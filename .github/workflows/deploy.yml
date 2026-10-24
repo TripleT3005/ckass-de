@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: composer install --no-dev --no-interaction --no-progress --optimize-autoloader
       - name: Upload per SFTP
         env:
           HOST: ${{ secrets.SFTP_HOST }}
@@ -20,4 +22,6 @@ jobs:
             open -u \"$USER\",\"$PASS\" sftp://$HOST;
             mirror -R --verbose \
               --exclude-glob .git* --exclude .github/ \
-              ./public/ /www/"
+              ./public/ /www/;
+            mirror -R --delete --verbose \
+              ./vendor/ /vendor/"
