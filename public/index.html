@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ckass</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+main{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 1.5rem}
+h1{margin:0;font-size:clamp(2.75rem,9vw,4.5rem);line-height:1;letter-spacing:-.03em;font-weight:400;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+h1 span{display:inline-block;font-variation-settings:normal;transition:color .3s}
+h1 span.hot{color:var(--accent)}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="name" aria-label="ckass">ckass</h1>
+</main>
+<script>
+(function(){
+  var h = document.getElementById("name"), txt = h.textContent;
+  h.textContent = ""; h.setAttribute("aria-label", txt);
+  var sp = [].map.call(txt, function(c){ var s = document.createElement("span"); s.textContent = c; s.setAttribute("aria-hidden","true"); h.appendChild(s); return s; });
+  var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var px = null, py = null, t0 = performance.now();
+  function frame(now){
+    var t = (now - t0) / 1000;
+    for (var i = 0; i < sp.length; i++){
+      var r = sp[i].getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+      var w = 520 + 160 * Math.sin(t * 0.9 - i * 0.7);
+      var near = 0;
+      if (px !== null){ var d = Math.hypot(px - cx, py - cy); near = Math.max(0, 1 - d / 150); w += 400 * near; }
+      sp[i].style.fontWeight = Math.round(Math.min(900, Math.max(400, w)));
+      sp[i].classList.toggle("hot", near > .55);
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener("pointermove", function(e){ px = e.clientX; py = e.clientY; });
+  function off(){ px = py = null; }
+  document.documentElement.addEventListener("pointerleave", off);
+  addEventListener("pointercancel", off);
+  addEventListener("blur", off);
+  addEventListener("pointerup", function(e){ if (e.pointerType !== "mouse") off(); });
+  if (still){ sp.forEach(function(s){ s.style.fontWeight = 600; }); }
+  else requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
