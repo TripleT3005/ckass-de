@@ -1,0 +1,23 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload per SFTP
+        env:
+          HOST: ${{ secrets.SFTP_HOST }}
+          USER: ${{ secrets.SFTP_USER }}
+          PASS: ${{ secrets.SFTP_PASS }}
+        run: |
+          sudo apt-get install -y lftp
+          lftp -c "set sftp:auto-confirm yes;
+            open -u \"$USER\",\"$PASS\" sftp://$HOST;
+            mirror -R --delete --verbose \
+              --exclude-glob .git* --exclude .github/ \
+              ./public/ /www/"
