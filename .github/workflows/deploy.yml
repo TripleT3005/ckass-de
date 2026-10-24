@@ -17,6 +17,7 @@ jobs:
           USER: ${{ secrets.SFTP_USER }}
           PASS: ${{ secrets.SFTP_PASS }}
         run: |
+          sudo apt-get update
           sudo apt-get install -y lftp
           lftp -c "set sftp:auto-confirm yes;
             open -u \"$USER\",\"$PASS\" sftp://$HOST;
