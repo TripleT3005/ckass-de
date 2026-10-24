@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Install dependencies
-        run: composer install --no-dev --no-interaction --no-progress --optimize-autoloader
+        run: composer install --no-dev --no-interaction --no-progress --no-autoloader
       - name: Upload per SFTP
         env:
           HOST: ${{ secrets.SFTP_HOST }}
@@ -24,4 +24,4 @@ jobs:
               --exclude-glob .git* --exclude .github/ \
               ./public/ /www/;
             mirror -R --delete --verbose \
-              ./vendor/ /vendor/"
+              ./vendor/phpmailer/phpmailer/src/ /PHPMailer/"
