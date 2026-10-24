@@ -16,10 +16,13 @@ jobs:
           HOST: ${{ secrets.SFTP_HOST }}
           USER: ${{ secrets.SFTP_USER }}
           PASS: ${{ secrets.SFTP_PASS }}
+          KNOWN_HOSTS: ${{ secrets.SFTP_KNOWN_HOSTS }}
         run: |
           sudo apt-get update
           sudo apt-get install -y lftp
-          lftp -c "set sftp:auto-confirm yes;
+          mkdir -p ~/.ssh
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          lftp -c "set sftp:connect-program 'ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts';
             open -u \"$USER\",\"$PASS\" sftp://$HOST;
             mirror -R --verbose \
               --exclude-glob .git* --exclude .github/ \
