@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chat Below for Twitch · browser extension that moves the Twitch chat below the video · Browser-Erweiterung, die den Twitch-Chat unter das Video verschiebt">
+<title>Chat Below for Twitch</title>
+<link rel="icon" href="icon.png" type="image/png">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+p,ul{margin:.5rem 0}
+ul{padding-left:1.25rem}
+li{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.lang{margin-top:1rem;color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.note{color:var(--muted);font-size:.9rem}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+figure{margin:1.5rem 0}
+figure img{display:block;width:100%;height:auto;border-radius:.5rem}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon.png" alt="" width="64" height="64">
+    <h1>Chat Below for Twitch</h1>
+  </header>
+  <p class="lang"><a href="#english">English</a> · <a href="#deutsch">Deutsch</a> · <a href="#screenshots">Screenshots</a></p>
+
+  <section id="english">
+    <h2>English</h2>
+    <p>Browser extension for Chrome and Edge that moves the Twitch chat below the video with one click. Made for monitors split into two or three windows side by side.</p>
+    <div class="links">
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest">Download</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch">Source code</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues">Support</a>
+    </div>
+
+    <h3>Features</h3>
+    <ul>
+      <li>Toggle via the chat button in the video's control bar or the extension icon in the browser toolbar</li>
+      <li>The video uses the full window width, the chat fills the space below it</li>
+      <li>Drag the line between video and chat to change the split, down to just the chat header; double-click resets it</li>
+      <li>A running hype train is shown compactly in the chat header row</li>
+      <li>Right-click the extension icon to hide the header bar or make it transparent, and to hide the left sidebar</li>
+      <li>Only active on stream pages; theatre mode and fullscreen keep working</li>
+      <li>Available in English and German</li>
+    </ul>
+
+    <h3 id="privacy">Privacy</h3>
+    <p>The extension only changes how Twitch stream pages are laid out. It does not collect, read or send any personal data, has no access to your Twitch account and makes no external requests.</p>
+    <p>Your settings (chat below on/off, divider position, header bar and sidebar options) are stored with the browser's own storage. With browser sync enabled, your browser syncs them across your devices; the extension itself does not transmit them anywhere.</p>
+    <p>Permissions: <code>storage</code> to remember the settings, <code>contextMenus</code> for the right-click menu of the icon and access to <code>www.twitch.tv</code> to change the page layout.</p>
+
+    <p class="note">Not affiliated with or endorsed by Twitch. Twitch is a trademark of Twitch Interactive, Inc.</p>
+  </section>
+
+  <section id="deutsch" lang="de">
+    <h2>Deutsch</h2>
+    <p>Browser-Erweiterung für Chrome und Edge, die den Twitch-Chat per Klick unter das Video verschiebt. Gedacht für Monitore, die in zwei oder drei Fenster nebeneinander aufgeteilt sind.</p>
+    <div class="links">
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest">Download</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch">Quellcode</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues">Support</a>
+    </div>
+
+    <h3>Funktionen</h3>
+    <ul>
+      <li>Umschalten über den Chat-Button in der Steuerleiste des Videos oder das Erweiterungssymbol in der Browserleiste</li>
+      <li>Das Video nutzt die volle Fensterbreite, der Chat füllt den Platz darunter</li>
+      <li>Die Linie zwischen Video und Chat lässt sich ziehen, bis nur noch die Chat-Kopfzeile sichtbar ist; Doppelklick setzt sie zurück</li>
+      <li>Ein laufender Hypetrain wird kompakt in der Kopfzeile des Chats angezeigt</li>
+      <li>Per Rechtsklick auf das Erweiterungssymbol lässt sich die Kopfleiste ausblenden oder transparent schalten und die linke Seitenleiste ausblenden</li>
+      <li>Nur auf Stream-Seiten aktiv; Kino-Modus und Vollbild funktionieren weiterhin</li>
+      <li>Auf Deutsch und Englisch verfügbar</li>
+    </ul>
+
+    <h3 id="datenschutz">Datenschutz</h3>
+    <p>Die Erweiterung ändert nur die Anordnung von Twitch-Stream-Seiten. Sie erhebt, liest und sendet keine personenbezogenen Daten, hat keinen Zugriff auf dein Twitch-Konto und stellt keine externen Anfragen.</p>
+    <p>Deine Einstellungen (Chat unten an/aus, Position der Trennlinie, Optionen für Kopf- und Seitenleiste) werden im Speicher des Browsers abgelegt. Ist die Browser-Synchronisierung aktiv, gleicht dein Browser sie zwischen deinen Geräten ab; die Erweiterung selbst überträgt sie nirgendwohin.</p>
+    <p>Berechtigungen: <code>storage</code>, um die Einstellungen zu speichern, <code>contextMenus</code> für das Rechtsklick-Menü des Symbols und Zugriff auf <code>www.twitch.tv</code>, um die Anordnung der Seite zu ändern.</p>
+
+    <p class="note">Nicht mit Twitch verbunden und nicht von Twitch unterstützt. Twitch ist eine Marke von Twitch Interactive, Inc.</p>
+  </section>
+
+  <section id="screenshots">
+    <h2>Screenshots</h2>
+    <figure><img src="screenshots/01-chat-below.png" alt="Twitch chat below the video" width="1280" height="800" loading="lazy"></figure>
+    <figure><img src="screenshots/02-without-extension.png" alt="Without the extension: chat next to the video" width="1280" height="800" loading="lazy"></figure>
+    <figure><img src="screenshots/03-resize-divider.png" alt="Drag the divider to resize, header bar transparent" width="1280" height="800" loading="lazy"></figure>
+    <figure><img src="screenshots/04-narrow-window.png" alt="Narrow window with header bar and sidebar hidden" width="1280" height="800" loading="lazy"></figure>
+    <figure><img src="screenshots/05-compact-chat.png" alt="Chat shrunk down to its header row" width="1280" height="800" loading="lazy"></figure>
+  </section>
+
+  <footer><a href="/">ckass.de</a></footer>
+</main>
+</body>
+</html>
