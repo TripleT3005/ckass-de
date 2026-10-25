@@ -27,12 +27,18 @@ a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
 .links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
 .links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.stores{display:flex;flex-wrap:wrap;gap:.75rem 1rem;margin:1.5rem 0 .5rem}
+.stores a,.stores span{display:inline-block;padding:.6rem 1.4rem;border:1px solid var(--accent);border-radius:999px;font-weight:600;text-decoration:none}
+.stores a{background:var(--accent);color:var(--bg);transition:opacity .2s}
+.stores a:hover{opacity:.85}
+.stores span{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.stores small{display:block;margin-top:.3rem;text-align:center;color:var(--muted);font-size:.8rem}
 .note{color:var(--muted);font-size:.9rem}
 section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
 figure{margin:1.5rem 0}
 figure img{display:block;width:100%;height:auto;border-radius:.5rem}
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.stores a{transition:none}}
 </style>
 </head>
 <body>
@@ -46,8 +52,12 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   <section id="english">
     <h2>English</h2>
     <p>Browser extension for Chrome and Edge that moves the Twitch chat below the video with one click. Made for monitors split into two or three windows side by side.</p>
+    <div class="stores">
+      <div><a href="https://chromewebstore.google.com/detail/chat-below-for-twitch/jfdcnglmpjdiofdlapohkchhhmkjffog" target="_blank" rel="noopener noreferrer">Chrome Web Store</a></div>
+      <div><span>Edge Add-ons</span><small>coming soon</small></div>
+    </div>
     <div class="links">
-      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">ZIP download</a>
       <a href="https://github.com/TripleT3005/chat-below-for-twitch" target="_blank" rel="noopener noreferrer">Source code</a>
       <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">Support</a>
     </div>
@@ -74,8 +84,12 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
   <section id="deutsch" lang="de">
     <h2>Deutsch</h2>
     <p>Browser-Erweiterung für Chrome und Edge, die den Twitch-Chat per Klick unter das Video verschiebt. Gedacht für Monitore, die in zwei oder drei Fenster nebeneinander aufgeteilt sind.</p>
+    <div class="stores">
+      <div><a href="https://chromewebstore.google.com/detail/chat-below-for-twitch/jfdcnglmpjdiofdlapohkchhhmkjffog" target="_blank" rel="noopener noreferrer">Chrome Web Store</a></div>
+      <div><span>Edge Add-ons</span><small>bald verfügbar</small></div>
+    </div>
     <div class="links">
-      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+      <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">ZIP-Download</a>
       <a href="https://github.com/TripleT3005/chat-below-for-twitch" target="_blank" rel="noopener noreferrer">Quellcode</a>
       <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">Support</a>
     </div>
