@@ -11,15 +11,15 @@ Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne 
 Projekte in [`projects.json`](projects.json) bekommen unter `/<slug>/` eine Seite, die aus ihrer `README.md` erzeugt wird. Der Workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) läuft täglich und von Hand. Er holt README und verlinkte Bilder per `gh api` aus den öffentlichen Projekt-Repos, erzeugt die Seiten mit [`scripts/project-pages`](scripts/project-pages) (Node.js ohne Pakete), prüft sie und schlägt Änderungen als Pull Request auf dem Branch `sync/projects` vor. Ohne Änderung entsteht kein Pull Request.
 
 ```json
-[{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true }]
+[{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true, "changelog": "flexpad-desktop/CHANGELOG.md" }]
 ```
 
-`download: true` zeigt einen Download-Knopf auf `https://github.com/<repo>/releases/latest`.
+`download: true` zeigt einen Download-Knopf auf `https://github.com/<repo>/releases/latest`, `changelog` einen Knopf auf diese Datei im Repo. Die Reihenfolge in `projects.json` ist die Reihenfolge auf der Startseite.
 
 Regeln für die README:
 
 - `# <img src="…"> Titel` in der ersten Zeile liefert Titel und Logo.
-- Abschnitte `## English` und `## Deutsch` werden zu Abschnitten der Seite mit Sprung-Links oben.
+- Abschnitte `## English` und `## Deutsch` werden zu den beiden Sprachfassungen der Seite. Angezeigt wird die erste unterstützte Sprache aus den Spracheinstellungen des Browsers, sonst Englisch; die Flaggen oben rechts schalten um. Die Wahl wird im `localStorage` des Browsers gespeichert und nirgendwohin gesendet. Ohne JavaScript erscheinen beide Fassungen untereinander.
 - Alles zwischen `<!-- web:skip -->` und `<!-- /web:skip -->` fehlt auf der Seite. Fehlt das Ende, bricht der Generator ab.
 - Sprungmarken werden wie auf GitHub über die ganze README gebildet (`#firmware`, `#firmware-1` …). Links auf weggelassene Abschnitte zeigen auf die README auf GitHub.
 - Relative Links werden zu GitHub-Adressen (`blob`, `tree`, `../../releases`). Ziele, die es im Repo nicht gibt, sind ein Fehler.
@@ -43,15 +43,15 @@ The site is fully static (HTML, CSS and a little JavaScript) with no external re
 Projects listed in [`projects.json`](projects.json) get a page at `/<slug>/` generated from their `README.md`. The workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) runs daily and on demand. It fetches the README and the images it links from the public project repositories via `gh api`, builds the pages with [`scripts/project-pages`](scripts/project-pages) (Node.js without packages), checks them and proposes changes as a pull request from the branch `sync/projects`. Without changes, no pull request is opened.
 
 ```json
-[{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true }]
+[{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true, "changelog": "flexpad-desktop/CHANGELOG.md" }]
 ```
 
-`download: true` adds a download button pointing to `https://github.com/<repo>/releases/latest`.
+`download: true` adds a download button pointing to `https://github.com/<repo>/releases/latest`, `changelog` a button pointing to that file in the repository. The order in `projects.json` is the order on the home page.
 
 Rules for the README:
 
 - `# <img src="…"> Title` on the first line provides title and logo.
-- Sections `## English` and `## Deutsch` become sections of the page with jump links at the top.
+- Sections `## English` and `## Deutsch` become the two language versions of the page. It shows the first supported language from the browser's language settings, otherwise English; the flags at the top right switch languages. The choice is kept in the browser's `localStorage` and never sent anywhere. Without JavaScript both versions are shown one below the other.
 - Everything between `<!-- web:skip -->` and `<!-- /web:skip -->` is left out. A missing end marker stops the generator.
 - Anchors are built like on GitHub across the whole README (`#firmware`, `#firmware-1` …). Links to left-out sections point to the README on GitHub.
 - Relative links become GitHub URLs (`blob`, `tree`, `../../releases`). Targets missing from the repository are an error.

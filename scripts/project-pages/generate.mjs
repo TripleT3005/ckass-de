@@ -193,25 +193,26 @@ export function generateProject(project, source) {
     else intro.push(block);
   }
 
+  const changelog = project.changelog ? ctx.link(project.changelog)?.href : null;
   const descriptions = [];
   const nav = [];
   const rendered = sections.map(({ heading, blocks: body }) => {
     const label = inlineText(heading.text);
     const lang = LANGUAGES[label.toLowerCase()] ?? null;
     const id = ctx.headingId(heading.line);
-    if (id) nav.push([id, renderInline(heading.text, ctx)]);
+    if (id) nav.push([id, renderInline(heading.text, ctx), lang]);
     const parts = [renderBlock({ ...heading, level: 2 }, ctx)];
     let buttonsPlaced = !lang;
     for (const block of body) {
       parts.push(renderBlock(block, ctx));
       if (!buttonsPlaced && block.type === "paragraph") {
-        parts.push(linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download }));
+        parts.push(linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download, changelog }));
         descriptions.push(firstSentence(inlineText(block.text)));
         buttonsPlaced = true;
       }
     }
-    if (!buttonsPlaced) parts.splice(1, 0, linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download }));
-    return { lang: lang && lang !== "en" ? lang : null, html: parts.join("\n") };
+    if (!buttonsPlaced) parts.splice(1, 0, linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download, changelog }));
+    return { lang, html: parts.join("\n") };
   });
 
   const files = new Map();

@@ -23,9 +23,10 @@ export function loadProjects(file) {
     if (typeof p.slug !== "string" || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug)) throw new Error(`${where}: "slug" must be lowercase letters, digits and hyphens`);
     if (typeof p.branch !== "string" || !/^[A-Za-z0-9._/-]+$/.test(p.branch) || p.branch.includes("..")) throw new Error(`${where}: "branch" is invalid`);
     if (p.download !== undefined && typeof p.download !== "boolean") throw new Error(`${where}: "download" must be true or false`);
+    if (p.changelog !== undefined && (typeof p.changelog !== "string" || /^[A-Za-z][A-Za-z0-9+.-]*:|^\/|\.\./.test(p.changelog))) throw new Error(`${where}: "changelog" must be a path inside the repository`);
     if (slugs.has(p.slug)) throw new Error(`${where}: slug "${p.slug}" is used twice`);
     slugs.add(p.slug);
-    return { repo: p.repo, slug: p.slug, branch: p.branch, download: p.download ?? false };
+    return { repo: p.repo, slug: p.slug, branch: p.branch, download: p.download ?? false, changelog: p.changelog ?? null };
   });
 }
 

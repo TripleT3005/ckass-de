@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { test } from "node:test";
+import os from "node:os";
+import path from "node:path";
+import { checkSite } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
 import { renderHtml } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
@@ -28,7 +32,7 @@ function memorySource(files) {
   };
 }
 
-const PROJECT = { repo: "owner/demo", slug: "demo", branch: "main", download: true };
+const PROJECT = { repo: "owner/demo", slug: "demo", branch: "main", download: true, changelog: "app/CHANGELOG.md" };
 
 const README = `# <img src="assets/logo.svg" alt="" width="40" align="center"> Demo
 
@@ -159,9 +163,25 @@ test("generates the page with rewritten links and skipped sections removed", () 
   assert.match(html, /href="https:\/\/github.com\/owner\/demo\/issues"/);
   assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/LICENSE"/);
   assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases\/latest"[^>]*>Download</);
-  assert.match(html, /<section lang="de">\n<h2 id="deutsch">/);
+  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"[^>]*>Changelog</);
+  assert.match(html, /<section data-lang="en">\n<h2 id="english">/);
+  assert.match(html, /<section data-lang="de" lang="de">\n<h2 id="deutsch">/);
+  assert.match(html, /<button type="button" data-set-lang="de"/);
+  assert.doesNotMatch(html, /class="lang"/);
   assert.match(html, /<img src="assets\/a.png" alt="A" width="49%"/);
-  assert.doesNotMatch(html, /<script/);
+});
+
+test("the link check accepts the template scripts but nothing else", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pages-"));
+  const html = generateProject(PROJECT, memorySource(demoFiles())).files.get("index.html");
+  fs.mkdirSync(path.join(dir, "demo", "assets"), { recursive: true });
+  for (const file of ["logo.svg", "a.png", "b.png"]) fs.writeFileSync(path.join(dir, "demo", "assets", file), "x");
+  fs.writeFileSync(path.join(dir, "demo", "index.html"), html);
+  fs.writeFileSync(path.join(dir, "index.html"), "<a href=\"/demo/#firmware-2\">x</a>");
+  assert.deepEqual(checkSite(dir).problems, []);
+  fs.writeFileSync(path.join(dir, "demo", "index.html"), html.replace("</main>", "<script>alert(1)</script></main>"));
+  assert.match(checkSite(dir).problems.join(), /active content/);
+  fs.rmSync(dir, { recursive: true, force: true });
 });
 
 test("broken links and missing images stop the generator", () => {
