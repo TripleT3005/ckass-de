@@ -1,0 +1,64 @@
+name: Sync project pages
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-projects
+  cancel-in-progress: false
+
+env:
+  SYNC_BRANCH: sync/projects
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Test generator
+        run: node --test scripts/project-pages/test/*.test.mjs
+
+      - name: Generate pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/project-pages/sync.mjs --summary "$RUNNER_TEMP/pr-body.md"
+
+      - name: Check links
+        run: node scripts/project-pages/check.mjs
+
+      - name: Open or update pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          open_pr=$(gh pr list --head "$SYNC_BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          git add -A public
+          if git diff --cached --quiet; then
+            echo "Project pages are up to date."
+            if [ -n "$open_pr" ]; then
+              gh pr close "$open_pr" --delete-branch --comment "The project pages on main already match the READMEs. / Die Projektseiten auf main entsprechen bereits den READMEs."
+            fi
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898583+github-actions[bot]@users.noreply.github.com"
+          git commit --quiet -m "Sync project pages"
+          if git fetch --quiet --depth=1 origin "refs/heads/$SYNC_BRANCH" 2>/dev/null \
+            && [ "$(git rev-parse 'HEAD^{tree}')" = "$(git rev-parse 'FETCH_HEAD^{tree}')" ]; then
+            echo "Branch $SYNC_BRANCH already has these changes."
+          else
+            git push --force origin "HEAD:refs/heads/$SYNC_BRANCH"
+          fi
+          if [ -n "$open_pr" ]; then
+            gh pr edit "$open_pr" --body-file "$RUNNER_TEMP/pr-body.md"
+          else
+            gh pr create --base main --head "$SYNC_BRANCH" --title "Sync project pages" --body-file "$RUNNER_TEMP/pr-body.md"
+          fi
