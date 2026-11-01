@@ -1,0 +1,42 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Test generator
+        run: node --test scripts/project-pages/test/*.test.mjs
+
+      - name: Check links
+        run: node scripts/project-pages/check.mjs
+
+      - name: Generate fixture page
+        run: |
+          node scripts/project-pages/sync.mjs --local flexpad=scripts/project-pages/test/fixture
+          node scripts/project-pages/check.mjs
+
+      - name: Test language redirect with Apache
+        run: |
+          sudo a2enmod rewrite headers
+          sudo rm -rf /var/www/site
+          sudo cp -r public /var/www/site
+          printf '%s\n' \
+            '<VirtualHost *:80>' \
+            '  DocumentRoot /var/www/site' \
+            '  <Directory /var/www/site>' \
+            '    Options -Indexes +SymLinksIfOwnerMatch' \
+            '    AllowOverride All' \
+            '    Require all granted' \
+            '  </Directory>' \
+            '</VirtualHost>' | sudo tee /etc/apache2/sites-available/000-default.conf
+          sudo systemctl restart apache2
+          bash scripts/project-pages/test/redirect.sh http://localhost flexpad
