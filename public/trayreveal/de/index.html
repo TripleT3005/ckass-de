@@ -84,13 +84,26 @@ Windows 11 versteckt jedes neue Tray-Icon hinter dem <code>^</code>-Überlaufmen
   <a href="https://github.com/TripleT3005/TrayReveal" target="_blank" rel="noopener noreferrer">Quellcode</a>
   <a href="https://github.com/TripleT3005/TrayReveal/issues" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
+<blockquote>
+<p>Rückmeldungen und Fehlerberichte gern als <a href="https://github.com/TripleT3005/TrayReveal/issues" target="_blank" rel="noopener noreferrer">Issue</a>. Keine Verbindung zu Microsoft und nicht von Microsoft unterstützt. Windows ist eine Marke der Microsoft-Unternehmensgruppe.</p>
+</blockquote>
+<h3 id="funktionen">Funktionen</h3>
+<ul>
+<li>Blendet jedes neue Tray-Icon sofort ein oder hält alle Icons sichtbar</li>
+<li>Ausnahmen für Apps, deren Icons immer ausgeblendet bleiben sollen</li>
+<li>Übernimmt deine Wahl, wenn sich eine App in einen neuen Ordner mit Versionsnummer aktualisiert</li>
+<li>Läuft als Standardbenutzer, ohne Administratorrechte, schreibt nur in <code>HKCU</code></li>
+<li>Kein Fenster, nur ein Tray-Icon mit Kontextmenü</li>
+<li>Keine Telemetrie; einziger Netzwerkzugriff ist eine abschaltbare Update-Prüfung (siehe <a href="#datenschutz">Datenschutz</a>)</li>
+</ul>
 <h3 id="installation-1">Installation</h3>
 <p>Eine der Dateien unter <a href="https://github.com/TripleT3005/TrayReveal/releases" target="_blank" rel="noopener noreferrer">Releases</a> herunterladen:</p>
 <ul>
 <li><strong>Installer</strong> <code>TrayReveal-&lt;Version&gt;-windows-x64-setup.exe</code> – installiert für den aktuellen Benutzer (Standard, ohne Administratorrechte) oder für alle Benutzer, legt einen Startmenü-Eintrag an und startet TrayReveal auf Wunsch mit Windows. Entfernen lässt es sich unter Einstellungen → Apps.</li>
 <li><strong>Portabel</strong> <code>TrayReveal-&lt;Version&gt;-windows-x64.zip</code> – in einen beliebigen Ordner entpacken und <code>TrayReveal.exe</code> starten. Der Ordner <code>lang</code> bleibt neben dem Programm.</li>
 </ul>
-<p>Das Programm ist nicht signiert, deshalb warnt SmartScreen beim ersten Start eventuell: „Weitere Informationen“ → „Trotzdem ausführen“. Zu jeder Datei gibt es eine <code>.sha256</code>-Datei zum Prüfen des Downloads, und die Release-Notizen verlinken einen VirusTotal-Scan.</p>
+<p>Das Programm ist nicht signiert, deshalb warnt SmartScreen beim ersten Start eventuell: „Weitere Informationen“ → „Trotzdem ausführen“. Zu jeder Datei gibt es eine <code>.sha256</code>-Datei zum Prüfen des Downloads, und die Release-Notizen verlinken einen VirusTotal-Scan. Änderungen stehen im <a href="https://github.com/TripleT3005/TrayReveal/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>.</p>
+<h4 id="installer-parameter">Installer-Parameter</h4>
 <p>Der Installer versteht die üblichen Inno-Setup-Parameter, z. B. für eine stille Installation:</p>
 <div class="table"><table>
 <thead><tr><th>Parameter</th><th>Wirkung</th></tr></thead>
@@ -124,24 +137,25 @@ Windows 11 versteckt jedes neue Tray-Icon hinter dem <code>^</code>-Überlaufmen
 <p>Wenn sich eine App in einen neuen Ordner mit Versionsnummer aktualisiert (zum Beispiel <code>app-1.2.3</code> oder ein Microsoft-Store-Paket), legt Windows dafür einen neuen, ausgeblendeten Eintrag an. TrayReveal erkennt die gleiche App und übernimmt deine bisherige Wahl. Ausnahmen gelten für alle Versionen einer App. Gibt es mehrere ältere Versionen, zählt die zuletzt geänderte.</p>
 <p>Einträge, deren Programm drei Tage am Stück fehlt, werden aus den Tray-Einstellungen von Windows entfernt, damit sich alte Versionen nicht ansammeln. Im Modus „Aus“ wird nichts entfernt.</p>
 <p><code>TrayReveal.exe --once</code> wendet die aktuellen Einstellungen einmal ohne Tray-Icon an und beendet sich, etwa für die Aufgabenplanung.</p>
-<h3 id="sprachen">Sprachen</h3>
+<h4 id="sprachen">Sprachen</h4>
 <p>TrayReveal gibt es in 51 Sprachen, darunter deutsche Dialekte und einige Spaßsprachen; <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> listet alle Codes. Mit <strong>Automatisch</strong> folgt es der Anzeigesprache von Windows und fällt sonst auf Englisch zurück.</p>
 <p>Die Übersetzungen wurden von Claude (KI) erzeugt. Die meisten hat noch keine Muttersprachlerin und kein Muttersprachler geprüft; welche geprüft sind, zeigen <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> und der Kopf jeder Datei. Wenn dir ein Fehler auffällt oder du eine bessere Formulierung kennst, eröffne gern ein <a href="https://github.com/TripleT3005/TrayReveal/issues" target="_blank" rel="noopener noreferrer">Issue</a> oder einen Pull Request. Mit Einverständnis wird die prüfende Person mit ihrem GitHub-Namen in der Sprachdatei und in <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> genannt.</p>
 <p>Die Texte liegen in einfachen Textdateien, benannt nach dem Sprachcode, z. B. <code>de.lang</code> oder <code>pt-BR.lang</code>, mit einem <code>Schlüssel = Text</code> pro Zeile. Für eine neue Sprache kopierst du <a href="https://github.com/TripleT3005/TrayReveal/blob/main/lang/en.lang" target="_blank" rel="noopener noreferrer"><code>lang/en.lang</code></a>, übersetzt die Texte nach dem <code>=</code> und lässt die Schlüssel und Platzhalter wie <code>{name}</code> unverändert. Fehlende Texte kommen aus der Rückfallsprache (<code>language.fallback</code>), sonst aus Englisch.</p>
 <p>Sprachdateien werden aus dem Ordner <code>lang</code> neben dem Programm und aus <code>%APPDATA%\TrayReveal\lang</code> gelesen. Der zweite Ordner braucht keine Administratorrechte und seine Texte haben Vorrang, dort kannst du also eine Sprache ergänzen oder einzelne Texte ändern.</p>
+<h4 id="updates-1">Updates</h4>
+<p>Ist <strong>Nach Updates suchen</strong> eingeschaltet, prüft TrayReveal kurz nach dem Start und danach einmal täglich, ob es eine neue Version gibt, und meldet sie mit einem Hinweis und dem Menüpunkt <strong>Version … herunterladen</strong>. Updates werden nie automatisch heruntergeladen oder installiert, das Menü verlinkt nur auf die Release-Seite.</p>
 <h3 id="funktionsweise">Funktionsweise</h3>
 <p>Windows speichert die Sichtbarkeit jedes Tray-Icons pro Benutzer unter <code>HKCU\Control Panel\NotifyIconSettings</code>, ein Unterschlüssel pro Icon. Der Wert <code>IsPromoted</code> legt fest, ob das Icon in der Taskleiste angezeigt (<code>1</code>) oder im Überlaufmenü versteckt wird (<code>0</code>); bei Icons, die noch nie angezeigt wurden, fehlt der Wert.
 TrayReveal wartet auf Änderungen an diesem Schlüssel (ohne regelmäßiges Abfragen), setzt oder erzeugt <code>IsPromoted</code> je nach gewähltem Modus und lässt alles andere unverändert. Es ist derselbe Wert, den der Schalter in den Windows-Einstellungen schreibt, einzelne Icons lassen sich dort also weiterhin ändern.</p>
+<p>Der Registry-Schlüssel ist von Microsoft nicht dokumentiert und kann sich mit künftigen Windows-Updates ändern. Ändert sich sein Aufbau, tut TrayReveal nichts, statt zu raten.</p>
+<h3 id="datenschutz">Datenschutz</h3>
 <ul>
-<li>Läuft als Standardbenutzer, ohne Administratorrechte, schreibt nur in <code>HKCU</code></li>
-<li>Kein Fenster, nur ein Tray-Icon mit Kontextmenü</li>
 <li>Netzwerkzugriff gibt es nur für die abschaltbare Update-Prüfung: Kurz nach dem Start und danach einmal täglich ruft TrayReveal die Angaben zum neuesten Release von <code>api.github.com</code> ab. Dabei wird nur abgerufen, nichts über dein System oder deine Icons gesendet oder hochgeladen; GitHub sieht nur die üblichen Anfragedaten wie die IP-Adresse und den Programmnamen mit Version (<code>TrayReveal/&lt;version&gt;</code>). Abschalten lässt sie sich im Menü mit <strong>Nach Updates suchen</strong>. Updates werden nie automatisch heruntergeladen oder installiert, das Menü verlinkt nur auf die Release-Seite.</li>
 <li>Keine Telemetrie</li>
 <li>Einstellungen liegen in der Registry unter <code>HKCU\Software\TrayReveal</code></li>
 </ul>
-<p>Der Registry-Schlüssel ist von Microsoft nicht dokumentiert und kann sich mit künftigen Windows-Updates ändern. Ändert sich sein Aufbau, tut TrayReveal nichts, statt zu raten.</p>
 <h3 id="lizenz">Lizenz</h3>
-<p><a href="https://github.com/TripleT3005/TrayReveal/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a> – keine Verbindung zu Microsoft und nicht von Microsoft unterstützt. Windows ist eine Marke der Microsoft-Unternehmensgruppe.</p>
+<p><a href="https://github.com/TripleT3005/TrayReveal/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
 </section>
 
   <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/TrayReveal" target="_blank" rel="noopener noreferrer">TripleT3005/TrayReveal</a></footer>

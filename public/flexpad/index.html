@@ -77,7 +77,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
   </header>
 
 <section id="english">
-<p>FlexPad is a freely configurable macro pad based on the ESP32-S3. The board acts as a USB keyboard and media controller and runs key sequences when a button is pressed or an encoder is turned. A cross-platform desktop app written in Rust (<a href="https://iced.rs/" target="_blank" rel="noopener noreferrer">iced</a>) lets you place buttons and rotary encoders on a canvas, assign GPIO pins and macros, and transfers the configuration to the device over USB serial. The firmware is written in Rust as well (<a href="https://github.com/esp-rs/esp-hal" target="_blank" rel="noopener noreferrer">esp-hal</a>, <a href="https://embassy.dev/" target="_blank" rel="noopener noreferrer">Embassy</a>).</p>
+<p>FlexPad is a freely configurable macro pad based on the ESP32-S3. The board acts as a USB keyboard and media controller and runs key sequences when a button is pressed or an encoder is turned. A cross-platform desktop app written in Rust (<a href="https://iced.rs/" target="_blank" rel="noopener noreferrer">iced</a>) lets you place buttons and rotary encoders on a canvas, assign GPIO pins and macros, and transfers the configuration to the device over USB serial; the firmware is written in Rust as well (<a href="https://github.com/esp-rs/esp-hal" target="_blank" rel="noopener noreferrer">esp-hal</a>, <a href="https://embassy.dev/" target="_blank" rel="noopener noreferrer">Embassy</a>).</p>
 <div class="links">
   <a href="https://github.com/TripleT3005/FlexPad/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
   <a href="https://github.com/TripleT3005/FlexPad/blob/main/flexpad-desktop/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
@@ -85,7 +85,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
   <a href="https://github.com/TripleT3005/FlexPad/issues" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
 <blockquote>
-<p>Not affiliated with or endorsed by Espressif Systems.</p>
+<p>Feedback and bug reports are welcome as <a href="https://github.com/TripleT3005/FlexPad/issues" target="_blank" rel="noopener noreferrer">issues</a>. Not affiliated with or endorsed by Espressif Systems.</p>
 </blockquote>
 <p>
   <img src="assets/screenshot-light.png" alt="FlexPad configurator with five tiles and the Tile Inspector (light mode)" width="49%" loading="lazy" decoding="async">
@@ -169,6 +169,8 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li><strong>Save Profile</strong> stores the profile on your computer, <strong>Set Config</strong> sends it to the device.</li>
 </ol>
 <p>Wiring test: while the app is connected, pressing a button or turning an encoder briefly highlights its tile on the canvas, and the status bar names the pin (e.g. &quot;GPIO 12 pressed – not assigned&quot; for a pin no tile uses).</p>
+<h4 id="updates">Updates</h4>
+<p>At start and then every 24 hours, the app checks whether a newer release exists and then shows &quot;Version x.y.z available&quot; in the status bar; a click opens the release page. Nothing is downloaded or installed automatically. <strong>Check for updates</strong> in the status bar switches the check off (see <a href="#privacy">Privacy</a>).</p>
 <h3 id="how-it-works">How it works</h3>
 <p>The firmware polls the configured pins every millisecond, debounces buttons, decodes encoders and runs the assigned macro as USB HID keyboard and consumer control (media keys) reports. The profile is stored as JSON in its own flash partition with two slots and a checksum, so it survives a restart and an interrupted save.</p>
 <p>The app and the device talk over the USB serial port of the board (line-based text commands, each terminated with <code>\n</code>). The complete protocol and profile format are described in <a href="https://github.com/TripleT3005/FlexPad/blob/main/docs/protocol.md" target="_blank" rel="noopener noreferrer">docs/protocol.md</a>; overview:</p>

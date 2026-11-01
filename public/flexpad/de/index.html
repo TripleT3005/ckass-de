@@ -76,7 +76,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
   </header>
 
 <section id="deutsch">
-<p>FlexPad ist ein frei konfigurierbares Makropad auf Basis des ESP32-S3. Das Board meldet sich als USB-Tastatur und Mediensteuerung und führt Tastenfolgen aus, wenn ein Taster gedrückt oder ein Encoder gedreht wird. Eine plattformübergreifende Desktop-App in Rust (<a href="https://iced.rs/" target="_blank" rel="noopener noreferrer">iced</a>) platziert Taster und Drehencoder auf einer Arbeitsfläche, ordnet GPIO-Pins und Makros zu und überträgt die Konfiguration per USB-Seriell auf das Gerät. Auch die Firmware ist in Rust geschrieben (<a href="https://github.com/esp-rs/esp-hal" target="_blank" rel="noopener noreferrer">esp-hal</a>, <a href="https://embassy.dev/" target="_blank" rel="noopener noreferrer">Embassy</a>).</p>
+<p>FlexPad ist ein frei konfigurierbares Makropad auf Basis des ESP32-S3. Das Board meldet sich als USB-Tastatur und Mediensteuerung und führt Tastenfolgen aus, wenn ein Taster gedrückt oder ein Encoder gedreht wird. Eine plattformübergreifende Desktop-App in Rust (<a href="https://iced.rs/" target="_blank" rel="noopener noreferrer">iced</a>) platziert Taster und Drehencoder auf einer Arbeitsfläche, ordnet GPIO-Pins und Makros zu und überträgt die Konfiguration per USB-Seriell auf das Gerät; auch die Firmware ist in Rust geschrieben (<a href="https://github.com/esp-rs/esp-hal" target="_blank" rel="noopener noreferrer">esp-hal</a>, <a href="https://embassy.dev/" target="_blank" rel="noopener noreferrer">Embassy</a>).</p>
 <div class="links">
   <a href="https://github.com/TripleT3005/FlexPad/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
   <a href="https://github.com/TripleT3005/FlexPad/blob/main/flexpad-desktop/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
@@ -84,7 +84,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
   <a href="https://github.com/TripleT3005/FlexPad/issues" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
 <blockquote>
-<p>Keine Verbindung zu Espressif Systems und nicht von Espressif unterstützt.</p>
+<p>Rückmeldungen und Fehlerberichte gern als <a href="https://github.com/TripleT3005/FlexPad/issues" target="_blank" rel="noopener noreferrer">Issue</a>. Keine Verbindung zu Espressif Systems und nicht von Espressif unterstützt.</p>
 </blockquote>
 <p>
   <img src="../assets/screenshot-light.png" alt="FlexPad-Konfigurator mit fünf Kacheln und dem Tile Inspector (heller Modus)" width="49%" loading="lazy" decoding="async">
@@ -168,6 +168,8 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li><strong>Save Profile</strong> speichert das Profil auf dem Rechner, <strong>Set Config</strong> überträgt es auf das Gerät.</li>
 </ol>
 <p>Verdrahtungstest: Solange die App verbunden ist, hebt ein Tastendruck oder eine Encoder-Drehung die zugehörige Kachel kurz auf der Arbeitsfläche hervor, und die Statusleiste nennt den Pin (z. B. „GPIO 12 pressed – not assigned“ für einen Pin ohne Kachel).</p>
+<h4 id="updates-1">Updates</h4>
+<p>Beim Start und danach alle 24 Stunden prüft die App, ob es ein neueres Release gibt, und zeigt dann in der Statusleiste „Version x.y.z available“; ein Klick öffnet die Release-Seite. Es wird nichts automatisch heruntergeladen oder installiert. <strong>Check for updates</strong> in der Statusleiste schaltet die Prüfung ab (siehe <a href="#datenschutz">Datenschutz</a>).</p>
 <h3 id="funktionsweise">Funktionsweise</h3>
 <p>Die Firmware fragt die konfigurierten Pins jede Millisekunde ab, entprellt Taster, wertet Encoder aus und führt das zugeordnete Makro als USB-HID-Tastatur- und Mediensteuerungs-Reports aus. Das Profil liegt als JSON in einer eigenen Flash-Partition mit zwei Speicherplätzen und Prüfsumme; es übersteht so einen Neustart und ein unterbrochenes Speichern.</p>
 <p>App und Gerät sprechen über den USB-Seriell-Port des Boards miteinander (zeilenbasierte Textbefehle, jeweils mit <code>\n</code> abgeschlossen). Das vollständige Protokoll und das Profilformat beschreibt <a href="https://github.com/TripleT3005/FlexPad/blob/main/docs/protocol.md" target="_blank" rel="noopener noreferrer">docs/protocol.md</a> (auf Englisch); Überblick:</p>
