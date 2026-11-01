@@ -1,7 +1,7 @@
 import path from "node:path";
 import { stripTags } from "./html.mjs";
 import { inlineText, parseBlocks, renderBlock, renderInline } from "./markdown.mjs";
-import { LANGUAGES, linkButtons, renderPage } from "./page.mjs";
+import { LANGUAGES, linkButtons, redirectRules, renderPage, SUPPORTED_LANGUAGES } from "./page.mjs";
 import { findSkippedLines, headingIds } from "./readme.mjs";
 
 // Images
@@ -72,6 +72,7 @@ export function createContext({ repo, branch, tree, pageIds, idsByLine }) {
   const errors = [];
   const warnings = [];
   const images = new Set();
+  const page = { lang: null, prefix: "", idLang: new Map() };
 
   function link(raw) {
     const url = raw.trim();
@@ -81,7 +82,10 @@ export function createContext({ repo, branch, tree, pageIds, idsByLine }) {
     }
     if (url.startsWith("#")) {
       const id = safeDecode(url.slice(1));
-      if (pageIds.has(id)) return { href: `#${id}` };
+      if (pageIds.has(id)) {
+        const owner = page.idLang.get(id);
+        return { href: page.lang && owner && owner !== page.lang ? `${page.prefix}${owner}/#${id}` : `#${id}` };
+      }
       if (allIds.has(id)) return { href: `${repoUrl}/blob/${encodePath(branch)}/README.md#${encodeURIComponent(id)}`, external: true };
       errors.push(`Link to unknown heading ${url}`);
       return null;
@@ -137,10 +141,11 @@ export function createContext({ repo, branch, tree, pageIds, idsByLine }) {
       return null;
     }
     images.add(resolved.path);
-    return encodePath(resolved.path);
+    return page.prefix + encodePath(resolved.path);
   }
 
   return {
+    page,
     repoUrl,
     errors,
     warnings,
@@ -188,32 +193,73 @@ export function generateProject(project, source) {
   const intro = [];
   const sections = [];
   for (const block of blocks.slice(1)) {
-    if (block.type === "heading" && block.level <= 2) sections.push({ heading: block, blocks: [] });
-    else if (sections.length) sections.at(-1).blocks.push(block);
+    if (block.type === "heading" && block.level <= 2) {
+      const lang = LANGUAGES[inlineText(block.text).toLowerCase()] ?? null;
+      sections.push({ heading: block, lang, id: ctx.headingId(block.line), blocks: [] });
+    } else if (sections.length) sections.at(-1).blocks.push(block);
     else intro.push(block);
   }
-
-  const changelog = project.changelog ? ctx.link(project.changelog)?.href : null;
-  const descriptions = [];
-  const nav = [];
-  const rendered = sections.map(({ heading, blocks: body }) => {
-    const label = inlineText(heading.text);
-    const lang = LANGUAGES[label.toLowerCase()] ?? null;
-    const id = ctx.headingId(heading.line);
-    if (id) nav.push([id, renderInline(heading.text, ctx), lang]);
-    const parts = [renderBlock({ ...heading, level: 2 }, ctx)];
-    let buttonsPlaced = !lang;
-    for (const block of body) {
-      parts.push(renderBlock(block, ctx));
-      if (!buttonsPlaced && block.type === "paragraph") {
-        parts.push(linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download, changelog }));
-        descriptions.push(firstSentence(inlineText(block.text)));
-        buttonsPlaced = true;
-      }
+  const languages = SUPPORTED_LANGUAGES.filter((l) => sections.some((s) => s.lang === l));
+  const multi = languages.length > 1;
+  for (const section of sections) {
+    if (!section.lang) continue;
+    if (section.id) ctx.page.idLang.set(section.id, section.lang);
+    for (const block of section.blocks) {
+      const id = block.type === "heading" ? ctx.headingId(block.line) : null;
+      if (id) ctx.page.idLang.set(id, section.lang);
     }
-    if (!buttonsPlaced) parts.splice(1, 0, linkButtons(lang, { repoUrl: ctx.repoUrl, download: project.download, changelog }));
-    return { lang, html: parts.join("\n") };
-  });
+  }
+  const changelog = project.changelog ? ctx.link(project.changelog)?.href : null;
+
+  function render(lang, prefix, canonical) {
+    Object.assign(ctx.page, { lang: multi ? lang : null, prefix });
+    const descriptions = [];
+    const nav = [];
+    const rendered = [];
+    for (const section of sections) {
+      if (multi && section.lang && section.lang !== lang) continue;
+      const ownLanguage = multi && section.lang;
+      if (section.id && !ownLanguage) nav.push([section.id, renderInline(section.heading.text, ctx)]);
+      const parts = ownLanguage ? [] : [renderBlock({ ...section.heading, level: 2 }, ctx)];
+      let buttonsPlaced = !section.lang;
+      const buttons = () => linkButtons(section.lang, { repoUrl: ctx.repoUrl, download: project.download, changelog });
+      for (const block of section.blocks) {
+        parts.push(renderBlock(block, ctx));
+        if (!buttonsPlaced && block.type === "paragraph") {
+          parts.push(buttons());
+          descriptions.push(firstSentence(inlineText(block.text)));
+          buttonsPlaced = true;
+        }
+      }
+      if (!buttonsPlaced) parts.splice(ownLanguage ? 0 : 1, 0, buttons());
+      rendered.push({ lang: section.lang, id: ownLanguage ? section.id : null, html: parts.join("\n") });
+    }
+    return renderPage({
+      repo: project.repo,
+      slug: project.slug,
+      title,
+      titleHtml,
+      titleId: ctx.headingId(titleBlock.line),
+      logo: logo ? prefix + logo : null,
+      description: [title, ...descriptions].join(" · "),
+      nav: multi ? nav : sections.filter((s) => s.id).map((s) => [s.id, renderInline(s.heading.text, ctx)]),
+      intro: intro.map((b) => renderBlock(b, ctx)).join("\n"),
+      sections: rendered,
+      lang: lang ?? "en",
+      languages,
+      prefix,
+      canonical,
+    });
+  }
+
+  const pages = new Map();
+  if (multi) {
+    for (const lang of languages) pages.set(`${lang}/index.html`, render(lang, "../", null));
+    pages.set("index.html", render(languages[0], "", `/${project.slug}/${languages[0]}/`));
+    pages.set(".htaccess", redirectRules(project.slug, languages));
+  } else {
+    pages.set("index.html", render(languages[0] ?? null, "", null));
+  }
 
   const files = new Map();
   for (const image of ctx.images) {
@@ -223,23 +269,12 @@ export function generateProject(project, source) {
     else files.set(image, data);
   }
 
-  if (ctx.errors.length) {
-    const error = new Error(`${project.repo}: ${ctx.errors.length} problem(s) in README.md\n${ctx.errors.map((e) => `  - ${e}`).join("\n")}`);
-    error.problems = ctx.errors;
+  const problems = [...new Set(ctx.errors)];
+  if (problems.length) {
+    const error = new Error(`${project.repo}: ${problems.length} problem(s) in README.md\n${problems.map((e) => `  - ${e}`).join("\n")}`);
+    error.problems = problems;
     throw error;
   }
-
-  const html = renderPage({
-    repo: project.repo,
-    title,
-    titleHtml,
-    titleId: ctx.headingId(titleBlock.line),
-    logo,
-    description: [title, ...descriptions].join(" · "),
-    nav,
-    intro: intro.map((b) => renderBlock(b, ctx)).join("\n"),
-    sections: rendered,
-  });
-  files.set("index.html", html);
-  return { title, logo, files, warnings: ctx.warnings };
+  for (const [file, content] of pages) files.set(file, content);
+  return { title, logo, files, warnings: [...new Set(ctx.warnings)] };
 }

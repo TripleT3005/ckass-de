@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { checkSite } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
+import { acceptLanguagePattern } from "../page.mjs";
 import { renderHtml } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
@@ -50,7 +51,7 @@ Demo is a tool. It does things.
 </p>
 
 ### Firmware
-See [Firmware](#firmware), [changelog](app/CHANGELOG.md), [docs](docs), [releases](../../releases), [issues](../../issues) and [Building](#building).
+See [Firmware](#firmware), [Deutsch](#deutsch), [changelog](app/CHANGELOG.md), [docs](docs), [releases](../../releases), [issues](../../issues) and [Building](#building).
 
 <!-- web:skip -->
 
@@ -144,42 +145,85 @@ test("unsafe link schemes are dropped", () => {
 
 // Project pages
 
-test("generates the page with rewritten links and skipped sections removed", () => {
+test("generates one page per language with rewritten links and skipped sections removed", () => {
   const { files, title, logo } = generateProject(PROJECT, memorySource(demoFiles()));
-  const html = files.get("index.html");
   assert.equal(title, "Demo");
   assert.equal(logo, "assets/logo.svg");
-  assert.deepEqual([...files.keys()].sort(), ["assets/a.png", "assets/b.png", "assets/logo.svg", "index.html"]);
-  assert.doesNotMatch(html, /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"/);
-  assert.match(html, /<h3 id="firmware">Firmware<\/h3>/);
-  assert.match(html, /<h3 id="firmware-2">Firmware<\/h3>/);
-  assert.match(html, /href="#firmware"/);
-  assert.match(html, /href="#firmware-2"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/README.md#building"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/README.md#bauen"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/tree\/main\/docs"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/issues"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/LICENSE"/);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases\/latest"[^>]*>Download</);
-  assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"[^>]*>Changelog</);
-  assert.match(html, /<section data-lang="en">\n<h2 id="english">/);
-  assert.match(html, /<section data-lang="de" lang="de">\n<h2 id="deutsch">/);
-  assert.match(html, /<button type="button" data-set-lang="de"/);
-  assert.doesNotMatch(html, /class="lang"/);
-  assert.match(html, /<img src="assets\/a.png" alt="A" width="49%"/);
+  assert.deepEqual([...files.keys()].sort(), [".htaccess", "assets/a.png", "assets/b.png", "assets/logo.svg", "de/index.html", "en/index.html", "index.html"]);
+  const en = files.get("en/index.html");
+  const de = files.get("de/index.html");
+  for (const html of [en, de]) {
+    assert.doesNotMatch(html, /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"|<script/);
+    assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases\/latest"[^>]*>Download</);
+    assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"[^>]*>Changelog</);
+    assert.match(html, /<link rel="alternate" hreflang="de" href="https:\/\/ckass.de\/demo\/de\/">/);
+    assert.match(html, /<img src="..\/assets\/logo.svg" alt="" width="64" height="64">/);
+  }
+  assert.match(en, /<html lang="en">/);
+  assert.match(en, /<section id="english">/);
+  assert.doesNotMatch(en, /Demo ist ein Werkzeug|<h2/);
+  assert.match(en, /<h3 id="firmware">Firmware<\/h3>/);
+  assert.match(en, /href="#firmware"/);
+  assert.match(en, /href="..\/de\/#deutsch"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/README.md#building"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/tree\/main\/docs"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/releases"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/issues"/);
+  assert.match(en, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/LICENSE"/);
+  assert.match(en, /<img src="..\/assets\/a.png" alt="A" width="49%"/);
+  assert.match(en, /<a href="..\/en\/" hreflang="en" lang="en" aria-current="page"/);
+  assert.match(en, /<a href="..\/de\/" hreflang="de" lang="de" aria-label="Deutsch"/);
+  assert.match(de, /<html lang="de">/);
+  assert.match(de, /<section id="deutsch">/);
+  assert.match(de, /<h3 id="firmware-2">Firmware<\/h3>/);
+  assert.match(de, /href="#firmware-2"/);
+  assert.match(de, />Quellcode</);
+  assert.match(de, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/README.md#bauen"/);
+  assert.doesNotMatch(de, /Demo is a tool/);
+  const fallback = files.get("index.html");
+  assert.match(fallback, /<link rel="canonical" href="https:\/\/ckass.de\/demo\/en\/">/);
+  assert.match(fallback, /<a href="de\/" hreflang="de"/);
+  assert.match(fallback, /<img src="assets\/a.png"/);
+  assert.match(files.get(".htaccess"), /RewriteRule \^\(index\\.html\)\?\$ \/demo\/de\/ \[R=302,L\]/);
 });
 
-test("the link check accepts the template scripts but nothing else", () => {
+test("a README with one language becomes a single page", () => {
+  const readme = "# Demo\n\n## English\n\nDemo is a tool.\n\n### Usage\nSee [usage](#usage).\n";
+  const { files } = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": readme }));
+  assert.deepEqual([...files.keys()], ["index.html"]);
+  assert.match(files.get("index.html"), /<h2 id="english">English<\/h2>/);
+  assert.doesNotMatch(files.get("index.html"), /class="switch"/);
+});
+
+test("the redirect picks the first supported browser language", () => {
+  const pattern = new RegExp(acceptLanguagePattern("de", ["en", "de"]), "i");
+  const cases = {
+    "de-DE,de;q=0.9,en;q=0.8": true,
+    "de": true,
+    "DE-AT": true,
+    "fr-FR,fr;q=0.9,de;q=0.8,en;q=0.7": true,
+    "en-US,en;q=0.9,de;q=0.8": false,
+    "en-GB,de": false,
+    "fr-FR,it": false,
+    "dense": false,
+    "": false,
+  };
+  for (const [header, german] of Object.entries(cases)) assert.equal(pattern.test(header), german, header);
+});
+
+test("the link check finds missing anchors and active content", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pages-"));
-  const html = generateProject(PROJECT, memorySource(demoFiles())).files.get("index.html");
-  fs.mkdirSync(path.join(dir, "demo", "assets"), { recursive: true });
-  for (const file of ["logo.svg", "a.png", "b.png"]) fs.writeFileSync(path.join(dir, "demo", "assets", file), "x");
-  fs.writeFileSync(path.join(dir, "demo", "index.html"), html);
-  fs.writeFileSync(path.join(dir, "index.html"), "<a href=\"/demo/#firmware-2\">x</a>");
+  const { files } = generateProject(PROJECT, memorySource(demoFiles()));
+  for (const [file, data] of files) {
+    fs.mkdirSync(path.dirname(path.join(dir, "demo", file)), { recursive: true });
+    fs.writeFileSync(path.join(dir, "demo", file), data);
+  }
+  fs.writeFileSync(path.join(dir, "index.html"), '<a href="/demo/de/#firmware-2">x</a>');
   assert.deepEqual(checkSite(dir).problems, []);
-  fs.writeFileSync(path.join(dir, "demo", "index.html"), html.replace("</main>", "<script>alert(1)</script></main>"));
+  fs.writeFileSync(path.join(dir, "index.html"), '<a href="/demo/en/#firmware-2">x</a>');
+  assert.match(checkSite(dir).problems.join(), /missing anchor/);
+  fs.writeFileSync(path.join(dir, "demo", "de", "index.html"), files.get("de/index.html").replace("</main>", "<script>alert(1)</script></main>"));
   assert.match(checkSite(dir).problems.join(), /active content/);
   fs.rmSync(dir, { recursive: true, force: true });
 });

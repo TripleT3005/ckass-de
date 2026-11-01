@@ -18,3 +18,25 @@ jobs:
 
       - name: Check links
         run: node scripts/project-pages/check.mjs
+
+      - name: Generate fixture page
+        run: |
+          node scripts/project-pages/sync.mjs --local flexpad=scripts/project-pages/test/fixture
+          node scripts/project-pages/check.mjs
+
+      - name: Test language redirect with Apache
+        run: |
+          sudo a2enmod rewrite headers
+          sudo rm -rf /var/www/site
+          sudo cp -r public /var/www/site
+          printf '%s\n' \
+            '<VirtualHost *:80>' \
+            '  DocumentRoot /var/www/site' \
+            '  <Directory /var/www/site>' \
+            '    Options -Indexes +SymLinksIfOwnerMatch' \
+            '    AllowOverride All' \
+            '    Require all granted' \
+            '  </Directory>' \
+            '</VirtualHost>' | sudo tee /etc/apache2/sites-available/000-default.conf
+          sudo systemctl restart apache2
+          bash scripts/project-pages/test/redirect.sh http://localhost flexpad

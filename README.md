@@ -2,7 +2,7 @@
 
 Persönliche Website.
 
-Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
+Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Der Hinweis erscheint in der ersten unterstützten Browsersprache (Deutsch oder Englisch), sonst auf Englisch. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
 
 Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne externe Ressourcen, Cookies und Tracking aus. Verwendet wird die Systemschrift des Geräts.
 
@@ -19,7 +19,7 @@ Projekte in [`projects.json`](projects.json) bekommen unter `/<slug>/` eine Seit
 Regeln für die README:
 
 - `# <img src="…"> Titel` in der ersten Zeile liefert Titel und Logo.
-- Abschnitte `## English` und `## Deutsch` werden zu den beiden Sprachfassungen der Seite. Angezeigt wird die erste unterstützte Sprache aus den Spracheinstellungen des Browsers, sonst Englisch; die Flaggen oben rechts schalten um. Die Wahl wird im `localStorage` des Browsers gespeichert und nirgendwohin gesendet. Ohne JavaScript erscheinen beide Fassungen untereinander.
+- Abschnitte `## English` und `## Deutsch` werden zu eigenen Seiten unter `/<slug>/en/` und `/<slug>/de/`; die Flaggen oben rechts sind normale Links dorthin und brauchen kein JavaScript. `/<slug>/` leitet per `.htaccess` (Apache, `mod_rewrite`) auf die erste unterstützte Sprache aus dem `Accept-Language`-Header des Browsers um, sonst auf Englisch. Gespeichert wird dabei nichts. Ohne `mod_rewrite` zeigt `/<slug>/` die englische Fassung. Hat die README nur eine Sprache, entsteht eine einzelne Seite.
 - Alles zwischen `<!-- web:skip -->` und `<!-- /web:skip -->` fehlt auf der Seite. Fehlt das Ende, bricht der Generator ab.
 - Sprungmarken werden wie auf GitHub über die ganze README gebildet (`#firmware`, `#firmware-1` …). Links auf weggelassene Abschnitte zeigen auf die README auf GitHub.
 - Relative Links werden zu GitHub-Adressen (`blob`, `tree`, `../../releases`). Ziele, die es im Repo nicht gibt, sind ein Fehler.
@@ -34,7 +34,7 @@ Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/projec
 
 Personal website.
 
-The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
+The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The notice appears in the first supported browser language (German or English), otherwise in English. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
 
 The site is fully static (HTML, CSS and a little JavaScript) with no external resources, cookies or tracking. It uses the device's system font.
 
@@ -51,7 +51,7 @@ Projects listed in [`projects.json`](projects.json) get a page at `/<slug>/` gen
 Rules for the README:
 
 - `# <img src="…"> Title` on the first line provides title and logo.
-- Sections `## English` and `## Deutsch` become the two language versions of the page. It shows the first supported language from the browser's language settings, otherwise English; the flags at the top right switch languages. The choice is kept in the browser's `localStorage` and never sent anywhere. Without JavaScript both versions are shown one below the other.
+- Sections `## English` and `## Deutsch` become separate pages at `/<slug>/en/` and `/<slug>/de/`; the flags at the top right are plain links to them and need no JavaScript. `/<slug>/` redirects via `.htaccess` (Apache, `mod_rewrite`) to the first supported language from the browser's `Accept-Language` header, otherwise to English. Nothing is stored. Without `mod_rewrite`, `/<slug>/` shows the English version. A README with only one language becomes a single page.
 - Everything between `<!-- web:skip -->` and `<!-- /web:skip -->` is left out. A missing end marker stops the generator.
 - Anchors are built like on GitHub across the whole README (`#firmware`, `#firmware-1` …). Links to left-out sections point to the README on GitHub.
 - Relative links become GitHub URLs (`blob`, `tree`, `../../releases`). Targets missing from the repository are an error.

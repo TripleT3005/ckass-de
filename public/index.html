@@ -60,6 +60,18 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   var notice = document.getElementById("motion-notice");
   var message = document.getElementById("motion-message");
   var toggle = document.getElementById("motion-toggle");
+  var texts = {
+    en: { label: "Reduced motion setting", enable: "Enable text effect", disable: "Disable text effect", off: "The text effect is turned off because of your system setting for reduced motion.", on: "The text effect is turned on for this page despite your system setting." },
+    de: { label: "Einstellung für reduzierte Bewegung", enable: "Texteffekt aktivieren", disable: "Texteffekt deaktivieren", off: "Der Texteffekt ist wegen deiner Systemeinstellung für reduzierte Bewegung deaktiviert.", on: "Der Texteffekt ist für diese Seite trotz deiner Systemeinstellung aktiviert." }
+  };
+  var language = "en", languages = navigator.languages || [navigator.language || ""];
+  for (var k = 0; k < languages.length; k++){
+    var code = String(languages[k]).toLowerCase().split("-")[0];
+    if (texts[code]){ language = code; break; }
+  }
+  var text = texts[language];
+  notice.lang = language;
+  notice.setAttribute("aria-label", text.label);
   var explicitlyEnabled = false, animationEnabled = false, animationFrame = null;
   var px = null, py = null, t0 = performance.now();
   function frame(now){
@@ -91,10 +103,8 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
     if (!motionPreference.matches) explicitlyEnabled = false;
     setAnimationEnabled(!motionPreference.matches || explicitlyEnabled);
     if (motionPreference.matches){
-      toggle.textContent = explicitlyEnabled ? "Texteffekt deaktivieren" : "Texteffekt aktivieren";
-      message.textContent = explicitlyEnabled
-        ? "Der Texteffekt ist für diese Seite trotz deiner Systemeinstellung aktiviert."
-        : "Der Texteffekt ist wegen deiner Systemeinstellung für reduzierte Bewegung deaktiviert.";
+      toggle.textContent = explicitlyEnabled ? text.disable : text.enable;
+      message.textContent = explicitlyEnabled ? text.on : text.off;
     }
   }
   addEventListener("pointermove", function(e){ px = e.clientX; py = e.clientY; });

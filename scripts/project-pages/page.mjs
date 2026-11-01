@@ -32,27 +32,37 @@ img{max-width:100%;height:auto}
 p>img{border-radius:.5rem;vertical-align:top}
 @media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
 .lang{margin-top:1rem;color:var(--muted)}
-.switch{display:none;gap:.25rem;margin-left:auto;align-self:flex-start}
-html[data-lang] .switch{display:flex}
-.switch button{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;background:none;cursor:pointer;opacity:.45;transition:opacity .2s,border-color .2s}
-.switch button:hover{opacity:.8}
-.switch button[aria-pressed="true"]{opacity:1;border-color:var(--line)}
-.switch button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch{display:flex;gap:.25rem;margin-left:auto;align-self:flex-start}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
 .switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
-html[data-lang] section[data-lang]{display:none}
-html:not([data-lang]) section+section,html[data-lang] section:not([data-lang]){margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
 .links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
 .links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
 .links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch button{transition:none}}`;
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}}`;
 
 // Language switch
+
+function star(cx, cy, r) {
+  const points = Array.from({ length: 10 }, (_, i) => {
+    const radius = i % 2 ? r * 0.382 : r;
+    const angle = -Math.PI / 2 + (i * Math.PI) / 5;
+    return `${(cx + radius * Math.cos(angle)).toFixed(2)} ${(cy + radius * Math.sin(angle)).toFixed(2)}`;
+  });
+  return `M${points.join("L")}z`;
+}
+
+const US_STARS = [[3, 2.5], [8, 2.5], [13, 2.5], [18, 2.5], [5.5, 6.5], [10.5, 6.5], [15.5, 6.5], [20.5, 6.5], [13, 10.5], [18, 10.5], [20.5, 14.5], [18, 18.5]]
+  .map(([x, y]) => star(x, y, 1.7))
+  .join("");
 
 const FLAGS = {
   en: {
     label: "English",
-    svg: '<svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><g fill="#fff"><circle cx="12" cy="4" r="1.2"/><circle cx="17" cy="4" r="1.2"/><circle cx="22" cy="4" r="1.2"/><circle cx="19.5" cy="8.5" r="1.2"/><circle cx="22" cy="13" r="1.2"/></g></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg>',
+    svg: `<svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="${US_STARS}"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg>`,
   },
   de: {
     label: "Deutsch",
@@ -60,19 +70,31 @@ const FLAGS = {
   },
 };
 
-export function headScript(languages) {
-  return `<script>(function(){var s=${JSON.stringify(languages)},r=document.documentElement,l;try{l=localStorage.getItem("lang")}catch(e){}if(s.indexOf(l)<0){l=s[0];var n=navigator.languages||[navigator.language||""];for(var i=0;i<n.length;i++){var c=String(n[i]).toLowerCase().split("-")[0];if(s.indexOf(c)>=0){l=c;break}}}r.lang=l;r.dataset.lang=l})();</script>`;
+export const SUPPORTED_LANGUAGES = Object.keys(FLAGS);
+
+function languageSwitch(languages, current, prefix) {
+  const links = languages.map((l) => {
+    const currentAttr = l === current ? ' aria-current="page"' : "";
+    return `      <a href="${prefix}${l}/" hreflang="${l}" lang="${l}"${currentAttr} aria-label="${FLAGS[l].label}" title="${FLAGS[l].label}">${FLAGS[l].svg}</a>`;
+  });
+  return `\n    <nav class="switch" aria-label="Language / Sprache">\n${links.join("\n")}\n    </nav>`;
 }
 
-export const BODY_SCRIPT = `<script>(function(){var r=document.documentElement,b=document.querySelectorAll("[data-set-lang]");function set(l,save){r.lang=l;r.dataset.lang=l;if(save)try{localStorage.setItem("lang",l)}catch(e){}for(var i=0;i<b.length;i++)b[i].setAttribute("aria-pressed",String(b[i].getAttribute("data-set-lang")===l))}for(var i=0;i<b.length;i++)b[i].addEventListener("click",function(){set(this.getAttribute("data-set-lang"),true)});function follow(){var t=null;try{t=document.getElementById(decodeURIComponent(location.hash.slice(1)))}catch(e){}var s=t&&t.closest("section[data-lang]");if(s&&s.getAttribute("data-lang")!==r.dataset.lang){set(s.getAttribute("data-lang"),false);t.scrollIntoView()}}addEventListener("hashchange",follow);set(r.dataset.lang,false);follow()})();</script>`;
+// Redirect
 
-function languageStyle(languages) {
-  return languages.map((l) => `html[data-lang="${l}"] section[data-lang="${l}"]`).join(",") + "{display:block}";
+export function acceptLanguagePattern(language, languages) {
+  return String.raw`^(?:\s*(?!(?:${languages.join("|")})\b)[^,]*,)*\s*${language}\b`;
 }
 
-function languageSwitch(languages) {
-  const buttons = languages.map((l) => `      <button type="button" data-set-lang="${l}" lang="${l}" aria-pressed="false" aria-label="${FLAGS[l].label}" title="${FLAGS[l].label}">${FLAGS[l].svg}</button>`);
-  return `\n    <div class="switch" role="group" aria-label="Language / Sprache">\n${buttons.join("\n")}\n    </div>`;
+export function redirectRules(slug, languages) {
+  const [fallback, ...rest] = languages;
+  const target = String.raw`^(index\.html)?$`;
+  const lines = ["<IfModule mod_rewrite.c>", "RewriteEngine On"];
+  for (const l of rest) {
+    lines.push(`RewriteCond %{HTTP:Accept-Language} ${acceptLanguagePattern(l, languages)} [NC]`, `RewriteRule ${target} /${slug}/${l}/ [R=302,L]`);
+  }
+  lines.push(`RewriteRule ${target} /${slug}/${fallback}/ [R=302,L]`, "</IfModule>", "<IfModule mod_headers.c>", "Header always merge Vary Accept-Language", "</IfModule>", "");
+  return lines.join("\n");
 }
 
 // Labels
@@ -84,6 +106,7 @@ const LABELS = {
 
 export const LANGUAGES = { english: "en", deutsch: "de" };
 export const GENERATED_MARK = "by scripts/project-pages -->";
+export const SITE = "https://ckass.de";
 
 export function linkButtons(language, { repoUrl, download, changelog }) {
   const labels = LABELS[language] ?? LABELS.en;
@@ -97,46 +120,44 @@ export function linkButtons(language, { repoUrl, download, changelog }) {
 
 // Page
 
-export function renderPage({ repo, title, titleHtml, titleId, logo, description, nav, intro, sections }) {
+export function renderPage({ repo, slug, title, titleHtml, titleId, logo, description, nav, intro, sections, lang, languages, prefix, canonical }) {
+  const switchable = languages.length > 1;
   const icon = logo ? `<link rel="icon" href="${escapeAttr(logo)}"${logo.endsWith(".svg") ? ' type="image/svg+xml"' : ""}>` : '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
   const logoImg = logo ? `\n    <img src="${escapeAttr(logo)}" alt="" width="64" height="64">` : "";
-  const languages = Object.keys(FLAGS).filter((l) => sections.some((s) => s.lang === l));
-  const switchable = languages.length > 1;
-  const links = switchable ? nav.filter(([, , lang]) => !lang) : nav;
-  const navHtml = links.length ? `\n  <p class="lang">${links.map(([id, label]) => `<a href="#${escapeAttr(id)}">${label}</a>`).join(" · ")}</p>` : "";
+  const alternates = switchable ? [...languages.map((l) => [l, `/${slug}/${l}/`]), ["x-default", `/${slug}/`]].map(([l, href]) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}${href}">`).join("") : "";
+  const canonicalLink = canonical ? `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">` : "";
+  const navHtml = nav.length ? `\n  <p class="lang">${nav.map(([id, label]) => `<a href="#${escapeAttr(id)}">${label}</a>`).join(" · ")}</p>` : "";
   const introHtml = intro ? `\n\n${intro}` : "";
   const sectionHtml = sections
-    .map(({ lang, html }) => {
-      const attrs = lang ? `${switchable ? ` data-lang="${lang}"` : ""}${lang !== "en" ? ` lang="${lang}"` : ""}` : "";
-      return `<section${attrs}>\n${html}\n</section>`;
+    .map((s) => {
+      const id = s.id ? ` id="${escapeAttr(s.id)}"` : "";
+      const sectionLang = s.lang && s.lang !== lang ? ` lang="${s.lang}"` : "";
+      return `<section${id}${sectionLang}>\n${s.html}\n</section>`;
     })
     .join("\n\n");
-  const head = switchable ? `\n${headScript(languages)}` : "";
-  const style = switchable ? `${STYLE}\n${languageStyle(languages)}` : STYLE;
-  const body = switchable ? `\n${BODY_SCRIPT}` : "";
   return `<!DOCTYPE html>
 <!-- Generated from README.md of ${escapeText(repo)} by scripts/project-pages -->
-<html lang="en">
+<html lang="${lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="${escapeAttr(description)}">
 <title>${escapeText(title)}</title>
-${icon}
+${icon}${canonicalLink}${alternates}
 <style>
-${style}
-</style>${head}
+${STYLE}
+</style>
 </head>
 <body>
 <main>
   <header>${logoImg}
-    <h1${titleId ? ` id="${escapeAttr(titleId)}"` : ""}>${titleHtml}</h1>${switchable ? languageSwitch(languages) : ""}
+    <h1${titleId ? ` id="${escapeAttr(titleId)}"` : ""}>${titleHtml}</h1>${switchable ? languageSwitch(languages, lang, prefix) : ""}
   </header>${navHtml}${introHtml}
 
 ${sectionHtml}
 
   <footer><a href="/">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
-</main>${body}
+</main>
 </body>
 </html>
 `;

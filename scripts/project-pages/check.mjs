@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { decodeEntities } from "./html.mjs";
-import { BODY_SCRIPT, GENERATED_MARK, headScript } from "./page.mjs";
+import { GENERATED_MARK } from "./page.mjs";
 
 // Pages
 
@@ -35,11 +35,8 @@ export function checkSite(publicDir) {
     const rel = path.relative(publicDir, file).split(path.sep).join("/");
     const generated = html.includes(GENERATED_MARK);
     if (generated) {
-      const languages = /<script>\(function\(\)\{var s=(\[[^\]]*\])/.exec(html)?.[1];
-      let content = html.replace(BODY_SCRIPT, "");
-      if (languages) content = content.replace(headScript(JSON.parse(languages)), "");
-      if (/<script|<iframe|<object|<embed|<form/i.test(content)) problems.push(`${rel}: contains active content`);
-      if (/\son[a-z]+\s*=/i.test(content)) problems.push(`${rel}: contains an event handler attribute`);
+      if (/<script|<iframe|<object|<embed|<form/i.test(html)) problems.push(`${rel}: contains active content`);
+      if (/\son[a-z]+\s*=/i.test(html)) problems.push(`${rel}: contains an event handler attribute`);
     }
     for (const m of html.matchAll(/\s(href|src)="([^"]*)"/g)) {
       const [, attr, raw] = m;
