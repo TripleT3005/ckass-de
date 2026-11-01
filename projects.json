@@ -2,5 +2,5 @@
   { "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true, "changelog": "flexpad-desktop/CHANGELOG.md" },
   { "repo": "TripleT3005/StreamXtras", "slug": "streamxtras", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
   { "repo": "TripleT3005/TrayReveal", "slug": "trayreveal", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
-  { "repo": "TripleT3005/chat-below-for-twitch", "slug": "chat-below-for-twitch", "branch": "main", "download": true }
+  { "repo": "TripleT3005/chat-below-for-twitch", "slug": "chat-below-for-twitch", "branch": "main", "download": true, "changelog": "CHANGELOG.md" }
 ]
