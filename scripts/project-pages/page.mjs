@@ -155,7 +155,7 @@ export const SITE = "https://ckass.de";
 
 const LOCALES = { en: "en_US", de: "de_DE" };
 
-export function openGraph({ title, description, url, lang }) {
+export function openGraph({ title, description, url, lang, image }) {
   const tags = [
     ["og:type", "website"],
     ["og:site_name", "ckass.de"],
@@ -163,6 +163,7 @@ export function openGraph({ title, description, url, lang }) {
     ["og:description", description],
     ["og:url", url],
     ["og:locale", LOCALES[lang] ?? LOCALES.en],
+    ...(image ? [["og:image", image], ["og:image:width", "256"], ["og:image:height", "256"]] : []),
   ];
   return tags.map(([property, content]) => `\n<meta property="${property}" content="${escapeAttr(content)}">`).join("");
 }
@@ -184,7 +185,7 @@ export function jsonLd(graph) {
   return `\n<script type="application/ld+json">${json}</script>`;
 }
 
-export function projectData({ repo, title, summary, url, home, lang, download }) {
+export function projectData({ repo, title, summary, url, home, lang, download, image }) {
   return jsonLd([
     {
       "@type": "SoftwareApplication",
@@ -196,6 +197,7 @@ export function projectData({ repo, title, summary, url, home, lang, download })
       isAccessibleForFree: true,
       offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
       ...(download ? { downloadUrl: download } : {}),
+      ...(image ? { image } : {}),
       sameAs: `https://github.com/${repo}`,
     },
     {
@@ -208,8 +210,8 @@ export function projectData({ repo, title, summary, url, home, lang, download })
   ]);
 }
 
-export function homeData({ url, lang, description }) {
-  return jsonLd([{ "@type": "WebSite", "@id": `${SITE}/#website`, name: "ckass", alternateName: "ckass.de", url: `${SITE}/`, inLanguage: lang, description, publisher: { "@id": AUTHOR["@id"] } }, AUTHOR, { "@type": "ProfilePage", url, mainEntity: { "@id": AUTHOR["@id"] } }]);
+export function homeData({ url, lang, description, image }) {
+  return jsonLd([{ "@type": "WebSite", "@id": `${SITE}/#website`, name: "ckass", alternateName: "ckass.de", url: `${SITE}/`, inLanguage: lang, description, image, publisher: { "@id": AUTHOR["@id"] } }, AUTHOR, { "@type": "ProfilePage", url, mainEntity: { "@id": AUTHOR["@id"] } }]);
 }
 
 export function linkButtons(language, { repoUrl, download, changelog }) {
@@ -224,13 +226,13 @@ export function linkButtons(language, { repoUrl, download, changelog }) {
 
 // Page
 
-export function renderPage({ repo, slug, title, titleHtml, titleId, logo, description, summary, download, nav, intro, sections, lang, languages, prefix, canonical }) {
+export function renderPage({ repo, slug, title, titleHtml, titleId, logo, preview, description, summary, download, nav, intro, sections, lang, languages, prefix, canonical }) {
   const switchable = languages.length > 1;
   const home = switchable ? `/${lang}/` : "/";
   const icon = logo ? `<link rel="icon" href="${escapeAttr(logo)}"${logo.endsWith(".svg") ? ' type="image/svg+xml"' : ""}>` : '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
   const logoImg = logo ? `\n    <img src="${escapeAttr(logo)}" alt="" width="64" height="64">` : "";
   const alternates = switchable ? [...languages.map((l) => [l, `/${slug}/${l}/`]), ["x-default", `/${slug}/`]].map(([l, href]) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}${href}">`).join("") : "";
-  const canonicalLink = `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${openGraph({ title, description, url: SITE + canonical, lang })}${projectData({ repo, title, summary, url: SITE + canonical, home, lang, download })}`;
+  const canonicalLink = `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${openGraph({ title, description, url: SITE + canonical, lang, image: preview })}${projectData({ repo, title, summary, url: SITE + canonical, home, lang, download, image: preview })}`;
   const navHtml = nav.length ? `\n  <p class="lang">${nav.map(([id, label]) => `<a href="#${escapeAttr(id)}">${label}</a>`).join(" · ")}</p>` : "";
   const introHtml = intro ? `\n\n${intro}` : "";
   const sectionHtml = sections

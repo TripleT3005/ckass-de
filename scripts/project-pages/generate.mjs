@@ -1,7 +1,7 @@
 import path from "node:path";
 import { stripTags } from "./html.mjs";
 import { inlineText, parseBlocks, renderBlock, renderInline } from "./markdown.mjs";
-import { LANGUAGES, linkButtons, redirectRules, renderPage, SUPPORTED_LANGUAGES } from "./page.mjs";
+import { LANGUAGES, linkButtons, redirectRules, renderPage, SITE, SUPPORTED_LANGUAGES } from "./page.mjs";
 import { findSkippedLines, headingIds } from "./readme.mjs";
 
 // Images
@@ -15,6 +15,7 @@ const IMAGE_TYPES = {
   ".svg": (b) => isSvg(b.toString("utf8")),
 };
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+export const PREVIEW_IMAGE = "assets/icons/icon-256.png";
 const SAFE_SEGMENT = /^[A-Za-z0-9_-][A-Za-z0-9._-]*$/;
 const UNSAFE_SVG = /<script|<foreignObject|<!ENTITY|<!DOCTYPE|\son[a-z]+\s*=|javascript:|(?:xlink:)?href\s*=\s*["']?\s*(?!#)|url\(\s*["']?\s*(?!#)|@import/i;
 
@@ -225,6 +226,8 @@ export function generateProject(project, source) {
     }
   }
   const changelog = project.changelog ? ctx.link(project.changelog)?.href : null;
+  const preview = source.tree.get(PREVIEW_IMAGE) === "blob" ? `${SITE}/${project.slug}/${PREVIEW_IMAGE}` : null;
+  if (preview) ctx.images.add(PREVIEW_IMAGE);
 
   function render(lang, prefix, canonical) {
     Object.assign(ctx.page, { lang: multi ? lang : null, prefix });
@@ -256,6 +259,7 @@ export function generateProject(project, source) {
       titleHtml,
       titleId: ctx.headingId(titleBlock.line),
       logo: logo ? prefix + logo : null,
+      preview,
       description: [title, ...descriptions].join(" · "),
       summary: descriptions.join(" "),
       download: project.download ? `${ctx.repoUrl}/releases/latest` : null,

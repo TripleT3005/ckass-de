@@ -3,14 +3,14 @@ import fs from "node:fs";
 import { test } from "node:test";
 import os from "node:os";
 import path from "node:path";
-import { checkSite, checkSitemap } from "../check.mjs";
+import { checkSite, checkSiteIcons, checkSitemap } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
 import { acceptLanguagePattern, ZOOM_SCRIPT } from "../page.mjs";
 import { renderHtml, stripTags } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
 import { buildSitemap } from "../sitemap.mjs";
-import { homeAbout, homeDescription, renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
+import { homeAbout, homeDescription, renderHome, SITE_ICONS, updateHtaccess, updateIndex } from "../sync.mjs";
 
 // Helpers
 
@@ -386,4 +386,31 @@ test("the root .htaccess keeps its own lines and gets one redirect block", () =>
   assert.match(once, /RewriteRule \^\(index\\.html\)\?\$ \/de\/ \[R=302,L,E=LANGUAGE_REDIRECT:1\]/);
   assert.equal(updateHtaccess(once), once);
   assert.equal(updateHtaccess(once.replace("/de/ [R", "/old/ [R")), once);
+});
+
+test("project pages use assets/icons/icon-256.png as preview image when the repository has it", () => {
+  const without = generateProject(PROJECT, memorySource(demoFiles())).files.get("en/index.html");
+  assert.doesNotMatch(without, /og:image/);
+  const { files } = generateProject(PROJECT, memorySource({ ...demoFiles(), "assets/icons/icon-256.png": PNG }));
+  assert.ok(files.get("assets/icons/icon-256.png").equals(PNG));
+  const page = files.get("de/index.html");
+  assert.match(page, /<meta property="og:image" content="https:\/\/ckass.de\/demo\/assets\/icons\/icon-256.png">/);
+  assert.match(page, /<meta property="og:image:width" content="256">/);
+  assert.equal(structuredData(page)[0]["@graph"][0].image, "https://ckass.de/demo/assets/icons/icon-256.png");
+});
+
+test("the site icons in public must match assets/icons", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "icons-"));
+  const icons = path.join(dir, "icons");
+  const site = path.join(dir, "public");
+  fs.mkdirSync(icons);
+  fs.mkdirSync(site);
+  for (const [source, target] of SITE_ICONS) {
+    fs.writeFileSync(path.join(icons, source), source);
+    fs.writeFileSync(path.join(site, target), source);
+  }
+  assert.deepEqual(checkSiteIcons(site, icons), []);
+  fs.writeFileSync(path.join(site, "favicon.svg"), "old");
+  assert.match(checkSiteIcons(site, icons).join(), /favicon.svg does not match assets\/icons\/icon.svg/);
+  fs.rmSync(dir, { recursive: true, force: true });
 });
