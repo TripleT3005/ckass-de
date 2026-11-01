@@ -21,7 +21,7 @@ jobs:
 
       - name: Generate fixture page
         run: |
-          node scripts/project-pages/sync.mjs --local flexpad=scripts/project-pages/test/fixture
+          node scripts/project-pages/sync.mjs --local flexpad=scripts/project-pages/test/fixture --only flexpad
           node scripts/project-pages/check.mjs
 
       - name: Test language redirect with Apache

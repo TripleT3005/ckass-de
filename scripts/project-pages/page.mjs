@@ -2,6 +2,14 @@ import { escapeAttr, escapeText } from "./html.mjs";
 
 // Styles
 
+export const SWITCH_STYLE = `.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}`;
+
 const STYLE = `:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
 @media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
 *,*::before,*::after{box-sizing:inherit}
@@ -32,11 +40,8 @@ img{max-width:100%;height:auto}
 p>img{border-radius:.5rem;vertical-align:top}
 @media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
 .lang{margin-top:1rem;color:var(--muted)}
-.switch{display:flex;gap:.25rem;margin-left:auto;align-self:flex-start}
-.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
-.switch a:hover{opacity:.8}
-.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
-.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+.switch{margin-left:auto;align-self:flex-start}
+${SWITCH_STYLE}
 section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
 .links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
 .links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
@@ -72,7 +77,7 @@ const FLAGS = {
 
 export const SUPPORTED_LANGUAGES = Object.keys(FLAGS);
 
-function languageSwitch(languages, current, prefix) {
+export function languageSwitch(languages, current, prefix) {
   const links = languages.map((l) => {
     const currentAttr = l === current ? ' aria-current="page"' : "";
     return `      <a href="${prefix}${l}/" hreflang="${l}" lang="${l}"${currentAttr} aria-label="${FLAGS[l].label}" title="${FLAGS[l].label}">${FLAGS[l].svg}</a>`;
@@ -86,14 +91,14 @@ export function acceptLanguagePattern(language, languages) {
   return String.raw`^(?:\s*(?!(?:${languages.join("|")})\b)[^,]*,)*\s*${language}\b`;
 }
 
-export function redirectRules(slug, languages) {
+export function redirectRules(base, languages) {
   const [fallback, ...rest] = languages;
   const target = String.raw`^(index\.html)?$`;
   const lines = ["<IfModule mod_rewrite.c>", "RewriteEngine On"];
   for (const l of rest) {
-    lines.push(`RewriteCond %{HTTP:Accept-Language} ${acceptLanguagePattern(l, languages)} [NC]`, `RewriteRule ${target} /${slug}/${l}/ [R=302,L]`);
+    lines.push(`RewriteCond %{HTTP:Accept-Language} ${acceptLanguagePattern(l, languages)} [NC]`, `RewriteRule ${target} ${base}${l}/ [R=302,L,E=LANGUAGE_REDIRECT:1]`);
   }
-  lines.push(`RewriteRule ${target} /${slug}/${fallback}/ [R=302,L]`, "</IfModule>", "<IfModule mod_headers.c>", "Header always merge Vary Accept-Language", "</IfModule>", "");
+  lines.push(`RewriteRule ${target} ${base}${fallback}/ [R=302,L,E=LANGUAGE_REDIRECT:1]`, "</IfModule>", "<IfModule mod_headers.c>", "Header always merge Vary Accept-Language env=LANGUAGE_REDIRECT", "</IfModule>", "");
   return lines.join("\n");
 }
 
@@ -156,7 +161,7 @@ ${STYLE}
 
 ${sectionHtml}
 
-  <footer><a href="/">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
+  <footer><a href="${switchable ? `/${lang}/` : "/"}">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
 </main>
 </body>
 </html>

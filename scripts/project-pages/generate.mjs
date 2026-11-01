@@ -256,7 +256,7 @@ export function generateProject(project, source) {
   if (multi) {
     for (const lang of languages) pages.set(`${lang}/index.html`, render(lang, "../", null));
     pages.set("index.html", render(languages[0], "", `/${project.slug}/${languages[0]}/`));
-    pages.set(".htaccess", redirectRules(project.slug, languages));
+    pages.set(".htaccess", redirectRules(`/${project.slug}/`, languages));
   } else {
     pages.set("index.html", render(languages[0] ?? null, "", null));
   }
@@ -276,5 +276,5 @@ export function generateProject(project, source) {
     throw error;
   }
   for (const [file, content] of pages) files.set(file, content);
-  return { title, logo, files, warnings: [...new Set(ctx.warnings)] };
+  return { title, logo, languages, files, warnings: [...new Set(ctx.warnings)] };
 }

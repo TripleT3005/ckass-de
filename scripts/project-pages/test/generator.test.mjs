@@ -9,7 +9,7 @@ import { acceptLanguagePattern } from "../page.mjs";
 import { renderHtml } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
-import { updateIndex } from "../sync.mjs";
+import { renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
 
 // Helpers
 
@@ -185,7 +185,9 @@ test("generates one page per language with rewritten links and skipped sections 
   assert.match(fallback, /<link rel="canonical" href="https:\/\/ckass.de\/demo\/en\/">/);
   assert.match(fallback, /<a href="de\/" hreflang="de"/);
   assert.match(fallback, /<img src="assets\/a.png"/);
-  assert.match(files.get(".htaccess"), /RewriteRule \^\(index\\.html\)\?\$ \/demo\/de\/ \[R=302,L\]/);
+  assert.match(files.get(".htaccess"), /RewriteRule \^\(index\\.html\)\?\$ \/demo\/de\/ \[R=302,L,E=LANGUAGE_REDIRECT:1\]/);
+  assert.match(en, /<footer><a href="\/en\/">ckass.de<\/a>/);
+  assert.match(de, /<footer><a href="\/de\/">ckass.de<\/a>/);
 });
 
 test("a README with one language becomes a single page", () => {
@@ -219,6 +221,10 @@ test("the link check finds missing anchors and active content", () => {
     fs.mkdirSync(path.dirname(path.join(dir, "demo", file)), { recursive: true });
     fs.writeFileSync(path.join(dir, "demo", file), data);
   }
+  for (const lang of ["en", "de"]) {
+    fs.mkdirSync(path.join(dir, lang));
+    fs.writeFileSync(path.join(dir, lang, "index.html"), "<p>home</p>");
+  }
   fs.writeFileSync(path.join(dir, "index.html"), '<a href="/demo/de/#firmware-2">x</a>');
   assert.deepEqual(checkSite(dir).problems, []);
   fs.writeFileSync(path.join(dir, "index.html"), '<a href="/demo/en/#firmware-2">x</a>');
@@ -244,8 +250,37 @@ test("images must be safe files of the declared type", () => {
   assert.match(checkImage("a.exe", PNG), /unsupported/);
 });
 
-test("project list on the home page is replaced between the markers", () => {
+test("project list on the home page links to the page in the same language", () => {
   const html = "<ul>\n    <li>old</li>\n    <!-- generated:projects -->\n    <li>stale</li>\n    <!-- /generated:projects -->\n</ul>";
-  const updated = updateIndex(html, [{ project: { slug: "demo" }, title: "Demo", logo: "assets/logo.svg" }]);
-  assert.equal(updated, '<ul>\n    <li>old</li>\n    <!-- generated:projects -->\n    <li><a href="/demo/"><img src="/demo/assets/logo.svg" alt="" width="20" height="20">Demo</a></li>\n    <!-- /generated:projects -->\n</ul>');
+  const results = [
+    { project: { slug: "demo" }, title: "Demo", logo: "assets/logo.svg", languages: ["en", "de"] },
+    { project: { slug: "solo" }, title: "Solo", logo: null, languages: ["en"] },
+  ];
+  assert.equal(
+    updateIndex(html, results, "de"),
+    '<ul>\n    <li>old</li>\n    <!-- generated:projects -->\n    <li><a href="/demo/de/"><img src="/demo/assets/logo.svg" alt="" width="20" height="20">Demo</a></li>\n    <li><a href="/solo/">Solo</a></li>\n    <!-- /generated:projects -->\n</ul>',
+  );
+});
+
+test("home pages get the language, flags and alternates", () => {
+  const template = '<html lang="{{lang}}">\n<head>{{head}}\n<style>{{switchStyle}}</style></head>\n<body>\n{{switch}}\n<ul>\n<!-- generated:projects -->\n<!-- /generated:projects -->\n</ul>';
+  const results = [{ project: { slug: "demo" }, title: "Demo", logo: null, languages: ["en", "de"] }];
+  const de = renderHome(template, results, "de", null);
+  assert.match(de, /<html lang="de">/);
+  assert.match(de, /<link rel="alternate" hreflang="en" href="https:\/\/ckass.de\/en\/">/);
+  assert.match(de, /\.switch a\[aria-current="page"\]/);
+  assert.match(de, /\n<nav class="switch" aria-label="Language \/ Sprache">\n  <a href="\/en\/" hreflang="en"/);
+  assert.match(de, /<a href="\/de\/" hreflang="de" lang="de" aria-current="page"/);
+  assert.match(de, /<li><a href="\/demo\/de\/">Demo<\/a><\/li>/);
+  assert.doesNotMatch(de, /canonical|\{\{/);
+  assert.match(renderHome(template, results, "en", "/en/"), /<link rel="canonical" href="https:\/\/ckass.de\/en\/">/);
+});
+
+test("the root .htaccess keeps its own lines and gets one redirect block", () => {
+  const base = "ErrorDocument 404 /404.html\nOptions -Indexes\n";
+  const once = updateHtaccess(base);
+  assert.ok(once.startsWith(base));
+  assert.match(once, /RewriteRule \^\(index\\.html\)\?\$ \/de\/ \[R=302,L,E=LANGUAGE_REDIRECT:1\]/);
+  assert.equal(updateHtaccess(once), once);
+  assert.equal(updateHtaccess(once.replace("/de/ [R", "/old/ [R")), once);
 });

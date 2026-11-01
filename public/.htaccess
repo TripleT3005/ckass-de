@@ -1,3 +1,14 @@
 ErrorDocument 404 /404.html
 ErrorDocument 403 /404.html
 Options -Indexes
+# generated:languages
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP:Accept-Language} ^(?:\s*(?!(?:en|de)\b)[^,]*,)*\s*de\b [NC]
+RewriteRule ^(index\.html)?$ /de/ [R=302,L,E=LANGUAGE_REDIRECT:1]
+RewriteRule ^(index\.html)?$ /en/ [R=302,L,E=LANGUAGE_REDIRECT:1]
+</IfModule>
+<IfModule mod_headers.c>
+Header always merge Vary Accept-Language env=LANGUAGE_REDIRECT
+</IfModule>
+# /generated:languages
