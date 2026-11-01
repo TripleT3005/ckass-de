@@ -41,7 +41,14 @@ export function decodeEntities(text) {
 }
 
 export function stripTags(html) {
-  return decodeEntities(html.replace(/<[^>]*>/g, ""));
+  let text = "";
+  let inTag = false;
+  for (const char of html) {
+    if (char === "<") inTag = true;
+    else if (inTag) inTag = char !== ">";
+    else text += char;
+  }
+  return decodeEntities(text);
 }
 
 // Raw HTML
