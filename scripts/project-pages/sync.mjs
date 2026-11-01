@@ -77,24 +77,22 @@ export function updateIndex(html, results, lang) {
   return `${html.slice(0, start + INDEX_START.length)}\n${items.join("")}${indent}${html.slice(end)}`;
 }
 
-const DISCORD = "https://discord.gg/VE6a3SNNuD";
-
 const HOME_TEXTS = {
   en: {
     intro: "Open-source projects by TripleT3005",
     and: "and",
-    about: "Hi, I'm Christoph Kaß, TripleT3005 online. Grew up with CRT monitors and dial-up beeps, now working as an IT systems administrator and building open-source tools on the side that make IT and everyday life a bit easier. Every now and then I stream on Twitch. Questions, ideas or just want to say hi? {Discord} is the quickest way to reach me.",
+    about: "Hi, I'm Christoph Kaß, known online as TripleT3005. Grew up with CRT monitors and dial-up beeps, now working as an IT systems administrator and building open-source tools on the side that make IT and everyday life a bit easier. Every now and then I stream on Twitch. Questions, ideas or just want to say hi? Discord is the quickest way to reach me.",
   },
   de: {
     intro: "Open-Source-Projekte von TripleT3005",
     and: "und",
-    about: "Hi, ich bin Christoph Kaß, online TripleT3005. Aufgewachsen mit Röhrenmonitor und Modem-Gepiepe, arbeite ich heute als IT-Systemadministrator und baue nebenbei Open-Source-Tools, die IT und Alltag etwas einfacher machen. Ab und zu streame ich auf Twitch. Fragen, Ideen oder einfach Hallo sagen? Am schnellsten erreichst du mich auf {Discord}.",
+    about: "Hi, ich bin Christoph Kaß, online TripleT3005. Aufgewachsen mit Röhrenmonitor und Modem-Gepiepe, arbeite ich heute als IT-Systemadministrator und baue nebenbei Open-Source-Tools, die IT und Alltag etwas einfacher machen. Ab und zu streame ich auf Twitch. Fragen, Ideen oder einfach Hallo sagen? Am schnellsten erreichst du mich auf Discord.",
   },
 };
 
 export function homeAbout(lang) {
   const { about } = HOME_TEXTS[lang] ?? HOME_TEXTS.en;
-  return escapeText(about).replace(/\{([^}]+)\}/, `<a href="${DISCORD}" target="_blank" rel="noopener noreferrer">$1</a>`);
+  return escapeText(about);
 }
 
 export function homeDescription(results, lang) {

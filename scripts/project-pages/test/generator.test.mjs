@@ -332,9 +332,10 @@ test("home pages get the language, flags and alternates", () => {
   assert.match(renderHome(template, results, "en", "/en/"), /<link rel="canonical" href="https:\/\/ckass.de\/en\/">/);
 });
 
-test("the home about text links Discord in the page language", () => {
-  assert.match(homeAbout("de"), /^Hi, ich bin Christoph Kaß, online TripleT3005\..* erreichst du mich auf <a href="https:\/\/discord\.gg\/VE6a3SNNuD" target="_blank" rel="noopener noreferrer">Discord<\/a>\.$/);
-  assert.match(homeAbout("en"), /^Hi, I'm Christoph Kaß.*<a href="https:\/\/discord\.gg\/VE6a3SNNuD"[^>]*>Discord<\/a> is the quickest way to reach me\.$/);
+test("the home about text follows the page language", () => {
+  assert.match(homeAbout("de"), /^Hi, ich bin Christoph Kaß, online TripleT3005\..* erreichst du mich auf Discord\.$/);
+  assert.match(homeAbout("en"), /^Hi, I'm Christoph Kaß, known online as TripleT3005\..* Discord is the quickest way to reach me\.$/);
+  assert.doesNotMatch(homeAbout("de"), /<a /);
   assert.equal(homeAbout("fr"), homeAbout("en"));
 });
 
