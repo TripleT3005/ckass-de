@@ -3,13 +3,14 @@ import fs from "node:fs";
 import { test } from "node:test";
 import os from "node:os";
 import path from "node:path";
-import { checkSite } from "../check.mjs";
+import { checkSite, checkSitemap } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
 import { acceptLanguagePattern, ZOOM_SCRIPT } from "../page.mjs";
 import { renderHtml, stripTags } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
-import { renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
+import { buildSitemap } from "../sitemap.mjs";
+import { homeDescription, renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
 
 // Helpers
 
@@ -277,15 +278,58 @@ test("project list on the home page links to the page in the same language", () 
 test("home pages get the language, flags and alternates", () => {
   const template = '<html lang="{{lang}}">\n<head>{{head}}\n<style>{{switchStyle}}</style></head>\n<body>\n{{switch}}\n<ul>\n<!-- generated:projects -->\n<!-- /generated:projects -->\n</ul>';
   const results = [{ project: { slug: "demo" }, title: "Demo", logo: null, languages: ["en", "de"] }];
-  const de = renderHome(template, results, "de", null);
+  const de = renderHome(template, results, "de", "/de/");
   assert.match(de, /<html lang="de">/);
+  assert.match(de, /<link rel="canonical" href="https:\/\/ckass.de\/de\/">/);
+  assert.match(de, /<meta property="og:url" content="https:\/\/ckass.de\/de\/">/);
+  assert.match(de, /<meta property="og:locale" content="de_DE">/);
   assert.match(de, /<link rel="alternate" hreflang="en" href="https:\/\/ckass.de\/en\/">/);
   assert.match(de, /\.switch a\[aria-current="page"\]/);
   assert.match(de, /\n<nav class="switch" aria-label="Language \/ Sprache">\n  <a href="\/en\/" hreflang="en"/);
   assert.match(de, /<a href="\/de\/" hreflang="de" lang="de" aria-current="page"/);
   assert.match(de, /<li><a href="\/demo\/de\/">Demo<\/a><\/li>/);
-  assert.doesNotMatch(de, /canonical|\{\{/);
+  assert.doesNotMatch(de, /\{\{/);
   assert.match(renderHome(template, results, "en", "/en/"), /<link rel="canonical" href="https:\/\/ckass.de\/en\/">/);
+});
+
+test("the home description lists the projects in the page language", () => {
+  const results = ["A", "B", "C"].map((title) => ({ title }));
+  assert.equal(homeDescription(results, "en"), "Open-source projects by TripleT3005: A, B and C.");
+  assert.equal(homeDescription(results.slice(0, 1), "de"), "Open-Source-Projekte von TripleT3005: A.");
+  assert.equal(homeDescription([], "en"), "Open-source projects by TripleT3005.");
+});
+
+test("project pages point to themselves as canonical and carry Open Graph tags", () => {
+  const { files } = generateProject(PROJECT, memorySource(demoFiles()));
+  assert.match(files.get("en/index.html"), /<link rel="canonical" href="https:\/\/ckass.de\/demo\/en\/">/);
+  assert.match(files.get("de/index.html"), /<link rel="canonical" href="https:\/\/ckass.de\/demo\/de\/">/);
+  assert.match(files.get("de/index.html"), /<meta property="og:title" content="Demo">/);
+  assert.match(files.get("de/index.html"), /<meta property="og:description" content="Demo · Demo ist ein Werkzeug\.">/);
+  const single = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": "# Demo\n\nDemo is a tool.\n" })).files.get("index.html");
+  assert.match(single, /<link rel="canonical" href="https:\/\/ckass.de\/demo\/">/);
+});
+
+test("the sitemap lists indexable pages under their canonical address only", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sitemap-"));
+  const page = (file, head) => {
+    fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true });
+    fs.writeFileSync(path.join(dir, file), `<head>${head}</head>`);
+  };
+  page("index.html", '<link rel="canonical" href="https://ckass.de/en/">');
+  page("en/index.html", '<link rel="canonical" href="https://ckass.de/en/">');
+  page("demo/de/index.html", '<link rel="canonical" href="https://ckass.de/demo/de/">');
+  page("solo/index.html", "");
+  page("404.html", '<meta name="robots" content="noindex, nofollow">');
+  assert.equal(
+    buildSitemap(dir),
+    '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>https://ckass.de/demo/de/</loc></url>\n  <url><loc>https://ckass.de/en/</loc></url>\n  <url><loc>https://ckass.de/solo/</loc></url>\n</urlset>\n',
+  );
+  assert.deepEqual(checkSitemap(dir), ["sitemap.xml is missing"]);
+  fs.writeFileSync(path.join(dir, "sitemap.xml"), buildSitemap(dir));
+  assert.deepEqual(checkSitemap(dir), []);
+  page("new/index.html", "");
+  assert.match(checkSitemap(dir).join(), /out of date/);
+  fs.rmSync(dir, { recursive: true, force: true });
 });
 
 test("the root .htaccess keeps its own lines and gets one redirect block", () => {

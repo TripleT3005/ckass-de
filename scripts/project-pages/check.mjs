@@ -3,16 +3,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { decodeEntities } from "./html.mjs";
 import { GENERATED_MARK, ZOOM_SCRIPT } from "./page.mjs";
+import { buildSitemap, htmlFiles } from "./sitemap.mjs";
 
 // Pages
-
-function htmlFiles(dir) {
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) return htmlFiles(full);
-    return entry.name.endsWith(".html") ? [full] : [];
-  });
-}
 
 function idsOf(html) {
   return new Set([...html.matchAll(/\sid="([^"]*)"/g)].map((m) => decodeEntities(m[1])));
@@ -64,9 +57,16 @@ export function checkSite(publicDir) {
   return { files: files.length, problems };
 }
 
+export function checkSitemap(publicDir) {
+  const file = path.join(publicDir, "sitemap.xml");
+  if (!fs.existsSync(file)) return ["sitemap.xml is missing"];
+  return fs.readFileSync(file, "utf8") === buildSitemap(publicDir) ? [] : ["sitemap.xml is out of date, run scripts/project-pages/sync.mjs"];
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const publicDir = path.resolve(process.argv[2] ?? fileURLToPath(new URL("../../public", import.meta.url)));
   const { files, problems } = checkSite(publicDir);
+  problems.push(...checkSitemap(publicDir));
   for (const problem of problems) console.log(`::error::${problem}`);
   console.log(`Checked ${files} pages, ${problems.length} problem(s).`);
   if (problems.length) process.exit(1);

@@ -269,11 +269,11 @@ export function generateProject(project, source) {
 
   const pages = new Map();
   if (multi) {
-    for (const lang of languages) pages.set(`${lang}/index.html`, render(lang, "../", null));
+    for (const lang of languages) pages.set(`${lang}/index.html`, render(lang, "../", `/${project.slug}/${lang}/`));
     pages.set("index.html", render(languages[0], "", `/${project.slug}/${languages[0]}/`));
     pages.set(".htaccess", redirectRules(`/${project.slug}/`, languages));
   } else {
-    pages.set("index.html", render(languages[0] ?? null, "", null));
+    pages.set("index.html", render(languages[0] ?? null, "", `/${project.slug}/`));
   }
 
   const files = new Map();
