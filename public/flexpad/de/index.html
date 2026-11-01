@@ -54,7 +54,14 @@ section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line
 .links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
 .links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}}
+img.zoomable{cursor:zoom-in}
+img.zoomable:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+dialog.zoom{max-width:none;max-height:none;margin:auto;padding:0;border:0;background:none;overflow:visible}
+dialog.zoom::backdrop{background:rgb(0 0 0 / .85)}
+dialog.zoom[open]{animation:zoom-in .15s ease-out}
+dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:auto;border-radius:.5rem;cursor:zoom-out}
+@keyframes zoom-in{from{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}dialog.zoom[open]{animation:none}}
 </style>
 </head>
 <body>
@@ -190,5 +197,35 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 
   <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/FlexPad" target="_blank" rel="noopener noreferrer">TripleT3005/FlexPad</a></footer>
 </main>
+<script>
+(function(){
+  var label = document.documentElement.lang === "de" ? "Bild vergrößern" : "Enlarge image";
+  var dialog = document.createElement("dialog"), large = document.createElement("img");
+  dialog.className = "zoom";
+  dialog.appendChild(large);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("click", function(){ dialog.close(); });
+  dialog.addEventListener("close", function(){ large.removeAttribute("src"); });
+  function open(img){
+    large.src = img.currentSrc || img.src;
+    large.alt = img.alt;
+    dialog.setAttribute("aria-label", img.alt || label);
+    (large.decode ? large.decode() : Promise.resolve()).catch(function(){}).then(function(){ if (!dialog.open) dialog.showModal(); });
+  }
+  function prepare(img){
+    if (img.naturalWidth <= img.clientWidth + 1 || img.classList.contains("zoomable")) return;
+    img.classList.add("zoomable");
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.title = label;
+    img.addEventListener("click", function(){ open(img); });
+    img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(img); } });
+  }
+  [].forEach.call(document.querySelectorAll("section img, main > p img"), function(img){
+    if (img.complete) prepare(img); else img.addEventListener("load", function(){ prepare(img); });
+  });
+  addEventListener("resize", function(){ [].forEach.call(document.querySelectorAll("section img, main > p img"), prepare); });
+})();
+</script>
 </body>
 </html>

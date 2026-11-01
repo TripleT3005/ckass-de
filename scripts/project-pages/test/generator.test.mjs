@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import { checkSite } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
-import { acceptLanguagePattern } from "../page.mjs";
+import { acceptLanguagePattern, ZOOM_SCRIPT } from "../page.mjs";
 import { renderHtml } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
@@ -153,12 +153,14 @@ test("generates one page per language with rewritten links and skipped sections 
   const en = files.get("en/index.html");
   const de = files.get("de/index.html");
   for (const html of [en, de]) {
-    assert.doesNotMatch(html, /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"|<script/);
+    assert.doesNotMatch(html.replace(ZOOM_SCRIPT, ""), /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"|<script/);
     assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases\/latest"[^>]*>Download</);
     assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"[^>]*>Changelog</);
     assert.match(html, /<link rel="alternate" hreflang="de" href="https:\/\/ckass.de\/demo\/de\/">/);
     assert.match(html, /<img src="..\/assets\/logo.svg" alt="" width="64" height="64">/);
   }
+  assert.ok(en.includes(ZOOM_SCRIPT));
+  assert.ok(!de.includes(ZOOM_SCRIPT));
   assert.match(en, /<html lang="en">/);
   assert.match(en, /<section id="english">/);
   assert.doesNotMatch(en, /Demo ist ein Werkzeug|<h2/);
@@ -195,7 +197,7 @@ test("a README with one language becomes a single page", () => {
   const { files } = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": readme }));
   assert.deepEqual([...files.keys()], ["index.html"]);
   assert.match(files.get("index.html"), /<h2 id="english">English<\/h2>/);
-  assert.doesNotMatch(files.get("index.html"), /class="switch"/);
+  assert.doesNotMatch(files.get("index.html"), /class="switch"|<script/);
 });
 
 test("the redirect picks the first supported browser language", () => {

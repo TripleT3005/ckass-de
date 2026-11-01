@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { decodeEntities } from "./html.mjs";
-import { GENERATED_MARK } from "./page.mjs";
+import { GENERATED_MARK, ZOOM_SCRIPT } from "./page.mjs";
 
 // Pages
 
@@ -35,8 +35,9 @@ export function checkSite(publicDir) {
     const rel = path.relative(publicDir, file).split(path.sep).join("/");
     const generated = html.includes(GENERATED_MARK);
     if (generated) {
-      if (/<script|<iframe|<object|<embed|<form/i.test(html)) problems.push(`${rel}: contains active content`);
-      if (/\son[a-z]+\s*=/i.test(html)) problems.push(`${rel}: contains an event handler attribute`);
+      const content = html.replace(ZOOM_SCRIPT, "");
+      if (/<script|<iframe|<object|<embed|<form/i.test(content)) problems.push(`${rel}: contains active content`);
+      if (/\son[a-z]+\s*=/i.test(content)) problems.push(`${rel}: contains an event handler attribute`);
     }
     for (const m of html.matchAll(/\s(href|src)="([^"]*)"/g)) {
       const [, attr, raw] = m;
