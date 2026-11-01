@@ -16,6 +16,12 @@ const INDEX_END = "<!-- /generated:projects -->";
 const HOME_TEMPLATE = path.join(ROOT, "templates", "home.html");
 const HTACCESS_START = "# generated:languages";
 const HTACCESS_END = "# /generated:languages";
+const ICON_DIRECTORY = path.join(ROOT, "assets", "icons");
+export const SITE_ICONS = [
+  ["icon.svg", "favicon.svg"],
+  ["icon.ico", "favicon.ico"],
+  ["icon-256.png", "icon.png"],
+];
 
 export function loadProjects(file) {
   const projects = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -106,8 +112,8 @@ export function renderHome(template, results, lang, canonical) {
   const description = homeDescription(results, lang);
   const links = [
     `\n<link rel="canonical" href="${SITE}${canonical}">`,
-    openGraph({ title: "ckass", description, url: SITE + canonical, lang }),
-    homeData({ url: SITE + canonical, lang, description }),
+    openGraph({ title: "ckass", description, url: SITE + canonical, lang, image: `${SITE}/icon.png` }),
+    homeData({ url: SITE + canonical, lang, description, image: `${SITE}/icon.png` }),
     ...SUPPORTED_LANGUAGES.map((l) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}/${l}/">`),
     `\n<link rel="alternate" hreflang="x-default" href="${SITE}/">`,
   ];
@@ -201,6 +207,7 @@ function main() {
   }
   for (const { project, files } of results) writeProject(project.slug, files);
   writeHome(results);
+  for (const [source, target] of SITE_ICONS) fs.copyFileSync(path.join(ICON_DIRECTORY, source), path.join(PUBLIC, target));
   fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), buildSitemap(PUBLIC));
   if (args.summary) fs.writeFileSync(args.summary, summary(results));
 }

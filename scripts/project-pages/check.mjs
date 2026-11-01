@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { decodeEntities } from "./html.mjs";
 import { GENERATED_MARK, ZOOM_SCRIPT } from "./page.mjs";
 import { buildSitemap, htmlFiles } from "./sitemap.mjs";
+import { SITE_ICONS } from "./sync.mjs";
 
 // Pages
 
@@ -64,6 +65,13 @@ export function checkSite(publicDir) {
   return { files: files.length, problems };
 }
 
+export function checkSiteIcons(publicDir, iconDir) {
+  return SITE_ICONS.filter(([source, target]) => {
+    const published = path.join(publicDir, target);
+    return !fs.existsSync(published) || !fs.readFileSync(published).equals(fs.readFileSync(path.join(iconDir, source)));
+  }).map(([source, target]) => `${target} does not match assets/icons/${source}, run scripts/project-pages/sync.mjs`);
+}
+
 export function checkSitemap(publicDir) {
   const file = path.join(publicDir, "sitemap.xml");
   if (!fs.existsSync(file)) return ["sitemap.xml is missing"];
@@ -74,6 +82,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const publicDir = path.resolve(process.argv[2] ?? fileURLToPath(new URL("../../public", import.meta.url)));
   const { files, problems } = checkSite(publicDir);
   problems.push(...checkSitemap(publicDir));
+  if (!process.argv[2]) problems.push(...checkSiteIcons(publicDir, fileURLToPath(new URL("../../assets/icons", import.meta.url))));
   for (const problem of problems) console.log(`::error::${problem}`);
   console.log(`Checked ${files} pages, ${problems.length} problem(s).`);
   if (problems.length) process.exit(1);
