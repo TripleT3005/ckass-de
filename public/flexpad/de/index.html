@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/FlexPad by scripts/project-pages -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="FlexPad · FlexPad ist ein frei konfigurierbares Makropad auf Basis des ESP32-S3.">
+<title>FlexPad</title>
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://ckass.de/flexpad/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/flexpad/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/flexpad/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{display:flex;gap:.25rem;margin-left:auto;align-self:flex-start}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="../assets/logo.svg" alt="" width="64" height="64">
+    <h1 id="-flexpad">FlexPad</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="../en/" hreflang="en" lang="en" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="../de/" hreflang="de" lang="de" aria-current="page" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="deutsch">
+<p>FlexPad ist ein frei konfigurierbares Makropad auf Basis des ESP32-S3. Das Board meldet sich als USB-Tastatur und Mediensteuerung und führt Tastenfolgen aus, wenn ein Taster gedrückt oder ein Encoder gedreht wird. Eine plattformübergreifende Desktop-App in Rust (<a href="https://iced.rs/" target="_blank" rel="noopener noreferrer">iced</a>) platziert Taster und Drehencoder auf einer Arbeitsfläche, ordnet GPIO-Pins und Makros zu und überträgt die Konfiguration per USB-Seriell auf das Gerät. Auch die Firmware ist in Rust geschrieben (<a href="https://github.com/esp-rs/esp-hal" target="_blank" rel="noopener noreferrer">esp-hal</a>, <a href="https://embassy.dev/" target="_blank" rel="noopener noreferrer">Embassy</a>).</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/FlexPad/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/FlexPad/blob/main/flexpad-desktop/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/FlexPad" target="_blank" rel="noopener noreferrer">Quellcode</a>
+  <a href="https://github.com/TripleT3005/FlexPad/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<blockquote>
+<p>Keine Verbindung zu Espressif Systems und nicht von Espressif unterstützt.</p>
+</blockquote>
+<p>
+  <img src="../assets/screenshot-light.png" alt="FlexPad-Konfigurator mit fünf Kacheln und dem Tile Inspector (heller Modus)" width="49%" loading="lazy" decoding="async">
+  <img src="../assets/screenshot-dark.png" alt="FlexPad-Konfigurator mit fünf Kacheln und dem Tile Inspector (dunkler Modus)" width="49%" loading="lazy" decoding="async">
+</p>
+<h3 id="funktionen">Funktionen</h3>
+<ul>
+<li>Bis zu 25 Eingänge an einem ESP32-S3: Taster und EC11-Drehencoder</li>
+<li>Makros aus Drücken und Loslassen von Tasten, Pausen, Medientasten und Text</li>
+<li>Grafischer Editor: Kacheln auf einer Arbeitsfläche platzieren, Pins zuordnen und Makros aus Vorlagen oder Schritt für Schritt erstellen</li>
+<li>Entprellzeit, Encoder-Auflösung und Drehrichtung pro Kachel einstellbar</li>
+<li>Profile lokal und auf dem Gerät gespeichert; einmal eingerichtet, arbeitet das Gerät ohne die App</li>
+<li>Kein Treiber, kein Konto, keine Netzwerkzugriffe außer einer optionalen Update-Prüfung (siehe <a href="#datenschutz">Datenschutz</a>)</li>
+</ul>
+<h3 id="hardware-1">Hardware</h3>
+<div class="table"><table>
+<thead><tr><th>Bauteil</th><th>Hinweise</th></tr></thead>
+<tbody>
+<tr><td>ESP32-S3-Board mit nativem USB</td><td>Entwickelt mit einem ESP32-S3-Dev-Module mit 16 MB Flash und 8 MB Octal-PSRAM (N16R8)</td></tr>
+<tr><td>Taster</td><td>Eine Seite an einen GPIO-Pin, die andere an GND. Die internen Pull-ups werden genutzt, Widerstände sind nicht nötig.</td></tr>
+<tr><td>EC11-Drehencoder (optional)</td><td>Pins A und B an zwei GPIO-Pins, der mittlere Pin C an GND. Der Taster des Encoders wie ein normaler Taster.</td></tr>
+</tbody>
+</table></div>
+<p><strong>Nutzbare Pins:</strong> 1, 2, 4–18, 21, 38–42, 47, 48 (25 Eingänge). Bewusst ausgenommen: GPIO 0, 3, 45 und 46 (Strapping-Pins), 19/20 (USB) und 33–37, die Module mit Octal-PSRAM oder Octal-Flash (z. B. N16R8) intern nutzen.</p>
+<h3 id="installation-1">Installation</h3>
+<p>Die App gibt es unter <a href="https://github.com/TripleT3005/FlexPad/releases" target="_blank" rel="noopener noreferrer">Releases</a> (Releases mit Namen <code>FlexPad &lt;Version&gt;</code>, Tag <code>v&lt;Version&gt;</code>). Die App enthält die passende Firmware und installiert oder aktualisiert sie auf dem Board (siehe <a href="#firmware-2">Firmware</a>). Die Firmware erscheint außerdem einzeln als <code>FlexPad firmware &lt;Version&gt;</code> (Tag <code>firmware-v&lt;Version&gt;</code>). Änderungen stehen in den Changelogs von <a href="https://github.com/TripleT3005/FlexPad/blob/main/flexpad-desktop/CHANGELOG.md" target="_blank" rel="noopener noreferrer">App</a> und <a href="https://github.com/TripleT3005/FlexPad/blob/main/flexpad-firmware/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Firmware</a>.</p>
+<h4 id="app-1">App</h4>
+<p><strong>Windows:</strong> <code>FlexPad-&lt;Version&gt;-windows-x64-setup.exe</code> ausführen. Es installiert für den aktuellen Benutzer ohne Administratorrechte (nach <code>%LOCALAPPDATA%\Programs\FlexPad</code>); „Für alle Benutzer installieren“ installiert nach <code>C:\Program Files\FlexPad</code> und fragt nach Administratorrechten. Optionen: Startmenü-Eintrag (an), Desktop-Verknüpfung (aus). Statt des Installers geht auch das portable Archiv <code>…-windows-x64-portable.zip</code>.</p>
+<p><strong>macOS:</strong> <code>…-macos-arm64.dmg</code> (Apple Silicon) öffnen und FlexPad in den Ordner Programme ziehen.</p>
+<p><strong>Linux:</strong> Unter Debian, Ubuntu, Linux Mint und ähnlichen <code>flexpad_&lt;Version&gt;_amd64.deb</code> installieren (z. B. <code>sudo apt install ./flexpad_1.2.0_amd64.deb</code>), unter Fedora, openSUSE und ähnlichen <code>flexpad-&lt;Version&gt;-1.x86_64.rpm</code> (z. B. <code>sudo dnf install ./flexpad-1.2.0-1.x86_64.rpm</code>). Beide tragen FlexPad ins Anwendungsmenü ein. Für andere Distributionen <code>…-linux-x64.tar.gz</code> entpacken und <code>flexpad</code> starten; es braucht <code>libudev</code>. Für den Zugriff auf den USB-Seriell-Port muss der eigene Benutzer in der Gruppe <code>dialout</code> (Debian, Ubuntu, Fedora) bzw. <code>uucp</code> (Arch) sein: <code>sudo usermod -aG dialout $USER</code>, danach neu anmelden.</p>
+<p>Die Anwendung ist nicht signiert, deshalb warnt das System beim ersten Start eventuell:</p>
+<ul>
+<li><strong>Windows:</strong> SmartScreen → „Weitere Informationen“ → „Trotzdem ausführen“</li>
+<li><strong>macOS:</strong> Die App ist nicht von Apple beglaubigt. Beim ersten Start verweigert macOS das Öffnen; dann unter Systemeinstellungen → Datenschutz &amp; Sicherheit „Dennoch öffnen“ wählen (bei älteren Versionen: Rechtsklick auf die App → „Öffnen“). Das ist nur einmal nötig.</li>
+</ul>
+<p>Zu jedem Download gibt es eine <code>.sha256</code>-Datei, um ihn zu prüfen.</p>
+<h4 id="installer-parameter">Installer-Parameter</h4>
+<div class="table"><table>
+<thead><tr><th>Parameter</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td><code>/CURRENTUSER</code></td><td>Nur für den aktuellen Benutzer installieren (Standard)</td></tr>
+<tr><td><code>/ALLUSERS</code></td><td>Für alle Benutzer installieren (fragt nach Administratorrechten)</td></tr>
+<tr><td><code>/DIR=&quot;C:\Pfad&quot;</code></td><td>Installationsordner</td></tr>
+<tr><td><code>/SILENT</code>, <code>/VERYSILENT</code></td><td>Ohne Assistent (mit oder ohne Fortschrittsfenster)</td></tr>
+<tr><td><code>/SUPPRESSMSGBOXES</code></td><td>Keine Meldungsfenster bei stiller Installation</td></tr>
+<tr><td><code>/TASKS=&quot;desktopicon&quot;</code></td><td>Desktop-Verknüpfung anlegen; ohne den Parameter gibt es keine</td></tr>
+<tr><td><code>/NOICONS</code></td><td>Kein Startmenü-Eintrag</td></tr>
+<tr><td><code>/LOG=&quot;C:\Pfad\setup.log&quot;</code></td><td>Protokolldatei schreiben</td></tr>
+</tbody>
+</table></div>
+<p>Beispiel: <code>FlexPad-1.2.0-windows-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /TASKS=&quot;desktopicon&quot;</code></p>
+<p>Profile und Einstellungen gelten pro Benutzer und werden vom Installer nicht gesetzt. Die Deinstallation entfernt Programm und Verknüpfungen, lässt Profile und Einstellungen aber stehen (Ordner siehe <a href="#datenschutz">Datenschutz</a>).</p>
+<h4 id="firmware-2">Firmware</h4>
+<p>Die App enthält die Firmware ihrer eigenen Version und schreibt sie selbst, ohne zusätzliches Werkzeug:</p>
+<ul>
+<li><strong>Aktualisieren:</strong> Läuft auf dem verbundenen FlexPad eine ältere Firmware, zeigt eine Leiste über der Arbeitsfläche „Update firmware“. Die App startet den FlexPad in seinen Bootloader neu, schreibt die Firmware und startet ihn wieder.</li>
+<li><strong>Erstinstallation oder Wiederherstellung:</strong> <strong>BOOT</strong> gedrückt halten, <strong>RESET</strong> drücken, <strong>BOOT</strong> loslassen (oder <strong>BOOT</strong> beim Einstecken gedrückt halten), dann <strong>Scan</strong> klicken. Für das Board im Bootloader-Modus zeigt eine Leiste über der Arbeitsfläche „Install firmware“.</li>
+</ul>
+<p>Das Board nicht abziehen, solange der Fortschrittsbalken zu sehen ist. Startet es danach nicht von selbst neu, <strong>RESET</strong> drücken oder es kurz abziehen. Das auf dem Gerät gespeicherte Profil bleibt erhalten: Geschrieben werden nur Bootloader, Partitionstabelle und App, und das Image endet vor der Profil-Partition.</p>
+<p>Alternativ enthält <code>FlexPad-firmware-&lt;Version&gt;-esp32s3.bin</code> aus dem Firmware-Release Bootloader, Partitionstabelle und Firmware in einem Image für einen ESP32-S3 mit mindestens 8 MB Flash. Geschrieben wird es mit <a href="https://github.com/esp-rs/espflash" target="_blank" rel="noopener noreferrer">espflash</a> (fertige Downloads auf dessen Release-Seite oder <code>cargo install espflash</code>):</p>
+<ol>
+<li>Das Board in den Download-Modus bringen: <strong>BOOT</strong> gedrückt halten, <strong>RESET</strong> drücken, <strong>BOOT</strong> loslassen. Läuft bereits die FlexPad-Firmware, geht das auch, indem man über ihren seriellen Port <code>REBOOT_BOOTLOADER</code> sendet.</li>
+<li><code>espflash write-bin --chip esp32s3 --no-stub --before no-reset --after no-reset --port &lt;port&gt; 0x0 FlexPad-firmware-&lt;Version&gt;-esp32s3.bin</code></li>
+<li><strong>RESET</strong> drücken (oder das Board kurz abziehen). Danach meldet sich das Board als „FlexPad“.</li>
+</ol>
+<p>Ein bereits gespeichertes Profil bleibt erhalten: Das Image endet vor der Profil-Partition.</p>
+<h3 id="bedienung">Bedienung</h3>
+<ol>
+<li>FlexPad per USB anschließen und die App starten.</li>
+<li><strong>Scan</strong>, das Gerät auswählen und <strong>Connect</strong>.</li>
+<li>Unter <strong>Keyboard layout</strong> das Tastaturlayout des Rechners wählen, an dem das Pad benutzt wird; die Tastennamen im Makro-Editor richten sich danach.</li>
+<li><strong>Load Config</strong> liest die auf dem Gerät gespeicherte Konfiguration.</li>
+<li>Mit <strong>Add Tile</strong> Kacheln hinzufügen (Taster oder EC11-Encoder), an die gewünschte Stelle ziehen und zum Bearbeiten im <strong>Tile Inspector</strong> auswählen:
+<ul>
+<li><strong>Pins</strong>: für jeden Anschluss des Bauteils den GPIO-Pin wählen (angeboten werden nur freie, nutzbare Pins),</li>
+<li><strong>Parameter</strong>: Entprellzeit, bei Encodern zusätzlich Schritte pro Raste und Drehrichtung,</li>
+<li><strong>Funktionen</strong> (z. B. Drücken, Rechts drehen, Links drehen): aufklappen, um das Makro zu bearbeiten,</li>
+<li>in einer Funktion das Makro aus <strong>Presets</strong> übernehmen oder Aktionen (Press, Release, Delay, Media, Text) einzeln hinzufügen. <strong>Advanced View</strong> zeigt das Makro als rohes JSON zum Bearbeiten.</li>
+<li><strong>Test</strong> neben einer Funktion führt ihr Makro einmal auf dem verbundenen Gerät aus, ohne etwas zu speichern; die Antwort (in der Warteschlange, ausgelastet oder der Grund eines Fehlers) erscheint an der Funktion. Das Makro tippt in das Fenster, das den Fokus hat; Text verwendet das Tastaturlayout des auf dem Gerät gespeicherten Profils.</li>
+</ul></li>
+<li><strong>Save Profile</strong> speichert das Profil auf dem Rechner, <strong>Set Config</strong> überträgt es auf das Gerät.</li>
+</ol>
+<p>Verdrahtungstest: Solange die App verbunden ist, hebt ein Tastendruck oder eine Encoder-Drehung die zugehörige Kachel kurz auf der Arbeitsfläche hervor, und die Statusleiste nennt den Pin (z. B. „GPIO 12 pressed – not assigned“ für einen Pin ohne Kachel).</p>
+<h3 id="funktionsweise">Funktionsweise</h3>
+<p>Die Firmware fragt die konfigurierten Pins jede Millisekunde ab, entprellt Taster, wertet Encoder aus und führt das zugeordnete Makro als USB-HID-Tastatur- und Mediensteuerungs-Reports aus. Das Profil liegt als JSON in einer eigenen Flash-Partition mit zwei Speicherplätzen und Prüfsumme; es übersteht so einen Neustart und ein unterbrochenes Speichern.</p>
+<p>App und Gerät sprechen über den USB-Seriell-Port des Boards miteinander (zeilenbasierte Textbefehle, jeweils mit <code>\n</code> abgeschlossen). Das vollständige Protokoll und das Profilformat beschreibt <a href="https://github.com/TripleT3005/FlexPad/blob/main/docs/protocol.md" target="_blank" rel="noopener noreferrer">docs/protocol.md</a> (auf Englisch); Überblick:</p>
+<div class="table"><table>
+<thead><tr><th>Befehl</th><th>Antwort</th></tr></thead>
+<tbody>
+<tr><td><code>GET_DEVICE_INFO</code></td><td><code>DEVICE_INFO:FlexPad,&lt;Seriennummer&gt;,&lt;Firmware-Version&gt;</code></td></tr>
+<tr><td><code>GET_CONFIG</code></td><td><code>CONFIG_DATA:&lt;Profil-JSON&gt;</code></td></tr>
+<tr><td><code>SET_CONFIG:&lt;Profil-JSON&gt;</code></td><td><code>CONFIG_SAVED</code> oder <code>CONFIG_ERROR:&lt;grund&gt;</code> (z. B. <code>unusable_pin:35</code>, <code>duplicate_pin:4</code>), ohne das gespeicherte Profil zu ändern</td></tr>
+<tr><td><code>RUN_MACRO:&lt;funktions-JSON&gt;</code></td><td>Führt ein Makro zum Testen aus, z. B. <code>RUN_MACRO:{&quot;actions&quot;:[{&quot;media&quot;:&quot;mute&quot;}]}</code>: <code>MACRO_QUEUED</code> oder <code>MACRO_ERROR:&lt;grund&gt;</code></td></tr>
+<tr><td><code>REBOOT_BOOTLOADER</code></td><td><code>REBOOTING:bootloader</code>, danach startet das Board zum Flashen im Download-Modus neu</td></tr>
+<tr><td>–</td><td>Vom Gerät gesendet: <code>EVENT:PIN:&lt;pin&gt;:PRESSED</code>/<code>RELEASED</code> und <code>EVENT:ENCODER:&lt;pin a&gt;:RIGHT</code>/<code>LEFT</code></td></tr>
+</tbody>
+</table></div>
+<p>Jede Funktion einer Kachel enthält ein Makro als Liste von Aktionen: <code>{&quot;press&quot;:&quot;&lt;taste&gt;&quot;}</code> drücken, <code>{&quot;release&quot;:&quot;&lt;taste&gt;&quot;}</code> loslassen, <code>{&quot;delay&quot;:&lt;ms&gt;}</code> warten, <code>{&quot;media&quot;:&quot;&lt;aktion&gt;&quot;}</code> Medientaste und <code>{&quot;text&quot;:&quot;&lt;text&gt;&quot;}</code> Text tippen (mit dem im Profil gewählten Tastaturlayout; English (US) oder German). Beispiel (Kopieren): <code>{&quot;actions&quot;:[{&quot;press&quot;:&quot;ControlLeft&quot;},{&quot;press&quot;:&quot;KeyC&quot;},{&quot;delay&quot;:50},{&quot;release&quot;:&quot;KeyC&quot;},{&quot;release&quot;:&quot;ControlLeft&quot;}]}</code>. Ältere Profile mit kommagetrennten Makro-Strings (<code>P:ControlLeft,P:KeyC,…</code>) werden beim Laden umgewandelt.</p>
+<p>Tastennamen beschreiben die physische Tastenposition auf einer US-Tastatur, mit den Namen von <a href="https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values" target="_blank" rel="noopener noreferrer"><code>KeyboardEvent.code</code></a> (<code>KeyA</code>, <code>Digit1</code>, <code>ControlLeft</code>, <code>Semicolon</code>, <code>IntlBackslash</code>, <code>NumpadAdd</code>, <code>F13</code> …). Bei deutschem Layout tippt <code>Semicolon</code> daher <code>ö</code> und <code>KeyZ</code> ein <code>y</code>. Die App zeigt die Tasten mit den Beschriftungen des im Profil gewählten Tastaturlayouts (z. B. <code>KeyY</code> als „Z“ bei deutschem Layout); ältere Namen früherer Versionen (<code>lctrl</code>, <code>ael</code>, <code>kp_1</code> …) werden beim Laden eines Profils umgestellt. Makros laufen im Hintergrund: Das Gerät beantwortet weiter serielle Befehle, und am Ende eines Makros werden alle Tasten losgelassen.</p>
+<h3 id="datenschutz">Datenschutz</h3>
+<ul>
+<li><strong>Die Firmware verbindet sich nie mit dem Internet.</strong> Die App macht eine einzige optionale Anfrage, die Update-Prüfung: beim Start und danach alle 24 Stunden, solange sie läuft, sendet sie eine HTTPS-GET-Anfrage an <code>https://api.github.com/repos/TripleT3005/FlexPad/releases/latest</code> und erhält die Angaben zum neuesten Release (Versionsnummer und Link), die mit der installierten Version verglichen werden; ist sie neuer, erscheint in der Statusleiste unten „Version x.y.z available“, ein Klick öffnet die Release-Seite im Browser. Es wird nichts heruntergeladen oder installiert. GitHub sieht deine IP-Adresse und den <code>User-Agent</code> <code>FlexPad/&lt;Version&gt;</code>; sonst wird nichts gesendet. Abschalten lässt sich die Prüfung mit <strong>Check for updates</strong> in der Statusleiste (wird in den Einstellungen gespeichert); dann macht die App überhaupt keine Anfrage.</li>
+<li>Die App spricht nur mit seriellen Ports am eigenen Rechner. Um FlexPad-Geräte zu finden, öffnet sie nur USB-Seriell-Ports, deren USB-Seriennummer mit <code>FlexPad-</code> beginnt (Espressif-Hersteller-ID <code>303A</code>), und fragt sie mit <code>GET_DEVICE_INFO</code> ab; andere Geräte bleiben unberührt. Ein Scan sucht in der Portliste außerdem nach einem ESP32-S3 im Bootloader-Modus (<code>303A:0009</code>), ohne ihn zu öffnen; dieser Port wird nur geöffnet, wenn man „Install firmware“ oder „Update firmware“ klickt.</li>
+<li>Profile und Einstellungen liegen pro Benutzer unter Windows in <code>%APPDATA%\FlexPad</code>, unter macOS in <code>~/Library/Application Support/FlexPad</code>, unter Linux die Einstellungen in <code>~/.config/flexpad</code> und die Profile in <code>~/.local/share/flexpad</code> (bzw. in den Ordnern aus <code>XDG_CONFIG_HOME</code> und <code>XDG_DATA_HOME</code>). Dateien aus dem Ordner <code>FlexPad</code> im Benutzerverzeichnis, den frühere Versionen nutzten, werden beim Start einmalig dorthin verschoben. Position und Größe des Fensters gehören zum Rechner und liegen in <code>window.json</code>: unter Windows in <code>%LOCALAPPDATA%\FlexPad</code>, unter macOS neben den Einstellungen, unter Linux in <code>~/.local/state/flexpad</code> (bzw. <code>XDG_STATE_HOME</code>). Das Gerät speichert das komplette Profil, das man ihm schickt; <strong>Load Config</strong> zeigt daher an jedem Rechner dasselbe Profil. Ältere Profile werden beim Laden ins aktuelle Format übernommen.</li>
+<li>Das Gerät meldet sich mit einer Seriennummer, die aus der MAC-Adresse des Chips gebildet wird.</li>
+</ul>
+<h3 id="lizenz">Lizenz</h3>
+<p><a href="https://github.com/TripleT3005/FlexPad/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
+</section>
+
+  <footer><a href="/">ckass.de</a> · <a href="https://github.com/TripleT3005/FlexPad" target="_blank" rel="noopener noreferrer">TripleT3005/FlexPad</a></footer>
+</main>
+</body>
+</html>
