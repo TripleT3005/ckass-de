@@ -172,8 +172,9 @@ export function openGraph({ title, description, url, lang }) {
 export const AUTHOR = {
   "@type": "Person",
   "@id": `${SITE}/#author`,
-  name: "TripleT3005",
-  alternateName: "ckass",
+  name: "Christoph Kaß",
+  alternateName: ["TripleT3005", "ckass"],
+  jobTitle: "IT-Systemadministrator",
   url: `${SITE}/`,
   sameAs: ["https://github.com/TripleT3005", "https://www.twitch.tv/TripleT3005"],
 };

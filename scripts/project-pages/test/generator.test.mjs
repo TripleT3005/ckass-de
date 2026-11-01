@@ -10,7 +10,7 @@ import { renderHtml, stripTags } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
 import { buildSitemap } from "../sitemap.mjs";
-import { homeDescription, renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
+import { homeAbout, homeDescription, renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
 
 // Helpers
 
@@ -330,6 +330,12 @@ test("home pages get the language, flags and alternates", () => {
   assert.match(de, /<li><a href="\/demo\/de\/">Demo<\/a><\/li>/);
   assert.doesNotMatch(de, /\{\{/);
   assert.match(renderHome(template, results, "en", "/en/"), /<link rel="canonical" href="https:\/\/ckass.de\/en\/">/);
+});
+
+test("the home about text links Discord in the page language", () => {
+  assert.match(homeAbout("de"), /^Hi, ich bin Christoph Kaß, online TripleT3005\..* erreichst du mich auf <a href="https:\/\/discord\.gg\/VE6a3SNNuD" target="_blank" rel="noopener noreferrer">Discord<\/a>\.$/);
+  assert.match(homeAbout("en"), /^Hi, I'm Christoph Kaß.*<a href="https:\/\/discord\.gg\/VE6a3SNNuD"[^>]*>Discord<\/a> is the quickest way to reach me\.$/);
+  assert.equal(homeAbout("fr"), homeAbout("en"));
 });
 
 test("the home description lists the projects in the page language", () => {
