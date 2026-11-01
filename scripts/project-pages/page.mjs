@@ -153,6 +153,20 @@ export const LANGUAGES = { english: "en", deutsch: "de" };
 export const GENERATED_MARK = "by scripts/project-pages -->";
 export const SITE = "https://ckass.de";
 
+const LOCALES = { en: "en_US", de: "de_DE" };
+
+export function openGraph({ title, description, url, lang }) {
+  const tags = [
+    ["og:type", "website"],
+    ["og:site_name", "ckass.de"],
+    ["og:title", title],
+    ["og:description", description],
+    ["og:url", url],
+    ["og:locale", LOCALES[lang] ?? LOCALES.en],
+  ];
+  return tags.map(([property, content]) => `\n<meta property="${property}" content="${escapeAttr(content)}">`).join("");
+}
+
 export function linkButtons(language, { repoUrl, download, changelog }) {
   const labels = LABELS[language] ?? LABELS.en;
   const links = [];
@@ -170,7 +184,7 @@ export function renderPage({ repo, slug, title, titleHtml, titleId, logo, descri
   const icon = logo ? `<link rel="icon" href="${escapeAttr(logo)}"${logo.endsWith(".svg") ? ' type="image/svg+xml"' : ""}>` : '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
   const logoImg = logo ? `\n    <img src="${escapeAttr(logo)}" alt="" width="64" height="64">` : "";
   const alternates = switchable ? [...languages.map((l) => [l, `/${slug}/${l}/`]), ["x-default", `/${slug}/`]].map(([l, href]) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}${href}">`).join("") : "";
-  const canonicalLink = canonical ? `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">` : "";
+  const canonicalLink = `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${openGraph({ title, description, url: SITE + canonical, lang })}`;
   const navHtml = nav.length ? `\n  <p class="lang">${nav.map(([id, label]) => `<a href="#${escapeAttr(id)}">${label}</a>`).join(" · ")}</p>` : "";
   const introHtml = intro ? `\n\n${intro}` : "";
   const sectionHtml = sections

@@ -2,7 +2,7 @@
 
 Persönliche Website.
 
-Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Die Startseite gibt es unter `/en/` und `/de/`; `/` leitet wie die Projektseiten nach der Browsersprache weiter, die Flaggen oben rechts wechseln die Sprache, und die Projektlinks führen zur Projektseite in derselben Sprache. Sie wird aus [`templates/home.html`](templates/home.html) erzeugt; Änderungen gehören in die Vorlage, nicht nach `public/`. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
+Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Die Startseite gibt es unter `/en/` und `/de/`; `/` leitet wie die Projektseiten nach der Browsersprache weiter, die Flaggen oben rechts wechseln die Sprache, und die Projektlinks führen zur Projektseite in derselben Sprache. Sie wird aus [`templates/home.html`](templates/home.html) erzeugt; Änderungen gehören in die Vorlage, nicht nach `public/`. Darunter stehen Links zu GitHub, Twitch und Discord sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
 
 Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne externe Ressourcen, Cookies und Tracking aus. Verwendet wird die Systemschrift des Geräts.
 
@@ -30,13 +30,15 @@ Pull Requests, die ein Workflow mit dem `GITHUB_TOKEN` öffnet, starten keine we
 
 `--only <slug>` erzeugt nur einzelne Projekte, `--local <slug>=<ordner>` nimmt die README aus einem lokalen Ordner.
 
+Jede Seite verweist per `canonical` auf ihre eigene Adresse und trägt Open-Graph-Angaben für Linkvorschauen. Nach dem Erzeugen schreibt `sync.mjs` die `public/sitemap.xml` mit allen Seiten, die auf sich selbst als `canonical` zeigen und kein `noindex` haben; `robots.txt` verweist darauf, und `check.mjs` meldet eine veraltete Sitemap als Fehler.
+
 Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (braucht ein angemeldetes `gh`) und `node scripts/project-pages/check.mjs`.
 
 ---
 
 Personal website.
 
-The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The home page exists at `/en/` and `/de/`; `/` redirects by browser language like the project pages, the flags at the top right switch languages, and the project links lead to the project page in the same language. It is generated from [`templates/home.html`](templates/home.html); edit the template, not `public/`. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
+The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The home page exists at `/en/` and `/de/`; `/` redirects by browser language like the project pages, the flags at the top right switch languages, and the project links lead to the project page in the same language. It is generated from [`templates/home.html`](templates/home.html); edit the template, not `public/`. Links to GitHub, Twitch, Discord and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
 
 The site is fully static (HTML, CSS and a little JavaScript) with no external resources, cookies or tracking. It uses the device's system font.
 
@@ -63,5 +65,7 @@ Rules for the README:
 Pull requests opened by a workflow with the `GITHUB_TOKEN` do not start other workflows. That is why tests and the link check run inside the sync workflow before the pull request is opened. Needed once: *Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"*.
 
 `--only <slug>` builds single projects only, `--local <slug>=<folder>` reads the README from a local folder.
+
+Every page points to its own address as `canonical` and carries Open Graph tags for link previews. After generating, `sync.mjs` writes `public/sitemap.xml` with every page that is its own `canonical` and has no `noindex`; `robots.txt` points to it, and `check.mjs` reports an outdated sitemap as an error.
 
 Locally: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (needs a signed-in `gh`) and `node scripts/project-pages/check.mjs`.

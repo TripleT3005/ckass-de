@@ -3,7 +3,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateProject } from "./generate.mjs";
 import { escapeAttr, escapeText } from "./html.mjs";
-import { GENERATED_MARK, languageSwitch, redirectRules, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
+import { GENERATED_MARK, languageSwitch, openGraph, redirectRules, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
+import { buildSitemap } from "./sitemap.mjs";
 import { githubSource, localSource } from "./source.mjs";
 
 // Configuration
@@ -76,14 +77,29 @@ export function updateIndex(html, results, lang) {
   return `${html.slice(0, start + INDEX_START.length)}\n${items.join("")}${indent}${html.slice(end)}`;
 }
 
+const HOME_TEXTS = {
+  en: { intro: "Open-source projects by TripleT3005", and: "and" },
+  de: { intro: "Open-Source-Projekte von TripleT3005", and: "und" },
+};
+
+export function homeDescription(results, lang) {
+  const { intro, and } = HOME_TEXTS[lang] ?? HOME_TEXTS.en;
+  const titles = results.map((r) => r.title);
+  const list = titles.length > 1 ? `${titles.slice(0, -1).join(", ")} ${and} ${titles.at(-1)}` : titles.join("");
+  return list ? `${intro}: ${list}.` : `${intro}.`;
+}
+
 export function renderHome(template, results, lang, canonical) {
+  const description = homeDescription(results, lang);
   const links = [
-    canonical ? `\n<link rel="canonical" href="${SITE}${canonical}">` : "",
+    `\n<link rel="canonical" href="${SITE}${canonical}">`,
+    openGraph({ title: "ckass", description, url: SITE + canonical, lang }),
     ...SUPPORTED_LANGUAGES.map((l) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}/${l}/">`),
     `\n<link rel="alternate" hreflang="x-default" href="${SITE}/">`,
   ];
   const html = template
     .replaceAll("{{lang}}", lang)
+    .replace("{{description}}", escapeAttr(description))
     .replace("{{head}}", links.join(""))
     .replace("{{switchStyle}}", SWITCH_STYLE)
     .replace("{{switch}}", languageSwitch(SUPPORTED_LANGUAGES, lang, "/").replace(/^\n/, "").replace(/^ {4}/gm, ""));
@@ -104,7 +120,7 @@ function writeHome(results) {
   fs.writeFileSync(path.join(PUBLIC, "index.html"), renderHome(template, results, fallback, `/${fallback}/`));
   for (const lang of SUPPORTED_LANGUAGES) {
     fs.mkdirSync(path.join(PUBLIC, lang), { recursive: true });
-    fs.writeFileSync(path.join(PUBLIC, lang, "index.html"), renderHome(template, results, lang, null));
+    fs.writeFileSync(path.join(PUBLIC, lang, "index.html"), renderHome(template, results, lang, `/${lang}/`));
   }
   const htaccess = path.join(PUBLIC, ".htaccess");
   fs.writeFileSync(htaccess, updateHtaccess(fs.readFileSync(htaccess, "utf8")));
@@ -170,6 +186,7 @@ function main() {
   }
   for (const { project, files } of results) writeProject(project.slug, files);
   writeHome(results);
+  fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), buildSitemap(PUBLIC));
   if (args.summary) fs.writeFileSync(args.summary, summary(results));
 }
 
