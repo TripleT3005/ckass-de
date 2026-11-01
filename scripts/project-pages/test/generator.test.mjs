@@ -161,7 +161,7 @@ test("generates one page per language with rewritten links and skipped sections 
   const en = files.get("en/index.html");
   const de = files.get("de/index.html");
   for (const html of [en, de]) {
-    assert.doesNotMatch(html.replace(ZOOM_SCRIPT, ""), /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"|<script/);
+    assert.doesNotMatch(html.replace(ZOOM_SCRIPT, ""), /Build it|Bauen\.|id="building"|id="bauen"|id="firmware-1"|id="firmware-3"|<script(?! type="application\/ld\+json")/);
     assert.match(html, /href="https:\/\/github.com\/owner\/demo\/releases\/latest"[^>]*>Download</);
     assert.match(html, /href="https:\/\/github.com\/owner\/demo\/blob\/main\/app\/CHANGELOG.md"[^>]*>Changelog</);
     assert.match(html, /<link rel="alternate" hreflang="de" href="https:\/\/ckass.de\/demo\/de\/">/);
@@ -205,7 +205,40 @@ test("a README with one language becomes a single page", () => {
   const { files } = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": readme }));
   assert.deepEqual([...files.keys()], ["index.html"]);
   assert.match(files.get("index.html"), /<h2 id="english">English<\/h2>/);
-  assert.doesNotMatch(files.get("index.html"), /class="switch"|<script/);
+  assert.doesNotMatch(files.get("index.html"), /class="switch"|<script(?! type="application\/ld\+json")/);
+});
+
+function structuredData(html) {
+  return [...html.matchAll(/<script type="application\/ld\+json">([^<]*)<\/script>/g)].map((m) => JSON.parse(m[1]));
+}
+
+test("project pages describe the project as free software with breadcrumbs", () => {
+  const { files } = generateProject(PROJECT, memorySource(demoFiles()));
+  const [data] = structuredData(files.get("de/index.html"));
+  const [app, breadcrumbs] = data["@graph"];
+  assert.equal(app["@type"], "SoftwareApplication");
+  assert.equal(app.name, "Demo");
+  assert.equal(app.description, "Demo ist ein Werkzeug.");
+  assert.equal(app.url, "https://ckass.de/demo/de/");
+  assert.equal(app.inLanguage, "de");
+  assert.equal(app.downloadUrl, "https://github.com/owner/demo/releases/latest");
+  assert.equal(app.sameAs, "https://github.com/owner/demo");
+  assert.deepEqual(app.offers, { "@type": "Offer", price: "0", priceCurrency: "EUR" });
+  assert.deepEqual(
+    breadcrumbs.itemListElement.map((i) => i.item),
+    ["https://ckass.de/de/", "https://ckass.de/demo/de/"],
+  );
+  const single = generateProject({ ...PROJECT, download: false }, memorySource({ ...demoFiles(), "README.md": "# Demo\n\nDemo is a tool.\n" })).files.get("index.html");
+  const [singleApp, singleCrumbs] = structuredData(single)[0]["@graph"];
+  assert.equal(singleApp.downloadUrl, undefined);
+  assert.equal(singleCrumbs.itemListElement[0].item, "https://ckass.de/");
+});
+
+test("structured data cannot close its script element", () => {
+  const readme = "# Demo </script><script>alert(1)</script>\n\nDemo is a tool.\n";
+  const html = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": readme })).files.get("index.html");
+  const block = /<script type="application\/ld\+json">[\s\S]*?<\/script>/.exec(html)[0];
+  assert.doesNotMatch(block.slice(1, -"</script>".length), /</);
 });
 
 test("the redirect picks the first supported browser language", () => {
@@ -241,6 +274,8 @@ test("the link check finds missing anchors and active content", () => {
   assert.match(checkSite(dir).problems.join(), /missing anchor/);
   fs.writeFileSync(path.join(dir, "demo", "de", "index.html"), files.get("de/index.html").replace("</main>", "<script>alert(1)</script></main>"));
   assert.match(checkSite(dir).problems.join(), /active content/);
+  fs.writeFileSync(path.join(dir, "demo", "de", "index.html"), files.get("de/index.html").replace("</head>", '<script type="application/ld+json">{oops</script></head>'));
+  assert.match(checkSite(dir).problems.join(), /invalid structured data/);
   fs.rmSync(dir, { recursive: true, force: true });
 });
 
@@ -283,6 +318,11 @@ test("home pages get the language, flags and alternates", () => {
   assert.match(de, /<link rel="canonical" href="https:\/\/ckass.de\/de\/">/);
   assert.match(de, /<meta property="og:url" content="https:\/\/ckass.de\/de\/">/);
   assert.match(de, /<meta property="og:locale" content="de_DE">/);
+  const [website, author, profile] = structuredData(de)[0]["@graph"];
+  assert.equal(website["@type"], "WebSite");
+  assert.equal(website.inLanguage, "de");
+  assert.deepEqual(author.sameAs, ["https://github.com/TripleT3005", "https://www.twitch.tv/TripleT3005"]);
+  assert.equal(profile.url, "https://ckass.de/de/");
   assert.match(de, /<link rel="alternate" hreflang="en" href="https:\/\/ckass.de\/en\/">/);
   assert.match(de, /\.switch a\[aria-current="page"\]/);
   assert.match(de, /\n<nav class="switch" aria-label="Language \/ Sprache">\n  <a href="\/en\/" hreflang="en"/);

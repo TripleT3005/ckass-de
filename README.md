@@ -30,7 +30,7 @@ Pull Requests, die ein Workflow mit dem `GITHUB_TOKEN` öffnet, starten keine we
 
 `--only <slug>` erzeugt nur einzelne Projekte, `--local <slug>=<ordner>` nimmt die README aus einem lokalen Ordner.
 
-Jede Seite verweist per `canonical` auf ihre eigene Adresse und trägt Open-Graph-Angaben für Linkvorschauen. Nach dem Erzeugen schreibt `sync.mjs` die `public/sitemap.xml` mit allen Seiten, die auf sich selbst als `canonical` zeigen und kein `noindex` haben; `robots.txt` verweist darauf, und `check.mjs` meldet eine veraltete Sitemap als Fehler.
+Jede Seite verweist per `canonical` auf ihre eigene Adresse und trägt Open-Graph-Angaben für Linkvorschauen. Strukturierte Daten (JSON-LD nach schema.org) beschreiben die Startseite als `WebSite` mit Autor und jede Projektseite als kostenlose `SoftwareApplication` mit Brotkrumen-Navigation; `check.mjs` prüft, dass sie gültiges JSON sind. Nach dem Erzeugen schreibt `sync.mjs` die `public/sitemap.xml` mit allen Seiten, die auf sich selbst als `canonical` zeigen und kein `noindex` haben; `robots.txt` verweist darauf, und `check.mjs` meldet eine veraltete Sitemap als Fehler.
 
 Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (braucht ein angemeldetes `gh`) und `node scripts/project-pages/check.mjs`.
 
@@ -66,6 +66,6 @@ Pull requests opened by a workflow with the `GITHUB_TOKEN` do not start other wo
 
 `--only <slug>` builds single projects only, `--local <slug>=<folder>` reads the README from a local folder.
 
-Every page points to its own address as `canonical` and carries Open Graph tags for link previews. After generating, `sync.mjs` writes `public/sitemap.xml` with every page that is its own `canonical` and has no `noindex`; `robots.txt` points to it, and `check.mjs` reports an outdated sitemap as an error.
+Every page points to its own address as `canonical` and carries Open Graph tags for link previews. Structured data (JSON-LD per schema.org) describes the home page as a `WebSite` with its author and every project page as a free `SoftwareApplication` with breadcrumbs; `check.mjs` verifies that it is valid JSON. After generating, `sync.mjs` writes `public/sitemap.xml` with every page that is its own `canonical` and has no `noindex`; `robots.txt` points to it, and `check.mjs` reports an outdated sitemap as an error.
 
 Locally: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (needs a signed-in `gh`) and `node scripts/project-pages/check.mjs`.
