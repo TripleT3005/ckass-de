@@ -12,6 +12,7 @@
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;margin:0}
 body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
 main{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 1.5rem}
 h1{margin:0;font-size:clamp(2.75rem,9vw,4.5rem);line-height:1;letter-spacing:-.03em;font-weight:400;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 h1 span{display:inline-block;font-variation-settings:normal;transition:color .3s}
@@ -26,7 +27,11 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .projects a:hover{color:var(--ink)}
 .projects a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:.25rem}
 .projects img{width:1.5rem;height:1.5rem}
-@media (prefers-reduced-motion:reduce){nav a,.projects a{transition:none}}
+#motion-notice{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;max-width:calc(100vw - 2rem);padding:.75rem 1rem;border-radius:.75rem;background:var(--ink);color:var(--bg);font-size:.875rem}
+#motion-notice p{margin:0}
+#motion-notice button{min-height:2.75rem;padding:.5rem .85rem;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+#motion-notice button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){h1 span,nav a,.projects a{transition:none}}
 </style>
 </head>
 <body>
@@ -40,12 +45,20 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
     <li><a href="/chat-below-for-twitch/"><img src="/chat-below-for-twitch/icon.png" alt="" width="20" height="20">Chat Below for Twitch</a></li>
   </ul>
 </main>
+<aside id="motion-notice" aria-label="Einstellung für reduzierte Bewegung" hidden>
+  <p id="motion-message" aria-live="polite">Der Texteffekt ist wegen deiner Systemeinstellung für reduzierte Bewegung deaktiviert.</p>
+  <button id="motion-toggle" type="button">Texteffekt aktivieren</button>
+</aside>
 <script>
 (function(){
   var h = document.getElementById("name"), txt = h.textContent;
   h.textContent = ""; h.setAttribute("aria-label", txt);
   var sp = [].map.call(txt, function(c){ var s = document.createElement("span"); s.textContent = c; s.setAttribute("aria-hidden","true"); h.appendChild(s); return s; });
-  var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+  var notice = document.getElementById("motion-notice");
+  var message = document.getElementById("motion-message");
+  var toggle = document.getElementById("motion-toggle");
+  var explicitlyEnabled = false, animationEnabled = false, animationFrame = null;
   var px = null, py = null, t0 = performance.now();
   function frame(now){
     var t = (now - t0) / 1000;
@@ -57,7 +70,30 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
       sp[i].style.fontWeight = Math.round(Math.min(900, Math.max(400, w)));
       sp[i].classList.toggle("hot", near > .55);
     }
-    requestAnimationFrame(frame);
+    if (animationEnabled) animationFrame = requestAnimationFrame(frame);
+  }
+  function setAnimationEnabled(enabled){
+    if (animationEnabled === enabled) return;
+    animationEnabled = enabled;
+    if (enabled){
+      t0 = performance.now();
+      animationFrame = requestAnimationFrame(frame);
+    } else {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      sp.forEach(function(s){ s.style.fontWeight = 600; s.classList.remove("hot"); });
+    }
+  }
+  function updateMotionPreference(){
+    notice.hidden = !motionPreference.matches;
+    if (!motionPreference.matches) explicitlyEnabled = false;
+    setAnimationEnabled(!motionPreference.matches || explicitlyEnabled);
+    if (motionPreference.matches){
+      toggle.textContent = explicitlyEnabled ? "Texteffekt deaktivieren" : "Texteffekt aktivieren";
+      message.textContent = explicitlyEnabled
+        ? "Der Texteffekt ist für diese Seite trotz deiner Systemeinstellung aktiviert."
+        : "Der Texteffekt ist wegen deiner Systemeinstellung für reduzierte Bewegung deaktiviert.";
+    }
   }
   addEventListener("pointermove", function(e){ px = e.clientX; py = e.clientY; });
   function off(){ px = py = null; }
@@ -65,8 +101,12 @@ nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
   addEventListener("pointercancel", off);
   addEventListener("blur", off);
   addEventListener("pointerup", function(e){ if (e.pointerType !== "mouse") off(); });
-  if (still){ sp.forEach(function(s){ s.style.fontWeight = 600; }); }
-  else requestAnimationFrame(frame);
+  toggle.addEventListener("click", function(){
+    explicitlyEnabled = !explicitlyEnabled;
+    updateMotionPreference();
+  });
+  motionPreference.addEventListener("change", updateMotionPreference);
+  updateMotionPreference();
 })();
 </script>
 </body>
