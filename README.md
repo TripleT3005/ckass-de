@@ -2,7 +2,7 @@
 
 Persönliche Website.
 
-Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren, darunter Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
+Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
 
 Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne externe Ressourcen, Cookies und Tracking aus. Verwendet wird die Systemschrift des Geräts.
 
@@ -34,7 +34,7 @@ Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/projec
 
 Personal website.
 
-The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch, with links to GitHub, Twitch and the project pages below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
+The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
 
 The site is fully static (HTML, CSS and a little JavaScript) with no external resources, cookies or tracking. It uses the device's system font.
 
