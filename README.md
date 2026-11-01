@@ -2,7 +2,7 @@
 
 Persönliche Website.
 
-Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Der Hinweis erscheint in der ersten unterstützten Browsersprache (Deutsch oder Englisch), sonst auf Englisch. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
+Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärke dezent wellenförmig ändern und auf Maus oder Berührung reagieren. Bei aktivierter Systemeinstellung für reduzierte Bewegung bleibt der Texteffekt zunächst aus; ein Hinweis ermöglicht die Aktivierung nur für diese Seite. Die Startseite gibt es unter `/en/` und `/de/`; `/` leitet wie die Projektseiten nach der Browsersprache weiter, die Flaggen oben rechts wechseln die Sprache, und die Projektlinks führen zur Projektseite in derselben Sprache. Sie wird aus [`templates/home.html`](templates/home.html) erzeugt; Änderungen gehören in die Vorlage, nicht nach `public/`. Darunter stehen Links zu GitHub und Twitch sowie zu den Projektseiten. Unter `/chat-below-for-twitch/` liegt die Seite der Browser-Erweiterung [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) mit Beschreibung, Datenschutz und Screenshots. Das Farbschema folgt dem Hell-/Dunkelmodus des Geräts.
 
 Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne externe Ressourcen, Cookies und Tracking aus. Verwendet wird die Systemschrift des Geräts.
 
@@ -28,13 +28,15 @@ Regeln für die README:
 
 Pull Requests, die ein Workflow mit dem `GITHUB_TOKEN` öffnet, starten keine weiteren Workflows. Darum laufen Tests und Link-Prüfung im Sync-Workflow selbst, bevor der Pull Request entsteht. Einmalig nötig: *Settings → Actions → General → „Allow GitHub Actions to create and approve pull requests“*.
 
+`--only <slug>` erzeugt nur einzelne Projekte, `--local <slug>=<ordner>` nimmt die README aus einem lokalen Ordner.
+
 Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (braucht ein angemeldetes `gh`) und `node scripts/project-pages/check.mjs`.
 
 ---
 
 Personal website.
 
-The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The notice appears in the first supported browser language (German or English), otherwise in English. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
+The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The home page exists at `/en/` and `/de/`; `/` redirects by browser language like the project pages, the flags at the top right switch languages, and the project links lead to the project page in the same language. It is generated from [`templates/home.html`](templates/home.html); edit the template, not `public/`. Links to GitHub, Twitch and the project pages appear below. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
 
 The site is fully static (HTML, CSS and a little JavaScript) with no external resources, cookies or tracking. It uses the device's system font.
 
@@ -59,5 +61,7 @@ Rules for the README:
 - Raw HTML is limited to `p`, `img` (`src`, `alt`, `width`, `align`) and `br`; anything else is shown as text.
 
 Pull requests opened by a workflow with the `GITHUB_TOKEN` do not start other workflows. That is why tests and the link check run inside the sync workflow before the pull request is opened. Needed once: *Settings → Actions → General → "Allow GitHub Actions to create and approve pull requests"*.
+
+`--only <slug>` builds single projects only, `--local <slug>=<folder>` reads the README from a local folder.
 
 Locally: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (needs a signed-in `gh`) and `node scripts/project-pages/check.mjs`.

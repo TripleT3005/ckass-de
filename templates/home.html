@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- Generated from templates/home.html by scripts/project-pages/sync.mjs; edit the template -->
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ckass · persönliche Website · personal website">
+<title>ckass</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">{{head}}
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+main{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 1.5rem}
+h1{margin:0;font-size:clamp(2.75rem,9vw,4.5rem);line-height:1;letter-spacing:-.03em;font-weight:400;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+h1 span{display:inline-block;font-variation-settings:normal;transition:color .3s}
+h1 span.hot{color:var(--accent)}
+main nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:2.25rem}
+main nav a{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+main nav svg{width:1.1em;height:1.1em;fill:currentColor}
+main nav a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main nav a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.projects{display:flex;flex-direction:column;align-items:flex-start;gap:.6rem;margin:1.75rem 0 0;padding:0;list-style:none}
+.projects a{display:inline-flex;align-items:center;gap:.5rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.projects a:hover{color:var(--ink)}
+.projects a:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:.25rem}
+.projects img{width:1.5rem;height:1.5rem}
+#motion-notice{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:max(1rem,env(safe-area-inset-bottom,0px));z-index:1;display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;max-width:calc(100vw - 2rem);padding:.75rem 1rem;border-radius:.75rem;background:var(--ink);color:var(--bg);font-size:.875rem}
+#motion-notice p{margin:0}
+#motion-notice button{min-height:2.75rem;padding:.5rem .85rem;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+#motion-notice button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){h1 span,nav a,.projects a{transition:none}}
+.switch{position:fixed;top:max(1rem,env(safe-area-inset-top,0px));right:max(1rem,env(safe-area-inset-right,0px));margin:0}
+{{switchStyle}}
+</style>
+</head>
+<body>
+{{switch}}
+<main>
+  <h1 id="name" aria-label="ckass">ckass</h1>
+  <nav>
+    <a href="https://github.com/TripleT3005" target="_blank" rel="me noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>GitHub</a>
+    <a href="https://www.twitch.tv/TripleT3005" target="_blank" rel="me noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>Twitch</a>
+  </nav>
+  <ul class="projects">
+    <li><a href="/chat-below-for-twitch/"><img src="/chat-below-for-twitch/icon.png" alt="" width="20" height="20">Chat Below for Twitch</a></li>
+    <!-- generated:projects -->
+    <!-- /generated:projects -->
+  </ul>
+</main>
+<aside id="motion-notice" hidden>
+  <p id="motion-message" aria-live="polite"></p>
+  <button id="motion-toggle" type="button"></button>
+</aside>
+<script>
+(function(){
+  var h = document.getElementById("name"), txt = h.textContent;
+  h.textContent = ""; h.setAttribute("aria-label", txt);
+  var sp = [].map.call(txt, function(c){ var s = document.createElement("span"); s.textContent = c; s.setAttribute("aria-hidden","true"); h.appendChild(s); return s; });
+  var motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+  var notice = document.getElementById("motion-notice");
+  var message = document.getElementById("motion-message");
+  var toggle = document.getElementById("motion-toggle");
+  var texts = {
+    en: { label: "Reduced motion setting", enable: "Enable text effect", disable: "Disable text effect", off: "The text effect is turned off because of your system setting for reduced motion.", on: "The text effect is turned on for this page despite your system setting." },
+    de: { label: "Einstellung für reduzierte Bewegung", enable: "Texteffekt aktivieren", disable: "Texteffekt deaktivieren", off: "Der Texteffekt ist wegen deiner Systemeinstellung für reduzierte Bewegung deaktiviert.", on: "Der Texteffekt ist für diese Seite trotz deiner Systemeinstellung aktiviert." }
+  };
+  var language = texts[document.documentElement.lang] ? document.documentElement.lang : "en";
+  var text = texts[language];
+  notice.setAttribute("aria-label", text.label);
+  var explicitlyEnabled = false, animationEnabled = false, animationFrame = null;
+  var px = null, py = null, t0 = performance.now();
+  function frame(now){
+    var t = (now - t0) / 1000;
+    for (var i = 0; i < sp.length; i++){
+      var r = sp[i].getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+      var w = 520 + 160 * Math.sin(t * 0.9 - i * 0.7);
+      var near = 0;
+      if (px !== null){ var d = Math.hypot(px - cx, py - cy); near = Math.max(0, 1 - d / 150); w += 400 * near; }
+      sp[i].style.fontWeight = Math.round(Math.min(900, Math.max(400, w)));
+      sp[i].classList.toggle("hot", near > .55);
+    }
+    if (animationEnabled) animationFrame = requestAnimationFrame(frame);
+  }
+  function setAnimationEnabled(enabled){
+    if (animationEnabled === enabled) return;
+    animationEnabled = enabled;
+    if (enabled){
+      t0 = performance.now();
+      animationFrame = requestAnimationFrame(frame);
+    } else {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      sp.forEach(function(s){ s.style.fontWeight = 600; s.classList.remove("hot"); });
+    }
+  }
+  function updateMotionPreference(){
+    notice.hidden = !motionPreference.matches;
+    if (!motionPreference.matches) explicitlyEnabled = false;
+    setAnimationEnabled(!motionPreference.matches || explicitlyEnabled);
+    if (motionPreference.matches){
+      toggle.textContent = explicitlyEnabled ? text.disable : text.enable;
+      message.textContent = explicitlyEnabled ? text.on : text.off;
+    }
+  }
+  addEventListener("pointermove", function(e){ px = e.clientX; py = e.clientY; });
+  function off(){ px = py = null; }
+  document.documentElement.addEventListener("pointerleave", off);
+  addEventListener("pointercancel", off);
+  addEventListener("blur", off);
+  addEventListener("pointerup", function(e){ if (e.pointerType !== "mouse") off(); });
+  toggle.addEventListener("click", function(){
+    explicitlyEnabled = !explicitlyEnabled;
+    updateMotionPreference();
+  });
+  motionPreference.addEventListener("change", updateMotionPreference);
+  updateMotionPreference();
+})();
+</script>
+</body>
+</html>

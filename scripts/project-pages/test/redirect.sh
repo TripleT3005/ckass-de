@@ -29,9 +29,17 @@ expect "" "/$slug/" "302 $base/$slug/en/"
 expect "de-DE" "/$slug/en/" "200 "
 expect "en-US" "/$slug/de/" "200 "
 expect "de-DE" "/$slug/assets/logo.svg" "200 "
+expect "de-DE,de;q=0.9,en;q=0.8" "/" "302 $base/de/"
+expect "en-US,en;q=0.9,de;q=0.8" "/index.html" "302 $base/en/"
+expect "fr-FR" "/" "302 $base/en/"
+expect "de-DE" "/en/" "200 "
+expect "en-US" "/de/" "200 "
+expect "de-DE" "/robots.txt" "200 "
 
-if ! curl -sI -H "Accept-Language: de" "$base/$slug/" | grep -qi '^vary:.*accept-language'; then
-  echo "::error::Redirect response has no Vary: Accept-Language"
-  failed=1
-fi
+for url in "/$slug/" "/"; do
+  if ! curl -sI -H "Accept-Language: de" "$base$url" | grep -qi '^vary:.*accept-language'; then
+    echo "::error::Redirect response for $url has no Vary: Accept-Language"
+    failed=1
+  fi
+done
 exit "$failed"

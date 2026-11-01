@@ -42,11 +42,14 @@ img{max-width:100%;height:auto}
 p>img{border-radius:.5rem;vertical-align:top}
 @media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
 .lang{margin-top:1rem;color:var(--muted)}
-.switch{display:flex;gap:.25rem;margin-left:auto;align-self:flex-start}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
 .switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
 .switch a:hover{opacity:.8}
 .switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
 section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
 .links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
 .links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
@@ -186,7 +189,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 <p><a href="https://github.com/TripleT3005/FlexPad/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
 </section>
 
-  <footer><a href="/">ckass.de</a> · <a href="https://github.com/TripleT3005/FlexPad" target="_blank" rel="noopener noreferrer">TripleT3005/FlexPad</a></footer>
+  <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/FlexPad" target="_blank" rel="noopener noreferrer">TripleT3005/FlexPad</a></footer>
 </main>
 </body>
 </html>

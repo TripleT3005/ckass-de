@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{HTTP:Accept-Language} ^(?:\s*(?!(?:en|de)\b)[^,]*,)*\s*de\b [NC]
-RewriteRule ^(index\.html)?$ /flexpad/de/ [R=302,L]
-RewriteRule ^(index\.html)?$ /flexpad/en/ [R=302,L]
+RewriteRule ^(index\.html)?$ /flexpad/de/ [R=302,L,E=LANGUAGE_REDIRECT:1]
+RewriteRule ^(index\.html)?$ /flexpad/en/ [R=302,L,E=LANGUAGE_REDIRECT:1]
 </IfModule>
 <IfModule mod_headers.c>
-Header always merge Vary Accept-Language
+Header always merge Vary Accept-Language env=LANGUAGE_REDIRECT
 </IfModule>
