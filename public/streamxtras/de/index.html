@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/StreamXtras by scripts/project-pages -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="StreamXtras · Schlanke, selbst betriebene Extras für deinen Stream in OBS – Chatbox, Alerts und mehr – als kostenlose Alternative zu gehosteten Overlay-Diensten.">
+<title>StreamXtras</title>
+<link rel="icon" href="../web/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://ckass.de/streamxtras/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/streamxtras/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/streamxtras/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="../web/favicon.svg" alt="" width="64" height="64">
+    <h1 id="-streamxtras">StreamXtras</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="../en/" hreflang="en" lang="en" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="../de/" hreflang="de" lang="de" aria-current="page" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="deutsch">
+<p>Schlanke, selbst betriebene Extras für deinen Stream in OBS – Chatbox, Alerts und mehr – als kostenlose Alternative zu gehosteten Overlay-Diensten.
+Eine kleine Begleit-Anwendung läuft im Infobereich (Tray), liefert die Overlays und eine Einstellungsseite auf deinem Rechner aus und verbindet sie mit Twitch. Kein Konto bei einem Drittanbieter, kein Tracking, keine externen Schriften oder Skripte.</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/StreamXtras/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/StreamXtras/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/StreamXtras" target="_blank" rel="noopener noreferrer">Quellcode</a>
+  <a href="https://github.com/TripleT3005/StreamXtras/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<blockquote>
+<p>Rückmeldungen und Fehlerberichte gern als Issue. Keine Verbindung zu Twitch, 7TV, BetterTTV, FrankerFaceZ oder Chatterino und nicht von ihnen unterstützt. Twitch ist eine Marke von Twitch Interactive, Inc.</p>
+</blockquote>
+<h3 id="funktionen">Funktionen</h3>
+<ul>
+<li><strong>Chatbox</strong> – liest den Chat anonym (ohne Login), zeigt Emotes von Twitch, 7TV, BetterTTV und FrankerFaceZ, hebt Ankündigungen hervor, entfernt von Moderatoren gelöschte Nachrichten und filtert Bots und Wörter</li>
+<li><strong>Alertbox</strong> – Alerts für Follows, Abos, Geschenkabos, Cheers und Raids mit Bild oder Video, Text und Sound; Varianten je Anzahl, Stufe oder Twitch-Nutzer; zehn Bilder und zehn Sounds sind dabei, eigene Dateien lassen sich hochladen</li>
+<li><strong>Ziele</strong> – Follower- und Sub-Goal als Fortschrittsbalken, auf der Einstellungsseite festgelegt oder aus deinem Twitch-Dashboard übernommen</li>
+<li><strong>Letzte Ereignisse</strong> – die letzten Follower, Abos, Geschenkabos, Cheers oder Raids, z. B. für eine BRB-Szene</li>
+<li><strong>Top-Emotes</strong> – die meistgenutzten Emotes im Chat über einen gewählten Zeitraum</li>
+<li><strong>Sprachausgabe</strong> – liest Alerts und Zuschauer-Nachrichten mit den Stimmen des Betriebssystems vor</li>
+<li><strong>Begleit-Anwendung</strong> – Tray-Icon, lokale Einstellungsseite mit Live-Vorschau, Einstellungen wirken ohne Neuladen der OBS-Quelle</li>
+</ul>
+<h3 id="installation-1">Installation</h3>
+<p><strong>Windows:</strong> <code>StreamXtras-&lt;Version&gt;-windows-x64-setup.exe</code> unter <a href="https://github.com/TripleT3005/StreamXtras/releases" target="_blank" rel="noopener noreferrer">Releases</a> herunterladen und ausführen. Es installiert für den aktuellen Benutzer ohne Administratorrechte (nach <code>%LOCALAPPDATA%\Programs\StreamXtras</code>); „Für alle Benutzer installieren“ installiert nach <code>C:\Program Files\StreamXtras</code> und fragt nach Administratorrechten. Optionen: Startmenü-Eintrag (an), Desktop-Verknüpfung (aus), mit Windows starten (aus). Statt des Installers geht auch das portable Archiv <code>…-windows-x64-portable.zip</code>.</p>
+<p><strong>macOS:</strong> <code>…-macos-arm64.dmg</code> (Apple Silicon) herunterladen, öffnen und StreamXtras in den Ordner Programme ziehen. StreamXtras erscheint nur in der Menüleiste, nicht im Dock.</p>
+<p><strong>Linux:</strong> Unter Debian, Ubuntu, Linux Mint und ähnlichen <code>streamxtras_&lt;Version&gt;_amd64.deb</code> installieren (z. B. <code>sudo apt install ./streamxtras_1.3.0_amd64.deb</code>), unter Fedora, openSUSE und ähnlichen <code>streamxtras-&lt;Version&gt;-1.x86_64.rpm</code> (z. B. <code>sudo dnf install ./streamxtras-1.3.0-1.x86_64.rpm</code>). Beide tragen StreamXtras ins Anwendungsmenü ein und empfehlen <code>espeak-ng</code> für die Sprachausgabe. Für andere Distributionen <code>…-linux-x64.tar.gz</code> in einen beliebigen Ordner entpacken; der Ordner <code>web</code> muss neben dem Programm bleiben.</p>
+<p>Die Anwendung ist nicht signiert, deshalb warnt das System beim ersten Start eventuell:</p>
+<ul>
+<li><strong>Windows:</strong> SmartScreen → „Weitere Informationen“ → „Trotzdem ausführen“</li>
+<li><strong>macOS:</strong> Die App ist nicht von Apple beglaubigt. Beim ersten Start verweigert macOS das Öffnen; dann unter Systemeinstellungen → Datenschutz &amp; Sicherheit „Dennoch öffnen“ wählen (bei älteren Versionen: Rechtsklick auf die App → „Öffnen“). Das ist nur einmal nötig.</li>
+<li><strong>Linux:</strong> <code>streamxtras</code> starten (kleingeschrieben, wie dort für Befehle üblich). Das Tray-Icon braucht einen Desktop mit StatusNotifierItem-Unterstützung (KDE Plasma oder GNOME mit AppIndicator-Erweiterung); die Sprachausgabe braucht <code>espeak-ng</code></li>
+</ul>
+<p>Bei den portablen Archiven für den automatischen Start eine Verknüpfung in den Autostart legen (Windows: Win+R, <code>shell:startup</code> eingeben). Zu jedem Download gibt es eine <code>.sha256</code>-Datei, um ihn zu prüfen.</p>
+<h4 id="installer-parameter">Installer-Parameter</h4>
+<div class="table"><table>
+<thead><tr><th>Parameter</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td><code>/CURRENTUSER</code></td><td>Nur für den aktuellen Benutzer installieren (Standard)</td></tr>
+<tr><td><code>/ALLUSERS</code></td><td>Für alle Benutzer installieren (fragt nach Administratorrechten)</td></tr>
+<tr><td><code>/DIR=&quot;C:\Pfad&quot;</code></td><td>Installationsordner</td></tr>
+<tr><td><code>/SILENT</code>, <code>/VERYSILENT</code></td><td>Ohne Assistent (mit oder ohne Fortschrittsfenster)</td></tr>
+<tr><td><code>/SUPPRESSMSGBOXES</code></td><td>Keine Meldungsfenster bei stiller Installation</td></tr>
+<tr><td><code>/TASKS=&quot;desktopicon,autostart&quot;</code></td><td>Gewählte Optionen; <code>desktopicon</code> legt eine Desktop-Verknüpfung an, <code>autostart</code> startet StreamXtras für den installierenden Benutzer mit Windows. Ohne den Parameter sind beide aus</td></tr>
+<tr><td><code>/NOICONS</code></td><td>Kein Startmenü-Eintrag</td></tr>
+<tr><td><code>/LOG=&quot;C:\Pfad\setup.log&quot;</code></td><td>Protokolldatei schreiben</td></tr>
+</tbody>
+</table></div>
+<p>Beispiel: <code>StreamXtras-1.1.0-windows-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /TASKS=&quot;autostart&quot;</code></p>
+<p>Einstellungen und Overlays gelten pro Benutzer und werden vom Installer nicht gesetzt. Die Deinstallation entfernt Programm, Verknüpfungen und Autostart-Eintrag, lässt Einstellungen und hochgeladene Dateien in <code>%APPDATA%\StreamXtras</code> und den Twitch-Login in <code>%LOCALAPPDATA%\StreamXtras</code> aber stehen.</p>
+<h3 id="bedienung">Bedienung</h3>
+<ol>
+<li>Begleit-Anwendung starten. Beim ersten Start öffnet sich die Einstellungsseite im Browser, danach per Klick auf das Tray-Icon.</li>
+<li>Auf der Einstellungsseite mit Twitch anmelden (nötig für Alerts, Ziele, letzte Ereignisse und alle Badges) und im Chatbox-Tab den Kanal prüfen.</li>
+<li>Die URL eines Overlays aus seinem Tab kopieren (z. B. <code>http://127.0.0.1:47820/chatbox/</code>) und in OBS als Browserquelle hinzufügen, <strong>Lokale Datei</strong> nicht anhaken. Breite und Höhe wie auf der Einstellungsseite wählen.</li>
+</ol>
+<h4 id="twitch-login-1">Twitch-Login</h4>
+<p>Twitch öffnet sich mit bereits eingetragenem Code, du bestätigst, fertig. Der Login gewährt nur Lesezugriff (Bits, Kanalpunkte-Einlösungen, Abos, Follower, Chat-Benachrichtigungen für Abo-Stufen und Nachrichten, Creator-Ziele), wird automatisch erneuert und bleibt gültig, solange die Anwendung mindestens alle 30 Tage einmal läuft. Bittet die Einstellungsseite nach einem Update um eine neue Anmeldung, braucht eine neue Funktion eine weitere Berechtigung.</p>
+<p>Release-Builds enthalten die Client-ID dieses Projekts. Um eine eigene Twitch-Anwendung zu nutzen (oder beim Selbstbauen), unter <a href="https://dev.twitch.tv/console" target="_blank" rel="noopener noreferrer">dev.twitch.tv</a> eine Anwendung mit Client-Typ <strong>Öffentlich</strong> und Weiterleitungs-URL <code>http://localhost</code> registrieren und ihre Client-ID in die <code>config.json</code> eintragen:</p>
+<pre><code>{ &quot;twitchClientId&quot;: &quot;deine-client-id&quot; }</code></pre>
+<h4 id="chatbox">Chatbox</h4>
+<p>Alle Einstellungen werden auf der Einstellungsseite mit Live-Vorschau bearbeitet: Kanal, Anzahl der Nachrichten, Ausblenden nach Zeit, Animation, Position, Schrift, Größe, Farben, Hintergrund der Nachrichten, Abstand, Emote-Größe, Badges, Drittanbieter-Badges, lesbare Namensfarben, Emote-Anbieter, Filter, geteilter Chat (Streamer-Icons, Nachrichten aus Partnerkanälen) und die Größe der Browserquelle. Gespeicherte Änderungen wirken sofort in geöffneten Chatboxen; nur ein neuer Kanal, andere Drittanbieter-Badges oder andere Emote-Anbieter laden sie neu.</p>
+<p>Filter blenden Nachrichten von gewählten Bots (Nightbot, StreamElements, Streamlabs, Moobot, Fossabot, WizeBot, Sery_Bot, SoundAlerts, KofiStreamBot, StreamStickers), vom Streamer, von weiteren eingetragenen Konten (z. B. dem Konto deines Streamer.bot) und Nachrichten mit gesperrten Wörtern aus. Ein <code>*</code> am Wortende trifft auch längere Wörter.</p>
+<p>Drittanbieter-Badges von 7TV, BetterTTV, FrankerFaceZ und Chatterino sind standardmäßig aus und lassen sich einzeln einschalten.</p>
+<p>URL-Parameter überschreiben die gespeicherten Einstellungen für eine einzelne Browserquelle, z. B. <code>?channel=andererkanal&amp;fontSize=24</code>. Die Parameternamen sind die Schlüssel im Abschnitt <code>chatbox</code> der <code>config.json</code>. Nutzer, die nie eine Namensfarbe gewählt haben, bekommen statt einer zufälligen eine feste Farbe aus Twitchs Palette, abhängig von ihrer Nutzer-ID.</p>
+<h4 id="alertbox">Alertbox</h4>
+<p>Die Alertbox zeigt immer einen Alert an, weitere warten in einer Warteschlange. Alerts gelten immer für den angemeldeten Kanal. Die Liste links wechselt zwischen den allgemeinen Einstellungen und den Alert-Typen; die Checkbox neben einem Typ schaltet ihn ein oder aus. Jeder Typ hat dieselben Optionen: Text mit Platzhaltern (<code>{name}</code>, <code>{amount}</code> für Monate, Geschenkabos, Bits oder Zuschauer, <code>{tier}</code>, <code>{message}</code>), Bild oder Video, stattdessen das Profilbild des Nutzers, Sound, Dauer und Sprachausgabe. Videos laufen bis zum Ende, mit eigenem Ton.</p>
+<p>Varianten ersetzen diese Optionen für einzelne Alerts, z. B. für genau 67 Bits, ab 500 Bits, für eine Abo-Stufe oder für den Raid eines bestimmten Streamers. Es gilt die erste passende Variante. In der Testzeile unter der Vorschau trägst du Anzahl, Stufe, Twitch-Namen und Nachricht ein: „Show in preview“ spielt den Alert in der Vorschau ab, „Send to OBS“ in jeder geöffneten Alertbox. Wer den Sound in OBS mischen möchte, aktiviert in der Browserquelle „Audio über OBS steuern“.</p>
+<p>Die Zeile „Live“ steuert alle geöffneten Alertboxen: den letzten echten Alert wiederholen, den gerade gezeigten Alert überspringen (z. B. bei einem Raid) oder Alerts pausieren, z. B. für Aufnahmen. Während der Pause warten neue Alerts in der Warteschlange, und ein Banner auf jedem Tab der Einstellungsseite zeigt das an. Ein Neustart der Begleit-Anwendung beendet die Pause.</p>
+<p>Sollen in einer Browserquelle nur bestimmte Alert-Typen erscheinen, hängst du sie an die Adresse an, z. B. <code>http://127.0.0.1:47820/alertbox/?types=follow,raid</code>. Verfügbare Typen: <code>follow</code>, <code>sub</code>, <code>gift</code>, <code>cheer</code>, <code>raid</code>.</p>
+<p>Die Sprachausgabe ist standardmäßig aus und wird je Alert-Typ eingeschaltet, mit einem Mindestwert für Geschenkabos und Cheers und einer Auswahl der Stufen bei Abos. Stimme, Lautstärke und maximale Länge stellst du unter General ein. Cheer-Emotes wie <code>Cheer100</code> werden vor dem Vorlesen entfernt.</p>
+<p>Hochgeladene Dateien (MP3, OGG, WAV, PNG, GIF, WebP, JPEG, MP4, WebM, bis 50 MB) liegen im Ordner <code>media</code> im Konfigurationsordner. Der Dateityp wird am Inhalt erkannt; SVG-Dateien werden nicht angenommen.</p>
+<h4 id="ziele-letzte-ereignisse-und-top-emotes">Ziele, letzte Ereignisse und Top-Emotes</h4>
+<ul>
+<li>Ziele: <code>http://127.0.0.1:47820/goal/?goal=followers</code> oder <code>?goal=subs</code>. Jedes Ziel nutzt entweder das auf der Einstellungsseite eingetragene Ziel oder das aktive Ziel aus deinem Twitch-Dashboard, das auch Moderatoren setzen können und das sich live aktualisiert.</li>
+<li>Letzte Ereignisse: <code>http://127.0.0.1:47820/recent/?type=follow</code> (auch <code>sub</code>, <code>gift</code>, <code>cheer</code>, <code>raid</code>). Test-Alerts werden nicht aufgenommen.</li>
+<li>Top-Emotes: <code>http://127.0.0.1:47820/topemotes/</code> zählt jedes Emote einmal pro Nachricht, ab dem Laden der Browserquelle.</li>
+</ul>
+<h4 id="sprachen">Sprachen</h4>
+<p>Die Einstellungsseite, die Diagnoseseite und das Tray-Menü gibt es in mehreren Sprachen, siehe <a href="https://github.com/TripleT3005/StreamXtras/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a>. Standardmäßig folgt StreamXtras der Anzeigesprache deines Systems; die Auswahl oben rechts auf der Einstellungsseite legt sie fest. Dialekte und Spaßsprachen gibt es nur dort. Das Tray-Menü wechselt nach einem Neustart von StreamXtras. Texte, die im Stream erscheinen, etwa die Alert-Texte, sind Einstellungen und bleiben so, wie du sie eingetragen hast.</p>
+<p>Alle Übersetzungen wurden von Claude (KI) erzeugt; geprüfte Dateien nennen die prüfende Person. Korrekturen sind als Issue oder Pull Request willkommen. Um eine eigene Übersetzung auszuprobieren, kopiere <code>web/lang/en.lang</code> nach <code>lang/&lt;code&gt;.lang</code> im Einstellungsordner (Windows: <code>%APPDATA%\StreamXtras\lang</code>) und übersetze die Texte; fehlende Texte fallen auf Englisch zurück.</p>
+<h4 id="updates-1">Updates</h4>
+<p>Beim Öffnen der Einstellungsseite prüft die Begleit-Anwendung höchstens einmal am Tag, ob es ein neueres Release gibt, und zeigt dann neben der Version einen Link dorthin. Es wird nichts automatisch heruntergeladen oder installiert.</p>
+<h3 id="funktionsweise">Funktionsweise</h3>
+<p>Die Begleit-Anwendung ist ein kleines Rust-Programm mit Tray-Icon und einem Webserver, der nur auf <code>127.0.0.1</code> lauscht (Port 47820). Er liefert die Overlays und die Einstellungsseite aus seinem Ordner <code>web</code> aus; OBS zeigt die Overlays als Browserquellen. Einstellungen gehen beim Ändern direkt an geöffnete Overlays, OBS muss sie also nie neu laden.</p>
+<p>Chatbox und Top-Emotes verbinden sich selbst mit dem Twitch-Chat, anonym und nur lesend. Mit dem Twitch-Login empfängt die Begleit-Anwendung Follows, Abos, Geschenkabos, Cheers, Raids und Zieländerungen über Twitch EventSub und gibt sie an die Overlays weiter. Die Sprachausgabe nutzt die Sprachausgabe des Betriebssystems (Windows-Stimmen, <code>say</code> unter macOS, <code>espeak-ng</code> unter Linux).</p>
+<p>Alle Daten bleiben in den Ordnern deines Benutzerkontos. Unter Windows liegt alles, was dir gehört und mit deinem Profil mitwandern darf, in <code>%APPDATA%\StreamXtras</code>, alles an diesen Rechner Gebundene in <code>%LOCALAPPDATA%\StreamXtras</code>. Unter macOS (<code>~/Library/Application Support/StreamXtras</code>) und Linux (<code>~/.config/streamxtras</code>) liegt alles in einem Ordner.</p>
+<div class="table"><table>
+<thead><tr><th>Datei</th><th>Inhalt</th><th>Ordner unter Windows</th></tr></thead>
+<tbody>
+<tr><td><code>config.json</code></td><td>Einstellungen aller Overlays, die Sprache und der Port</td><td><code>%APPDATA%</code></td></tr>
+<tr><td><code>history.json</code></td><td>Die letzten 20 Ereignisse je Typ für die letzten Ereignisse</td><td><code>%APPDATA%</code></td></tr>
+<tr><td><code>media/</code></td><td>Deine hochgeladenen Bilder, Videos und Sounds</td><td><code>%APPDATA%</code></td></tr>
+<tr><td><code>lang/</code></td><td>Deine eigenen Sprachdateien (optional)</td><td><code>%APPDATA%</code></td></tr>
+<tr><td><code>twitch-token.json</code></td><td>Twitch-Login (Zugriffs- und Erneuerungstoken)</td><td><code>%LOCALAPPDATA%</code></td></tr>
+<tr><td><code>update-check.json</code></td><td>Zeitpunkt und Ergebnis der letzten Update-Prüfung</td><td><code>%LOCALAPPDATA%</code></td></tr>
+</tbody>
+</table></div>
+<h3 id="datenschutz">Datenschutz</h3>
+<p>StreamXtras hat keine Telemetrie und keinen eigenen Server. Einstellungsseite und Overlays sprechen nur mit der Begleit-Anwendung auf deinem Rechner. Diese Netzwerkzugriffe gibt es:</p>
+<div class="table"><table>
+<thead><tr><th>Zugriff</th><th>Wann</th><th>Gesendet</th><th>Abgerufen</th></tr></thead>
+<tbody>
+<tr><td>Twitch-Chat (<code>irc-ws.chat.twitch.tv</code>)</td><td>Chatbox, Top-Emotes, Diagnose</td><td>Der Kanalname, anonym</td><td>Chatnachrichten des Kanals</td></tr>
+<tr><td>APIs von 7TV, BetterTTV, FrankerFaceZ</td><td>Chatbox und Top-Emotes, je Anbieter abschaltbar</td><td>Die Twitch-ID des Kanals</td><td>Emote-Listen</td></tr>
+<tr><td>Emote- und Badge-Bilder (Twitch, 7TV, BetterTTV, FrankerFaceZ, Chatterino)</td><td>Sobald ein Bild angezeigt wird</td><td>Die Bildadresse, ohne Referrer</td><td>Das Bild</td></tr>
+<tr><td>Listen der Drittanbieter-Badges (BetterTTV, FrankerFaceZ, Chatterino, 7TV)</td><td>Nur wenn eingeschaltet, standardmäßig aus</td><td>7TV: die Twitch-ID jedes Chatters</td><td>Badge-Listen</td></tr>
+<tr><td>Twitch-Login und -API (<code>id.twitch.tv</code>, <code>api.twitch.tv</code>, <code>eventsub.wss.twitch.tv</code>)</td><td>Nur mit Anmeldung</td><td>Dein Login-Token, deine Kanal-ID und die IDs der angezeigten Nutzer</td><td>Badges, Profilbilder, Cheermotes, Follower- und Abo-Zahlen, Ziele und Live-Ereignisse</td></tr>
+<tr><td>GitHub-Releases (<code>api.github.com</code>)</td><td>Höchstens einmal am Tag beim Öffnen der Einstellungsseite</td><td>Eine Anfrage ohne persönliche Daten</td><td>Die neueste Versionsnummer und ihr Link</td></tr>
+</tbody>
+</table></div>
+<p>Das Twitch-Token verlässt die Begleit-Anwendung nur in Richtung Twitch. Ohne Twitch-Login bleiben nur der anonyme Chat, die Emote-Anbieter und die Update-Prüfung.</p>
+<h3 id="lizenz">Lizenz</h3>
+<p><a href="https://github.com/TripleT3005/StreamXtras/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
+</section>
+
+  <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/StreamXtras" target="_blank" rel="noopener noreferrer">TripleT3005/StreamXtras</a></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/TrayReveal by scripts/project-pages -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="TrayReveal · A tiny tray app for Windows 11 that keeps your notification area icons visible.">
+<title>TrayReveal</title>
+<link rel="icon" href="docs/logo.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ckass.de/trayreveal/en/">
+<link rel="alternate" hreflang="en" href="https://ckass.de/trayreveal/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/trayreveal/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/trayreveal/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="docs/logo.svg" alt="" width="64" height="64">
+    <h1 id="-trayreveal">TrayReveal</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="en/" hreflang="en" lang="en" aria-current="page" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="de/" hreflang="de" lang="de" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="english">
+<p>A tiny tray app for Windows 11 that keeps your notification area icons visible.
+Windows 11 hides every new tray icon behind the <code>^</code> overflow menu and no longer offers the old &quot;Always show all icons&quot; checkbox. TrayReveal brings that convenience back: it watches the icon list of the current user and shows new icons right away – or all of them, if you prefer.</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/TrayReveal/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/TrayReveal/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/TrayReveal" target="_blank" rel="noopener noreferrer">Source code</a>
+  <a href="https://github.com/TripleT3005/TrayReveal/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<h3 id="installation">Installation</h3>
+<p>Download one of the files from <a href="https://github.com/TripleT3005/TrayReveal/releases" target="_blank" rel="noopener noreferrer">Releases</a>:</p>
+<ul>
+<li><strong>Installer</strong> <code>TrayReveal-&lt;version&gt;-windows-x64-setup.exe</code> – installs for the current user (default, no administrator rights) or for all users, adds a Start menu entry and optionally starts TrayReveal with Windows. It can be removed under Settings → Apps.</li>
+<li><strong>Portable</strong> <code>TrayReveal-&lt;version&gt;-windows-x64.zip</code> – extract it to any folder and start <code>TrayReveal.exe</code>. Keep the <code>lang</code> folder next to the program.</li>
+</ul>
+<p>The program is not signed, so SmartScreen may warn on the first start: &quot;More info&quot; → &quot;Run anyway&quot;. Each file has a <code>.sha256</code> file to verify the download, and the release notes link a VirusTotal scan.</p>
+<p>The installer accepts the usual Inno Setup parameters, e.g. for a silent installation:</p>
+<div class="table"><table>
+<thead><tr><th>Parameter</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><code>/CURRENTUSER</code></td><td>Install for the current user only (default)</td></tr>
+<tr><td><code>/ALLUSERS</code></td><td>Install for all users (asks for administrator rights)</td></tr>
+<tr><td><code>/DIR=&quot;C:\Path&quot;</code></td><td>Installation folder</td></tr>
+<tr><td><code>/SILENT</code>, <code>/VERYSILENT</code></td><td>Without wizard (with or without progress window)</td></tr>
+<tr><td><code>/SUPPRESSMSGBOXES</code></td><td>No message boxes in silent mode</td></tr>
+<tr><td><code>/TASKS=&quot;autostart,desktopicon&quot;</code></td><td>Selected options; <code>autostart</code> starts TrayReveal with Windows for the installing user, <code>desktopicon</code> adds a desktop shortcut. Without the parameter, autostart is on and the desktop shortcut off</td></tr>
+<tr><td><code>/NOICONS</code></td><td>No Start menu entry</td></tr>
+<tr><td><code>/LOG=&quot;C:\Path\setup.log&quot;</code></td><td>Write a log file</td></tr>
+</tbody>
+</table></div>
+<p>Example: <code>TrayReveal-1.1.0-windows-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /ALLUSERS /TASKS=&quot;autostart&quot;</code></p>
+<p>Settings such as the mode or the language are stored per user and are not set by the installer. Uninstalling removes the program and the autostart entry but keeps the settings in <code>HKCU\Software\TrayReveal</code>.</p>
+<h3 id="usage">Usage</h3>
+<p>Start <code>TrayReveal.exe</code>. On the first start it only remembers the icons that already exist and changes nothing. Right-click (or left-click) its tray icon for the menu:</p>
+<p><img src="docs/menu.png" alt="The TrayReveal context menu" loading="lazy" decoding="async"></p>
+<ul>
+<li><strong>Off</strong> – watch only, change nothing</li>
+<li><strong>Show new icons</strong> (default) – every new icon is shown once; if you hide it later in the Windows Settings, it stays hidden</li>
+<li><strong>Always show all icons</strong> – keeps every icon visible, except the exceptions</li>
+<li><strong>Show all icons now / Hide all icons now</strong> – one-time actions; hiding is not available while all icons are always shown</li>
+<li><strong>Exceptions</strong> – lists the apps with their icons; apps marked with a red cross always stay hidden, clicking them again shows them again (except in Off mode)</li>
+<li><strong>Undo last change</strong> – reverts the last action from the menu (mode, show/hide all, exceptions) while TrayReveal is running</li>
+<li><strong>Check for updates</strong> – checks once a day whether a new version exists and announces it with a notification and the menu item <strong>Download version …</strong></li>
+<li><strong>Notify about new icons</strong>, <strong>Language</strong>, <strong>Start with Windows</strong>, <strong>Quit</strong></li>
+</ul>
+<p>The menu follows the light or dark mode of the taskbar.</p>
+<p>When an app updates into a new versioned folder (for example <code>app-1.2.3</code> or a Microsoft Store package), Windows creates a new hidden entry for it. TrayReveal recognizes the same app and keeps your previous choice. Exceptions apply to all versions of an app. If several older versions exist, the one changed last counts.</p>
+<p>Entries whose program has been missing for three days in a row are removed from the Windows tray settings, so old versions do not pile up. In Off mode nothing is removed.</p>
+<p><code>TrayReveal.exe --once</code> applies the current settings once without a tray icon and exits, e.g. for the Task Scheduler.</p>
+<h3 id="languages">Languages</h3>
+<p>TrayReveal comes in 51 languages, including German dialects and a few fun languages; <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> lists all codes. With <strong>Automatic</strong>, it follows the Windows display language and falls back to English.</p>
+<p>The translations were generated by Claude (AI). Most of them have not been checked by a native speaker yet; <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> and the header of each file show which ones have. If you notice a mistake or know a better wording, please open an <a href="https://github.com/TripleT3005/TrayReveal/issues" target="_blank" rel="noopener noreferrer">issue</a> or a pull request. Reviewers are credited with their GitHub name in the language file and in <a href="https://github.com/TripleT3005/TrayReveal/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a>, if they agree.</p>
+<p>The texts are plain text files named after the language code, e.g. <code>de.lang</code> or <code>pt-BR.lang</code>, with one <code>key = text</code> per line. To add a language, copy <a href="https://github.com/TripleT3005/TrayReveal/blob/main/lang/en.lang" target="_blank" rel="noopener noreferrer"><code>lang/en.lang</code></a>, translate the texts after the <code>=</code> and keep the keys and placeholders such as <code>{name}</code>. Missing texts are taken from the fallback language (<code>language.fallback</code>), otherwise from English.</p>
+<p>Language files are read from the <code>lang</code> folder next to the program and from <code>%APPDATA%\TrayReveal\lang</code>. The second folder needs no administrator rights and its texts take priority, so you can add a language or change single texts there.</p>
+<h3 id="how-it-works">How it works</h3>
+<p>Windows stores the visibility of each tray icon per user under <code>HKCU\Control Panel\NotifyIconSettings</code>, one subkey per icon. The value <code>IsPromoted</code> decides whether the icon is shown on the taskbar (<code>1</code>) or hidden in the overflow menu (<code>0</code>); for icons that were never shown, the value is missing.
+TrayReveal waits for changes to this key (no polling), sets or creates <code>IsPromoted</code> according to the chosen mode and leaves everything else untouched. It is the same value the Windows Settings toggle writes, so you can still change single icons there.</p>
+<ul>
+<li>Runs as a standard user, no administrator rights, writes only to <code>HKCU</code></li>
+<li>No window, only a tray icon with a context menu</li>
+<li>The only network access is the optional update check: shortly after the start and then once a day, TrayReveal requests the information about the latest release from <code>api.github.com</code>. It only downloads this information; nothing about your system or your icons is sent or uploaded, and GitHub only sees the usual request data such as the IP address and the program name with version (<code>TrayReveal/&lt;version&gt;</code>). It can be turned off with <strong>Check for updates</strong> in the menu. Updates are never downloaded or installed automatically, the menu only links to the release page.</li>
+<li>No telemetry</li>
+<li>Settings are stored in the registry under <code>HKCU\Software\TrayReveal</code></li>
+</ul>
+<p>The registry key is not documented by Microsoft and may change with future Windows updates. If its layout changes, TrayReveal does nothing instead of guessing.</p>
+<h3 id="license">License</h3>
+<p><a href="https://github.com/TripleT3005/TrayReveal/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a> – not affiliated with or endorsed by Microsoft. Windows is a trademark of the Microsoft group of companies.</p>
+</section>
+
+  <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/TrayReveal" target="_blank" rel="noopener noreferrer">TripleT3005/TrayReveal</a></footer>
+</main>
+</body>
+</html>
