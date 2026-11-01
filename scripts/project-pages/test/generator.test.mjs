@@ -6,7 +6,7 @@ import path from "node:path";
 import { checkSite } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
 import { acceptLanguagePattern, ZOOM_SCRIPT } from "../page.mjs";
-import { renderHtml } from "../html.mjs";
+import { renderHtml, stripTags } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
 import { renderHome, updateHtaccess, updateIndex } from "../sync.mjs";
@@ -138,8 +138,15 @@ test("raw HTML is limited to p, img and br", () => {
   assert.equal(warnings.length, 4);
 });
 
+test("stripTags leaves no tag openers behind", () => {
+  assert.equal(stripTags("<b>A</b> &amp; <i>B</i>"), "A & B");
+  assert.equal(stripTags("<<b>script>x<scr<i>ipt"), "script>xipt");
+  assert.equal(stripTags("a <script"), "a ");
+  assert.equal(stripTags("x &lt;b&gt;"), "x <b>");
+});
+
 test("unsafe link schemes are dropped", () => {
-  const ctx = { link: (url) => (url.startsWith("javascript:") ? null : { href: url }), image: () => null, warn: () => {} };
+  const ctx = { link: (url) => (/^https?:/i.test(url) ? { href: url } : null), image: () => null, warn: () => {} };
   assert.equal(renderInline("[x](javascript:alert(1)) [y](https://a.b)", ctx), 'x <a href="https://a.b">y</a>');
 });
 
@@ -248,6 +255,9 @@ test("images must be safe files of the declared type", () => {
   assert.equal(checkImage("a.png", PNG), null);
   assert.match(checkImage("a.png", SVG), /does not match/);
   assert.match(checkImage("a.svg", Buffer.from('<svg onload="x"></svg>')), /scripts/);
+  assert.equal(checkImage("a.svg", Buffer.from(`<?xml version="1.0"?>\n<!-- a --> <!-- b -->\n${SVG}`)), null);
+  assert.match(checkImage("a.svg", Buffer.from("<!-- a <svg>")), /does not match/);
+  assert.match(checkImage("a.svg", Buffer.from(`<!--${"<!--".repeat(100000)}`)), /does not match/);
   assert.match(checkImage("a.svg", Buffer.from('<svg><image href="https://x/y.png"/></svg>')), /external/);
   assert.match(checkImage("a.exe", PNG), /unsupported/);
 });

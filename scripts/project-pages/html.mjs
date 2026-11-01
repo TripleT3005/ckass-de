@@ -41,7 +41,7 @@ export function decodeEntities(text) {
 }
 
 export function stripTags(html) {
-  return decodeEntities(html.replace(/<[^>]*>/g, ""));
+  return decodeEntities(html.replace(/<[^>]*>?/g, ""));
 }
 
 // Raw HTML

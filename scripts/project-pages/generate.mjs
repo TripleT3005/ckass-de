@@ -12,11 +12,26 @@ const IMAGE_TYPES = {
   ".jpeg": (b) => b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
   ".gif": (b) => /^GIF8[79]a/.test(b.subarray(0, 6).toString("latin1")),
   ".webp": (b) => b.subarray(0, 4).toString("latin1") === "RIFF" && b.subarray(8, 12).toString("latin1") === "WEBP",
-  ".svg": (b) => /^\s*(?:<\?xml[^>]*\?>\s*)?(?:<!--[\s\S]*?-->\s*)*<svg[\s>]/.test(b.toString("utf8")),
+  ".svg": (b) => isSvg(b.toString("utf8")),
 };
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 const SAFE_SEGMENT = /^[A-Za-z0-9_-][A-Za-z0-9._-]*$/;
 const UNSAFE_SVG = /<script|<foreignObject|<!ENTITY|<!DOCTYPE|\son[a-z]+\s*=|javascript:|(?:xlink:)?href\s*=\s*["']?\s*(?!#)|url\(\s*["']?\s*(?!#)|@import/i;
+
+function isSvg(text) {
+  let rest = text.trimStart();
+  if (rest.startsWith("<?xml")) {
+    const end = rest.indexOf("?>");
+    if (end < 0) return false;
+    rest = rest.slice(end + 2).trimStart();
+  }
+  while (rest.startsWith("<!--")) {
+    const end = rest.indexOf("-->", 4);
+    if (end < 0) return false;
+    rest = rest.slice(end + 3).trimStart();
+  }
+  return /^<svg[\s>]/.test(rest);
+}
 
 export function checkImage(file, data) {
   const ext = path.posix.extname(file).toLowerCase();
