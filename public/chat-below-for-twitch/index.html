@@ -75,12 +75,10 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
       <a href="de/" hreflang="de" lang="de" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
     </nav>
   </header>
-  <p class="lang"><a href="#screenshots">Screenshots</a></p>
 
 <section id="english">
 <p>Browser extension for Chrome and Edge that moves the Twitch chat below the video with one click.
-Useful when the monitor is split into two or three windows side by side.
-Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="noopener noreferrer">https://ckass.de/chat-below-for-twitch/</a></p>
+Useful when the monitor is split into two or three windows side by side.</p>
 <div class="links">
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
@@ -88,8 +86,15 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
 <blockquote>
-<p>Not affiliated with or endorsed by Twitch. Twitch is a trademark of Twitch Interactive, Inc.</p>
+<p>Feedback and bug reports are welcome as <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">issues</a>. Not affiliated with or endorsed by Twitch. Twitch is a trademark of Twitch Interactive, Inc.</p>
 </blockquote>
+<p>
+  <img src="screenshots/01-chat-below.png" alt="Twitch chat below the video" width="49%" loading="lazy" decoding="async">
+  <img src="screenshots/02-without-extension.png" alt="Without the extension: chat next to the video" width="49%" loading="lazy" decoding="async">
+  <img src="screenshots/03-resize-divider.png" alt="Drag the divider to resize, header bar transparent" width="49%" loading="lazy" decoding="async">
+  <img src="screenshots/04-narrow-window.png" alt="Narrow window with header bar and sidebar hidden" width="49%" loading="lazy" decoding="async">
+  <img src="screenshots/05-compact-chat.png" alt="Chat shrunk down to its header row" width="49%" loading="lazy" decoding="async">
+</p>
 <h3 id="features">Features</h3>
 <ul>
 <li>Toggle via the chat button in the video's control bar (next to settings and fullscreen) or via the extension icon in the browser toolbar</li>
@@ -98,15 +103,11 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
 <li>A running hype train is shown compactly in the chat header row</li>
 <li>Right-click the extension icon to hide the header bar or make it transparent, and to hide the left sidebar (applies while the chat is below the video)</li>
 <li>Drag the line between video and chat to change the split, down to just the chat header; double-click resets it</li>
-<li>Only active on stream pages; theatre mode and fullscreen keep working</li>
+<li>Only active on stream pages; fullscreen keeps working, theatre mode is left while the chat is below the video</li>
 <li>The setting is remembered for all Twitch tabs; with browser sync enabled it also applies on your other computers</li>
 <li>Available in English and German, depending on the browser language</li>
 </ul>
-<h3 id="privacy">Privacy</h3>
-<p>The extension only changes how Twitch stream pages are laid out. It does not collect, read or send any personal data, has no access to your Twitch account and makes no external requests.</p>
-<p>Your settings (chat below on/off, divider position, header bar and sidebar options) are stored with the browser's own storage. With browser sync enabled, your browser syncs them across your devices; the extension itself does not transmit them anywhere.</p>
-<p>Permissions: <code>storage</code> to remember the settings, <code>contextMenus</code> for the right-click menu of the icon and access to <code>www.twitch.tv</code> to change the page layout.</p>
-<h3 id="install">Install</h3>
+<h3 id="installation">Installation</h3>
 <ul>
 <li><strong>Chrome:</strong> <a href="https://chromewebstore.google.com/detail/chat-below-for-twitch/jfdcnglmpjdiofdlapohkchhhmkjffog" target="_blank" rel="noopener noreferrer">Chrome Web Store</a></li>
 <li><strong>Edge:</strong> Edge Add-ons (coming soon)</li>
@@ -118,17 +119,24 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
 <li>Enable &quot;Developer mode&quot;</li>
 <li>Click &quot;Load unpacked&quot; and select the extracted folder</li>
 </ol>
+<p>Changes are listed in the <a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">changelog</a>.</p>
+<h3 id="usage">Usage</h3>
+<ol>
+<li>Open a stream on <code>www.twitch.tv</code>.</li>
+<li>Click the chat button in the video's control bar (next to settings and fullscreen) or the extension icon in the browser toolbar. The chat moves below the video; another click moves it back to the right. If the control bar is not available, a floating button &quot;Chat: right&quot; / &quot;Chat: below ✓&quot; is shown instead. The extension icon shows the state: purple with the chat at the bottom while it is on, grey with the chat on the right while it is off.</li>
+<li>Drag the line between video and chat to change the split, down to just the chat header row. Double-click the line to reset it.</li>
+<li>Right-click the extension icon for more options: <strong>Header bar</strong> → <strong>Show</strong>, <strong>Transparent</strong> or <strong>Hide</strong>, and <strong>Hide left sidebar</strong>. They apply while the chat is below the video.</li>
+</ol>
+<p>The browser suggests the keyboard shortcut Alt+Shift+C for toggling; it can be changed or removed at <code>chrome://extensions/shortcuts</code> (Edge: <code>edge://extensions/shortcuts</code>).</p>
+<h3 id="how-it-works">How it works</h3>
+<p>A content script with a stylesheet runs on <code>www.twitch.tv</code> and adds the chat button to the player. When the layout is turned on and a stream page is open (not in fullscreen), it marks the page with a CSS class: the video is sized to the full width of the page area at 16:9, as far as the space above the chat allows, and the chat column is placed below it with the divider in between. Twitch is a single-page app, so the script watches page changes and the window size and recalculates the layout. While the chat is below the video, theatre mode is left automatically and its button and Alt+T are disabled, because both would break the layout.</p>
+<p>A small background service worker handles the extension icon, the keyboard shortcut and the right-click menu. The state is kept in the browser's sync storage; every open Twitch tab reacts to changes there, so all tabs follow the same setting.</p>
+<h3 id="privacy">Privacy</h3>
+<p>The extension only changes how Twitch stream pages are laid out. It does not collect, read or send any personal data, has no access to your Twitch account and makes no external requests.</p>
+<p>Your settings (chat below on/off, divider position, header bar and sidebar options) are stored with the browser's own storage. With browser sync enabled, your browser syncs them across your devices; the extension itself does not transmit them anywhere.</p>
+<p>Permissions: <code>storage</code> to remember the settings, <code>contextMenus</code> for the right-click menu of the icon and access to <code>www.twitch.tv</code> to change the page layout.</p>
 <h3 id="license">License</h3>
 <p><a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
-</section>
-
-<section>
-<h2 id="screenshots">Screenshots</h2>
-<p><img src="screenshots/01-chat-below.png" alt="Twitch chat below the video" loading="lazy" decoding="async"></p>
-<p><img src="screenshots/02-without-extension.png" alt="Without the extension: chat next to the video" loading="lazy" decoding="async"></p>
-<p><img src="screenshots/03-resize-divider.png" alt="Drag the divider to resize, header bar transparent" loading="lazy" decoding="async"></p>
-<p><img src="screenshots/04-narrow-window.png" alt="Narrow window with header bar and sidebar hidden" loading="lazy" decoding="async"></p>
-<p><img src="screenshots/05-compact-chat.png" alt="Chat shrunk down to its header row" loading="lazy" decoding="async"></p>
 </section>
 
   <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/chat-below-for-twitch" target="_blank" rel="noopener noreferrer">TripleT3005/chat-below-for-twitch</a></footer>

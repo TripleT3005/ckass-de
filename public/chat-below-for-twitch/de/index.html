@@ -74,12 +74,10 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
       <a href="../de/" hreflang="de" lang="de" aria-current="page" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
     </nav>
   </header>
-  <p class="lang"><a href="#screenshots">Screenshots</a></p>
 
 <section id="deutsch">
 <p>Browser-Erweiterung für Chrome und Edge, die den Twitch-Chat per Klick unter das Video verschiebt.
-Praktisch, wenn der Monitor in zwei oder drei Fenster nebeneinander aufgeteilt ist.
-Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="noopener noreferrer">https://ckass.de/chat-below-for-twitch/</a></p>
+Praktisch, wenn der Monitor in zwei oder drei Fenster nebeneinander aufgeteilt ist.</p>
 <div class="links">
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
@@ -87,8 +85,15 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
   <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
 <blockquote>
-<p>Nicht mit Twitch verbunden und nicht von Twitch unterstützt. Twitch ist eine Marke von Twitch Interactive, Inc.</p>
+<p>Rückmeldungen und Fehlerberichte gern als <a href="https://github.com/TripleT3005/chat-below-for-twitch/issues" target="_blank" rel="noopener noreferrer">Issue</a>. Keine Verbindung zu Twitch und nicht von Twitch unterstützt. Twitch ist eine Marke von Twitch Interactive, Inc.</p>
 </blockquote>
+<p>
+  <img src="../screenshots/01-chat-below.png" alt="Twitch-Chat unter dem Video" width="49%" loading="lazy" decoding="async">
+  <img src="../screenshots/02-without-extension.png" alt="Ohne die Erweiterung: Chat neben dem Video" width="49%" loading="lazy" decoding="async">
+  <img src="../screenshots/03-resize-divider.png" alt="Trennlinie ziehen zum Ändern der Größe, Kopfleiste transparent" width="49%" loading="lazy" decoding="async">
+  <img src="../screenshots/04-narrow-window.png" alt="Schmales Fenster mit ausgeblendeter Kopf- und Seitenleiste" width="49%" loading="lazy" decoding="async">
+  <img src="../screenshots/05-compact-chat.png" alt="Chat auf seine Kopfzeile verkleinert" width="49%" loading="lazy" decoding="async">
+</p>
 <h3 id="funktionen">Funktionen</h3>
 <ul>
 <li>Umschalten über den Chat-Button in der Steuerleiste des Videos (neben Einstellungen und Vollbild) oder über das Erweiterungssymbol oben in der Browserleiste</li>
@@ -97,15 +102,11 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
 <li>Ein laufender Hypetrain wird kompakt in der Kopfzeile des Chats angezeigt</li>
 <li>Per Rechtsklick auf das Erweiterungssymbol lässt sich die Kopfleiste ausblenden oder transparent schalten und die linke Seitenleiste ausblenden (gilt, solange der Chat unter dem Video ist)</li>
 <li>Die Linie zwischen Video und Chat lässt sich ziehen, um die Aufteilung zu ändern, bis nur noch die Chat-Kopfzeile sichtbar ist; Doppelklick setzt sie zurück</li>
-<li>Nur auf Stream-Seiten aktiv; Kino-Modus und Vollbild funktionieren weiterhin</li>
+<li>Nur auf Stream-Seiten aktiv; Vollbild funktioniert weiterhin, der Kinomodus wird verlassen, solange der Chat unter dem Video ist</li>
 <li>Die Einstellung gilt für alle Twitch-Tabs; mit aktivierter Browser-Synchronisierung auch auf deinen anderen Computern</li>
 <li>Auf Deutsch und Englisch verfügbar, abhängig von der Sprache des Browsers</li>
 </ul>
-<h3 id="datenschutz">Datenschutz</h3>
-<p>Die Erweiterung ändert nur die Anordnung von Twitch-Stream-Seiten. Sie erhebt, liest und sendet keine personenbezogenen Daten, hat keinen Zugriff auf dein Twitch-Konto und stellt keine externen Anfragen.</p>
-<p>Deine Einstellungen (Chat unten an/aus, Position der Trennlinie, Optionen für Kopf- und Seitenleiste) werden im Speicher des Browsers abgelegt. Ist die Browser-Synchronisierung aktiv, gleicht dein Browser sie zwischen deinen Geräten ab; die Erweiterung selbst überträgt sie nirgendwohin.</p>
-<p>Berechtigungen: <code>storage</code>, um die Einstellungen zu speichern, <code>contextMenus</code> für das Rechtsklick-Menü des Symbols und Zugriff auf <code>www.twitch.tv</code>, um die Anordnung der Seite zu ändern.</p>
-<h3 id="installation">Installation</h3>
+<h3 id="installation-1">Installation</h3>
 <ul>
 <li><strong>Chrome:</strong> <a href="https://chromewebstore.google.com/detail/chat-below-for-twitch/jfdcnglmpjdiofdlapohkchhhmkjffog" target="_blank" rel="noopener noreferrer">Chrome Web Store</a></li>
 <li><strong>Edge:</strong> Edge Add-ons (bald verfügbar)</li>
@@ -117,17 +118,24 @@ Website: <a href="https://ckass.de/chat-below-for-twitch/" target="_blank" rel="
 <li>„Entwicklermodus“ aktivieren</li>
 <li>„Entpackte Erweiterung laden“ und den entpackten Ordner auswählen</li>
 </ol>
+<p>Änderungen stehen im <a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>.</p>
+<h3 id="bedienung">Bedienung</h3>
+<ol>
+<li>Einen Stream auf <code>www.twitch.tv</code> öffnen.</li>
+<li>Auf den Chat-Button in der Steuerleiste des Videos (neben Einstellungen und Vollbild) oder auf das Erweiterungssymbol in der Browserleiste klicken. Der Chat wandert unter das Video, ein weiterer Klick holt ihn wieder nach rechts. Ist die Steuerleiste nicht verfügbar, erscheint stattdessen ein schwebender Button „Chat: rechts“ / „Chat: unten ✓“. Das Erweiterungssymbol zeigt den Zustand: lila mit dem Chat unten, solange es eingeschaltet ist, grau mit dem Chat rechts, solange es aus ist.</li>
+<li>Die Linie zwischen Video und Chat ziehen, um die Aufteilung zu ändern, bis nur noch die Kopfzeile des Chats sichtbar ist. Ein Doppelklick auf die Linie setzt sie zurück.</li>
+<li>Ein Rechtsklick auf das Erweiterungssymbol bietet weitere Optionen: <strong>Kopfleiste</strong> → <strong>Anzeigen</strong>, <strong>Transparent</strong> oder <strong>Ausblenden</strong> sowie <strong>Linke Seitenleiste ausblenden</strong>. Sie gelten, solange der Chat unter dem Video ist.</li>
+</ol>
+<p>Der Browser schlägt zum Umschalten das Tastenkürzel Alt+Umschalt+C vor; ändern oder entfernen lässt es sich unter <code>chrome://extensions/shortcuts</code> (Edge: <code>edge://extensions/shortcuts</code>).</p>
+<h3 id="funktionsweise">Funktionsweise</h3>
+<p>Ein Content-Script mit Stylesheet läuft auf <code>www.twitch.tv</code> und fügt dem Player den Chat-Button hinzu. Ist das Layout eingeschaltet und eine Stream-Seite geöffnet (nicht im Vollbild), markiert es die Seite mit einer CSS-Klasse: Das Video wird im Format 16:9 auf die volle Breite des Seitenbereichs gebracht, soweit der Platz über dem Chat reicht, und die Chat-Spalte darunter angeordnet, mit der Trennlinie dazwischen. Twitch ist eine Single-Page-App, deshalb beobachtet das Script Änderungen an der Seite und die Fenstergröße und berechnet das Layout neu. Solange der Chat unter dem Video ist, wird der Kinomodus automatisch verlassen, sein Knopf und Alt+T sind dann abgeschaltet, weil beide das Layout durcheinanderbringen würden.</p>
+<p>Ein kleiner Service Worker im Hintergrund kümmert sich um das Erweiterungssymbol, das Tastenkürzel und das Rechtsklick-Menü. Der Zustand liegt im synchronisierten Speicher des Browsers; jeder geöffnete Twitch-Tab reagiert auf Änderungen dort, sodass alle Tabs derselben Einstellung folgen.</p>
+<h3 id="datenschutz">Datenschutz</h3>
+<p>Die Erweiterung ändert nur die Anordnung von Twitch-Stream-Seiten. Sie erhebt, liest und sendet keine personenbezogenen Daten, hat keinen Zugriff auf dein Twitch-Konto und stellt keine externen Anfragen.</p>
+<p>Deine Einstellungen (Chat unten an/aus, Position der Trennlinie, Optionen für Kopf- und Seitenleiste) werden im Speicher des Browsers abgelegt. Ist die Browser-Synchronisierung aktiv, gleicht dein Browser sie zwischen deinen Geräten ab; die Erweiterung selbst überträgt sie nirgendwohin.</p>
+<p>Berechtigungen: <code>storage</code>, um die Einstellungen zu speichern, <code>contextMenus</code> für das Rechtsklick-Menü des Symbols und Zugriff auf <code>www.twitch.tv</code>, um die Anordnung der Seite zu ändern.</p>
 <h3 id="lizenz">Lizenz</h3>
 <p><a href="https://github.com/TripleT3005/chat-below-for-twitch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
-</section>
-
-<section>
-<h2 id="screenshots">Screenshots</h2>
-<p><img src="../screenshots/01-chat-below.png" alt="Twitch chat below the video" loading="lazy" decoding="async"></p>
-<p><img src="../screenshots/02-without-extension.png" alt="Without the extension: chat next to the video" loading="lazy" decoding="async"></p>
-<p><img src="../screenshots/03-resize-divider.png" alt="Drag the divider to resize, header bar transparent" loading="lazy" decoding="async"></p>
-<p><img src="../screenshots/04-narrow-window.png" alt="Narrow window with header bar and sidebar hidden" loading="lazy" decoding="async"></p>
-<p><img src="../screenshots/05-compact-chat.png" alt="Chat shrunk down to its header row" loading="lazy" decoding="async"></p>
 </section>
 
   <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/chat-below-for-twitch" target="_blank" rel="noopener noreferrer">TripleT3005/chat-below-for-twitch</a></footer>
