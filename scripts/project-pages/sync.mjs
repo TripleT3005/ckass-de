@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateProject } from "./generate.mjs";
 import { escapeAttr, escapeText } from "./html.mjs";
-import { GENERATED_MARK, languageSwitch, openGraph, redirectRules, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
+import { GENERATED_MARK, homeData, languageSwitch, openGraph, redirectRules, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
 import { buildSitemap } from "./sitemap.mjs";
 import { githubSource, localSource } from "./source.mjs";
 
@@ -94,6 +94,7 @@ export function renderHome(template, results, lang, canonical) {
   const links = [
     `\n<link rel="canonical" href="${SITE}${canonical}">`,
     openGraph({ title: "ckass", description, url: SITE + canonical, lang }),
+    homeData({ url: SITE + canonical, lang, description }),
     ...SUPPORTED_LANGUAGES.map((l) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}/${l}/">`),
     `\n<link rel="alternate" hreflang="x-default" href="${SITE}/">`,
   ];

@@ -28,7 +28,14 @@ export function checkSite(publicDir) {
     const rel = path.relative(publicDir, file).split(path.sep).join("/");
     const generated = html.includes(GENERATED_MARK);
     if (generated) {
-      const content = html.replace(ZOOM_SCRIPT, "");
+      const content = html.replace(ZOOM_SCRIPT, "").replace(/<script type="application\/ld\+json">([^<]*)<\/script>/g, (_, json) => {
+        try {
+          JSON.parse(json);
+        } catch {
+          problems.push(`${rel}: invalid structured data`);
+        }
+        return "";
+      });
       if (/<script|<iframe|<object|<embed|<form/i.test(content)) problems.push(`${rel}: contains active content`);
       if (/\son[a-z]+\s*=/i.test(content)) problems.push(`${rel}: contains an event handler attribute`);
     }

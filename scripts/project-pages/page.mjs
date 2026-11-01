@@ -167,6 +167,50 @@ export function openGraph({ title, description, url, lang }) {
   return tags.map(([property, content]) => `\n<meta property="${property}" content="${escapeAttr(content)}">`).join("");
 }
 
+// Structured data
+
+export const AUTHOR = {
+  "@type": "Person",
+  "@id": `${SITE}/#author`,
+  name: "TripleT3005",
+  alternateName: "ckass",
+  url: `${SITE}/`,
+  sameAs: ["https://github.com/TripleT3005", "https://www.twitch.tv/TripleT3005"],
+};
+
+export function jsonLd(graph) {
+  const json = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
+  return `\n<script type="application/ld+json">${json}</script>`;
+}
+
+export function projectData({ repo, title, summary, url, home, lang, download }) {
+  return jsonLd([
+    {
+      "@type": "SoftwareApplication",
+      name: title,
+      description: summary || title,
+      url,
+      inLanguage: lang,
+      author: AUTHOR,
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      ...(download ? { downloadUrl: download } : {}),
+      sameAs: `https://github.com/${repo}`,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "ckass", item: SITE + home },
+        { "@type": "ListItem", position: 2, name: title, item: url },
+      ],
+    },
+  ]);
+}
+
+export function homeData({ url, lang, description }) {
+  return jsonLd([{ "@type": "WebSite", "@id": `${SITE}/#website`, name: "ckass", alternateName: "ckass.de", url: `${SITE}/`, inLanguage: lang, description, publisher: { "@id": AUTHOR["@id"] } }, AUTHOR, { "@type": "ProfilePage", url, mainEntity: { "@id": AUTHOR["@id"] } }]);
+}
+
 export function linkButtons(language, { repoUrl, download, changelog }) {
   const labels = LABELS[language] ?? LABELS.en;
   const links = [];
@@ -179,12 +223,13 @@ export function linkButtons(language, { repoUrl, download, changelog }) {
 
 // Page
 
-export function renderPage({ repo, slug, title, titleHtml, titleId, logo, description, nav, intro, sections, lang, languages, prefix, canonical }) {
+export function renderPage({ repo, slug, title, titleHtml, titleId, logo, description, summary, download, nav, intro, sections, lang, languages, prefix, canonical }) {
   const switchable = languages.length > 1;
+  const home = switchable ? `/${lang}/` : "/";
   const icon = logo ? `<link rel="icon" href="${escapeAttr(logo)}"${logo.endsWith(".svg") ? ' type="image/svg+xml"' : ""}>` : '<link rel="icon" href="/favicon.svg" type="image/svg+xml">';
   const logoImg = logo ? `\n    <img src="${escapeAttr(logo)}" alt="" width="64" height="64">` : "";
   const alternates = switchable ? [...languages.map((l) => [l, `/${slug}/${l}/`]), ["x-default", `/${slug}/`]].map(([l, href]) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}${href}">`).join("") : "";
-  const canonicalLink = `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${openGraph({ title, description, url: SITE + canonical, lang })}`;
+  const canonicalLink = `\n<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${openGraph({ title, description, url: SITE + canonical, lang })}${projectData({ repo, title, summary, url: SITE + canonical, home, lang, download })}`;
   const navHtml = nav.length ? `\n  <p class="lang">${nav.map(([id, label]) => `<a href="#${escapeAttr(id)}">${label}</a>`).join(" · ")}</p>` : "";
   const introHtml = intro ? `\n\n${intro}` : "";
   const sectionHtml = sections
@@ -215,7 +260,7 @@ ${STYLE}
 
 ${sectionHtml}
 
-  <footer><a href="${switchable ? `/${lang}/` : "/"}">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
+  <footer><a href="${home}">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
 </main>${/<img /.test(introHtml + sectionHtml) ? `\n${ZOOM_SCRIPT}` : ""}
 </body>
 </html>

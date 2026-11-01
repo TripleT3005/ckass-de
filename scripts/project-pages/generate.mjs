@@ -257,6 +257,8 @@ export function generateProject(project, source) {
       titleId: ctx.headingId(titleBlock.line),
       logo: logo ? prefix + logo : null,
       description: [title, ...descriptions].join(" · "),
+      summary: descriptions.join(" "),
+      download: project.download ? `${ctx.repoUrl}/releases/latest` : null,
       nav: multi ? nav : sections.filter((s) => s.id).map((s) => [s.id, renderInline(s.heading.text, ctx)]),
       intro: intro.map((b) => renderBlock(b, ctx)).join("\n"),
       sections: rendered,
