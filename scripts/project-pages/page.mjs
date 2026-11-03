@@ -18,7 +18,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple
 main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
 header{display:flex;align-items:center;gap:1rem}
 header img{width:4rem;height:4rem}
-h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600;min-width:0;overflow-wrap:break-word;hyphens:auto}
 h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
 h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
 h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
@@ -224,6 +224,57 @@ export function linkButtons(language, { repoUrl, download, changelog }) {
   return `<div class="links">\n${anchors.join("\n")}\n</div>`;
 }
 
+// Legal pages
+
+export const LEGAL_PAGES = {
+  imprint: { en: "Legal notice", de: "Impressum" },
+  privacy: { en: "Privacy policy", de: "Datenschutz­erklärung" },
+};
+
+const LEGAL_LINK_LABELS = {
+  en: { imprint: "Legal notice", privacy: "Privacy" },
+  de: { imprint: "Impressum", privacy: "Datenschutz" },
+};
+
+export function legalLinks(lang) {
+  const language = LEGAL_LINK_LABELS[lang] ? lang : SUPPORTED_LANGUAGES[0];
+  return Object.keys(LEGAL_PAGES)
+    .map((slug) => `<a href="/${slug}/${language}/">${LEGAL_LINK_LABELS[language][slug]}</a>`)
+    .join(" · ");
+}
+
+export function renderLegalPage({ slug, lang, body, canonical }) {
+  const title = LEGAL_PAGES[slug][lang];
+  const alternates = [...SUPPORTED_LANGUAGES.map((l) => [l, `/${slug}/${l}/`]), ["x-default", `/${slug}/`]].map(([l, href]) => `\n<link rel="alternate" hreflang="${l}" href="${SITE}${href}">`).join("");
+  return `<!DOCTYPE html>
+<!-- Generated from templates/legal by scripts/project-pages/sync.mjs; edit the templates -->
+<html lang="${lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>${escapeText(title.replaceAll("­", ""))} · ckass</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="${SITE}${escapeAttr(canonical)}">${alternates}
+<style>
+${STYLE}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>${escapeText(title)}</h1>${languageSwitch(SUPPORTED_LANGUAGES, lang, `/${slug}/`)}
+  </header>
+
+${body.trim()}
+
+  <footer><a href="/${lang}/">ckass.de</a> · ${legalLinks(lang)}</footer>
+</main>
+</body>
+</html>
+`;
+}
+
 // Page
 
 export function renderPage({ repo, slug, title, titleHtml, titleId, logo, preview, description, summary, download, nav, intro, sections, lang, languages, prefix, canonical }) {
@@ -263,7 +314,7 @@ ${STYLE}
 
 ${sectionHtml}
 
-  <footer><a href="${home}">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a></footer>
+  <footer><a href="${home}">ckass.de</a> · <a href="https://github.com/${escapeAttr(repo)}" target="_blank" rel="noopener noreferrer">${escapeText(repo)}</a> · ${legalLinks(lang)}</footer>
 </main>${/<img /.test(introHtml + sectionHtml) ? `\n${ZOOM_SCRIPT}` : ""}
 </body>
 </html>

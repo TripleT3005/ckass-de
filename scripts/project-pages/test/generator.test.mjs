@@ -6,11 +6,11 @@ import path from "node:path";
 import { checkSite, checkSiteIcons, checkSitemap } from "../check.mjs";
 import { checkImage, generateProject } from "../generate.mjs";
 import { acceptLanguagePattern, ZOOM_SCRIPT } from "../page.mjs";
-import { renderHtml, stripTags } from "../html.mjs";
+import { decodeEntities, renderHtml, stripTags } from "../html.mjs";
 import { parseBlocks, renderBlocks, renderInline } from "../markdown.mjs";
 import { findSkippedLines, githubSlug, headingIds } from "../readme.mjs";
 import { buildSitemap } from "../sitemap.mjs";
-import { homeAbout, homeDescription, renderHome, SITE_ICONS, updateHtaccess, updateIndex } from "../sync.mjs";
+import { homeAbout, homeDescription, loadProjects, renderHome, renderLegal, SITE_ICONS, updateHtaccess, updateIndex } from "../sync.mjs";
 
 // Helpers
 
@@ -264,9 +264,9 @@ test("the link check finds missing anchors and active content", () => {
     fs.mkdirSync(path.dirname(path.join(dir, "demo", file)), { recursive: true });
     fs.writeFileSync(path.join(dir, "demo", file), data);
   }
-  for (const lang of ["en", "de"]) {
-    fs.mkdirSync(path.join(dir, lang));
-    fs.writeFileSync(path.join(dir, lang, "index.html"), "<p>home</p>");
+  for (const page of ["en", "de", "imprint/en", "imprint/de", "privacy/en", "privacy/de"]) {
+    fs.mkdirSync(path.join(dir, page), { recursive: true });
+    fs.writeFileSync(path.join(dir, page, "index.html"), "<p>page</p>");
   }
   fs.writeFileSync(path.join(dir, "index.html"), '<a href="/demo/de/#firmware-2">x</a>');
   assert.deepEqual(checkSite(dir).problems, []);
@@ -377,6 +377,51 @@ test("the sitemap lists indexable pages under their canonical address only", () 
   page("new/index.html", "");
   assert.match(checkSitemap(dir).join(), /out of date/);
   fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test("legal pages fill in the contact block in the page language and stay out of search results", () => {
+  const templates = {
+    contact: "<p>Name<br>{{country}}</p>\n<p>{{email}}: x</p>\n",
+    "imprint.de": "<h2>Angaben</h2>\n{{contact}}\n",
+    "imprint.en": "<h2>Information</h2>\n{{contact}}\n",
+  };
+  const de = renderLegal(templates, "imprint", "de", "/imprint/de/");
+  assert.match(de, /<html lang="de">/);
+  assert.match(de, /<title>Impressum · ckass<\/title>/);
+  assert.match(de, /<meta name="robots" content="noindex">/);
+  assert.match(de, /<link rel="canonical" href="https:\/\/ckass.de\/imprint\/de\/">/);
+  assert.match(de, /<p>Name<br>Deutschland<\/p>\n<p>E-Mail: x<\/p>/);
+  assert.match(de, /<a href="\/imprint\/en\/" hreflang="en"/);
+  assert.match(de, /<footer><a href="\/de\/">ckass.de<\/a> · <a href="\/imprint\/de\/">Impressum<\/a> · <a href="\/privacy\/de\/">Datenschutz<\/a><\/footer>/);
+  assert.match(renderLegal(templates, "imprint", "en", "/imprint/en/"), /<p>Name<br>Germany<\/p>\n<p>Email: x<\/p>/);
+  assert.doesNotMatch(de, /\{\{/);
+  assert.throws(() => renderLegal(templates, "privacy", "de", "/privacy/de/"), /privacy\.de\.html is missing/);
+});
+
+test("email addresses on legal pages are written as character references", () => {
+  const templates = { contact: '<p>{{country}} {{email}}: <a href="mailto:a.b@example.org">a.b@example.org</a></p>', "imprint.de": "{{contact}}" };
+  const html = renderLegal(templates, "imprint", "de", "/imprint/de/");
+  assert.doesNotMatch(html, /a\.b@example\.org|mailto:/);
+  const href = /<a href="([^"]*)">([^<]*)<\/a><\/p>/.exec(html);
+  assert.equal(decodeEntities(href[1]), "mailto:a.b@example.org");
+  assert.equal(decodeEntities(href[2]), "a.b@example.org");
+});
+
+test("every page links to the legal pages in its own language", () => {
+  const template = '<html lang="{{lang}}">\n<head>{{head}}</head>\n<body>\n{{switch}}\n<ul>\n<!-- generated:projects -->\n<!-- /generated:projects -->\n</ul>\n<footer>{{legal}}</footer>';
+  assert.match(renderHome(template, [], "de", "/de/"), /<footer><a href="\/imprint\/de\/">Impressum<\/a> · <a href="\/privacy\/de\/">Datenschutz<\/a><\/footer>/);
+  assert.match(renderHome(template, [], "en", "/en/"), /<footer><a href="\/imprint\/en\/">Legal notice<\/a> · <a href="\/privacy\/en\/">Privacy<\/a><\/footer>/);
+  const { files } = generateProject(PROJECT, memorySource(demoFiles()));
+  assert.match(files.get("de/index.html"), /<a href="\/imprint\/de\/">Impressum<\/a> · <a href="\/privacy\/de\/">Datenschutz<\/a><\/footer>/);
+  const single = generateProject(PROJECT, memorySource({ ...demoFiles(), "README.md": "# Demo\n\nDemo is a tool.\n" })).files.get("index.html");
+  assert.match(single, /<a href="\/imprint\/en\/">Legal notice<\/a>/);
+});
+
+test("legal page slugs cannot be used by projects", () => {
+  const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "projects-")), "projects.json");
+  fs.writeFileSync(file, JSON.stringify([{ repo: "owner/x", slug: "privacy", branch: "main" }]));
+  assert.throws(() => loadProjects(file), /reserved for a legal page/);
+  fs.rmSync(path.dirname(file), { recursive: true, force: true });
 });
 
 test("the root .htaccess keeps its own lines and gets one redirect block", () => {

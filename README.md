@@ -6,6 +6,8 @@ Die Startseite zeigt den Namen „ckass“, dessen Buchstaben ihre Schriftstärk
 
 Die Seite ist rein statisch (HTML, CSS und ein wenig JavaScript) und kommt ohne externe Ressourcen, Cookies und Tracking aus. Verwendet wird die Systemschrift des Geräts.
 
+Impressum (`/imprint/`) und Datenschutzerklärung (`/privacy/`) entstehen aus [`templates/legal`](templates/legal), jeweils auf Deutsch und Englisch. Die Kontaktdaten stehen nur in `contact.html`; enthält eine Vorlage noch `TODO-`, bricht `sync.mjs` ab. Startseite, Projektseiten, Rechtstexte und die 404-Seite verlinken beide Seiten im Footer. Die Rechtstexte tragen `noindex` und fehlen deshalb in der Sitemap.
+
 ### Projektseiten aus READMEs
 
 Projekte in [`projects.json`](projects.json) bekommen unter `/<slug>/` eine Seite, die aus ihrer `README.md` erzeugt wird. Der Workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) läuft täglich und von Hand. Er holt README und verlinkte Bilder per `gh api` aus den öffentlichen Projekt-Repos, erzeugt die Seiten mit [`scripts/project-pages`](scripts/project-pages) (Node.js ohne Pakete), prüft sie und schlägt Änderungen als Pull Request auf dem Branch `sync/projects` vor. Ohne Änderung entsteht kein Pull Request.
@@ -43,6 +45,8 @@ Personal website.
 The home page shows the name "ckass". Its letters subtly change weight in a wave and react to mouse or touch. When the system prefers reduced motion, the text effect stays off until explicitly enabled for this page. The home page exists at `/en/` and `/de/`; `/` redirects by browser language like the project pages, the flags at the top right switch languages, and the project links lead to the project page in the same language. It is generated from [`templates/home.html`](templates/home.html); edit the template, not `public/`. Below the name, a short introduction is followed by links to GitHub, Twitch, Discord and the project pages. `/chat-below-for-twitch/` hosts the page of the browser extension [Chat Below for Twitch](https://github.com/TripleT3005/chat-below-for-twitch) with description, privacy information and screenshots. The color scheme follows the device's light/dark mode.
 
 The site is fully static (HTML, CSS and a little JavaScript) with no external resources, cookies or tracking. It uses the device's system font.
+
+The legal notice (`/imprint/`) and privacy policy (`/privacy/`) are built from [`templates/legal`](templates/legal), each in German and English. Contact details live only in `contact.html`; if a template still contains `TODO-`, `sync.mjs` stops. The home page, project pages, legal pages and the 404 page link both pages in their footer. The legal pages carry `noindex` and are therefore left out of the sitemap.
 
 ### Project pages from READMEs
 
