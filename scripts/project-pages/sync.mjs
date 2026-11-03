@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateProject } from "./generate.mjs";
 import { escapeAttr, escapeText } from "./html.mjs";
-import { GENERATED_MARK, homeData, languageSwitch, openGraph, redirectRules, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
+import { GENERATED_MARK, homeData, languageSwitch, LEGAL_PAGES, legalLinks, openGraph, redirectRules, renderLegalPage, SITE, SUPPORTED_LANGUAGES, SWITCH_STYLE } from "./page.mjs";
 import { buildSitemap } from "./sitemap.mjs";
 import { githubSource, localSource } from "./source.mjs";
 
@@ -14,6 +14,7 @@ const PUBLIC = path.join(ROOT, "public");
 const INDEX_START = "<!-- generated:projects -->";
 const INDEX_END = "<!-- /generated:projects -->";
 const HOME_TEMPLATE = path.join(ROOT, "templates", "home.html");
+const LEGAL_TEMPLATES = path.join(ROOT, "templates", "legal");
 const HTACCESS_START = "# generated:languages";
 const HTACCESS_END = "# /generated:languages";
 const ICON_DIRECTORY = path.join(ROOT, "assets", "icons");
@@ -35,6 +36,7 @@ export function loadProjects(file) {
     if (p.download !== undefined && typeof p.download !== "boolean") throw new Error(`${where}: "download" must be true or false`);
     if (p.changelog !== undefined && (typeof p.changelog !== "string" || /^[A-Za-z][A-Za-z0-9+.-]*:|^\/|\.\./.test(p.changelog))) throw new Error(`${where}: "changelog" must be a path inside the repository`);
     if (SUPPORTED_LANGUAGES.includes(p.slug)) throw new Error(`${where}: slug "${p.slug}" is reserved for the home page`);
+    if (Object.hasOwn(LEGAL_PAGES, p.slug)) throw new Error(`${where}: slug "${p.slug}" is reserved for a legal page`);
     if (slugs.has(p.slug)) throw new Error(`${where}: slug "${p.slug}" is used twice`);
     slugs.add(p.slug);
     return { repo: p.repo, slug: p.slug, branch: p.branch, download: p.download ?? false, changelog: p.changelog ?? null };
@@ -121,6 +123,7 @@ export function renderHome(template, results, lang, canonical) {
     .replaceAll("{{lang}}", lang)
     .replace("{{description}}", escapeAttr(description))
     .replace("{{about}}", homeAbout(lang))
+    .replace("{{legal}}", legalLinks(lang))
     .replace("{{head}}", links.join(""))
     .replace("{{switchStyle}}", SWITCH_STYLE)
     .replace("{{switch}}", languageSwitch(SUPPORTED_LANGUAGES, lang, "/").replace(/^\n/, "").replace(/^ {4}/gm, ""));
@@ -145,6 +148,46 @@ function writeHome(results) {
   }
   const htaccess = path.join(PUBLIC, ".htaccess");
   fs.writeFileSync(htaccess, updateHtaccess(fs.readFileSync(htaccess, "utf8")));
+}
+
+const CONTACT_TEXTS = {
+  en: { country: "Germany", email: "Email" },
+  de: { country: "Deutschland", email: "E-Mail" },
+};
+
+export function encodeEmails(html) {
+  return html.replace(/(?:mailto:)?[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, (match) => [...match].map((c) => `&#${c.codePointAt(0)};`).join(""));
+}
+
+export function renderLegal(templates, slug, lang, canonical) {
+  const contact = encodeEmails(templates.contact.replace("{{country}}", CONTACT_TEXTS[lang].country).replace("{{email}}", CONTACT_TEXTS[lang].email));
+  const body = templates[`${slug}.${lang}`];
+  if (!body) throw new Error(`templates/legal/${slug}.${lang}.html is missing`);
+  return renderLegalPage({ slug, lang, body: body.replaceAll("{{contact}}", contact.trim()), canonical });
+}
+
+function writeLegal() {
+  const templates = Object.fromEntries(
+    fs
+      .readdirSync(LEGAL_TEMPLATES)
+      .filter((f) => f.endsWith(".html"))
+      .map((f) => [f.slice(0, -".html".length), fs.readFileSync(path.join(LEGAL_TEMPLATES, f), "utf8")]),
+  );
+  const placeholders = Object.entries(templates)
+    .filter(([, html]) => html.includes("TODO-"))
+    .map(([name]) => `templates/legal/${name}.html`);
+  if (placeholders.length) throw new Error(`Placeholders left in ${placeholders.join(", ")}`);
+  const [fallback] = SUPPORTED_LANGUAGES;
+  for (const slug of Object.keys(LEGAL_PAGES)) {
+    const dir = path.join(PUBLIC, slug);
+    fs.rmSync(dir, { recursive: true, force: true });
+    for (const lang of SUPPORTED_LANGUAGES) {
+      fs.mkdirSync(path.join(dir, lang), { recursive: true });
+      fs.writeFileSync(path.join(dir, lang, "index.html"), renderLegal(templates, slug, lang, `/${slug}/${lang}/`));
+    }
+    fs.writeFileSync(path.join(dir, "index.html"), renderLegal(templates, slug, fallback, `/${slug}/${fallback}/`));
+    fs.writeFileSync(path.join(dir, ".htaccess"), redirectRules(`/${slug}/`, SUPPORTED_LANGUAGES));
+  }
 }
 
 function summary(results) {
@@ -207,6 +250,7 @@ function main() {
   }
   for (const { project, files } of results) writeProject(project.slug, files);
   writeHome(results);
+  writeLegal();
   for (const [source, target] of SITE_ICONS) fs.copyFileSync(path.join(ICON_DIRECTORY, source), path.join(PUBLIC, target));
   fs.writeFileSync(path.join(PUBLIC, "sitemap.xml"), buildSitemap(PUBLIC));
   if (args.summary) fs.writeFileSync(args.summary, summary(results));
