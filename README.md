@@ -38,6 +38,10 @@ Das Logo der Website liegt als einzige Quelle in [`assets/icons/icon.svg`](asset
 
 Lokal: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (braucht ein angemeldetes `gh`) und `node scripts/project-pages/check.mjs`.
 
+### Lizenzen
+
+Der Code steht unter der [MIT-Lizenz](LICENSE). Die einzige Abhängigkeit ist PHPMailer (LGPL-2.1), installiert über Composer und nur auf dem Server verwendet. [`scripts/licenses/check.mjs`](scripts/licenses/check.mjs) prüft `composer.lock` und schlägt fehl, wenn eine Abhängigkeit keine Lizenz hat oder eine, die nicht auf der Liste erlaubter Lizenzen steht, etwa AGPL oder GPL. Lokal: `node --test scripts/licenses/*.test.mjs` und `node scripts/licenses/check.mjs`.
+
 ---
 
 Personal website.
@@ -77,3 +81,7 @@ Every page points to its own address as `canonical` and carries Open Graph tags 
 The site logo lives in [`assets/icons/icon.svg`](assets/icons) as the only source; ICO and PNG in all common sizes are generated from it with [`render-icons.mjs`](https://github.com/TripleT3005/TripleT3005/blob/main/scripts/render-icons.mjs) (`node render-icons.mjs assets/icons`). `sync.mjs` copies `favicon.svg`, `favicon.ico` and `icon.png` (preview image for link previews) from it into `public/`, and `check.mjs` reports copies that differ. Project pages show the repository's `assets/icons/icon-256.png` in link previews if it exists.
 
 Locally: `node --test scripts/project-pages/test/*.test.mjs`, `node scripts/project-pages/sync.mjs` (needs a signed-in `gh`) and `node scripts/project-pages/check.mjs`.
+
+### Licenses
+
+The code is licensed under the [MIT License](LICENSE). The only dependency is PHPMailer (LGPL-2.1), installed with Composer and only used on the server. [`scripts/licenses/check.mjs`](scripts/licenses/check.mjs) checks `composer.lock` and fails if a dependency has no license or one that is not on the allow list, such as AGPL or GPL. Locally: `node --test scripts/licenses/*.test.mjs` and `node scripts/licenses/check.mjs`.

@@ -13,6 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Test license check
+        run: node --test scripts/licenses/*.test.mjs
+
+      - name: Check licenses
+        run: node scripts/licenses/check.mjs
+
       - name: Test generator
         run: node --test scripts/project-pages/test/*.test.mjs
 
