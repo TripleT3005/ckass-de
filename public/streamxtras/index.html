@@ -199,6 +199,7 @@ A small companion app runs in the system tray, serves the overlays and a setting
 <p>The Twitch token never leaves the companion app except to Twitch itself. Without the Twitch login, only the anonymous chat, the emote providers and the update check remain.</p>
 <h3 id="license">License</h3>
 <p><a href="https://github.com/TripleT3005/StreamXtras/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
+<p>Release packages, the installer and the Linux packages include <code>THIRD-PARTY-LICENSES.txt</code> with the licenses of all third-party components built into the companion app; the overlays contain no third-party code. The CI fails if a dependency uses a license that is not on the allow list in <a href="https://github.com/TripleT3005/StreamXtras/blob/main/tools/third_party_licenses.py" target="_blank" rel="noopener noreferrer"><code>tools/third_party_licenses.py</code></a>. The list is created with Python 3 (standard library only), e.g. <code>python ../tools/third_party_licenses.py --rust-std --output ../THIRD-PARTY-LICENSES.txt</code> in <code>companion</code>; the Windows installer needs this file.</p>
 </section>
 
   <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/StreamXtras" target="_blank" rel="noopener noreferrer">TripleT3005/StreamXtras</a> · <a href="/imprint/en/">Legal notice</a> · <a href="/privacy/en/">Privacy</a></footer>
