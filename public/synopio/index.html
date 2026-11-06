@@ -101,6 +101,10 @@ It is made for drafts of laws, ordinances, reports and other long documents, whe
 <blockquote>
 <p>Feedback and bug reports are welcome as <a href="https://github.com/TripleT3005/Synopio/issues" target="_blank" rel="noopener noreferrer">issues</a>. Not affiliated with or endorsed by Microsoft. Windows and Word are trademarks of the Microsoft group of companies.</p>
 </blockquote>
+<p>
+  <img src="assets/screenshot-light.png" alt="Synopio comparing two versions of a library regulation, showing changes only (light mode)" width="49%" loading="lazy" decoding="async">
+  <img src="assets/screenshot-dark.png" alt="Synopio comparing two versions of a library regulation, showing changes only (dark mode)" width="49%" loading="lazy" decoding="async">
+</p>
 <h3 id="features">Features</h3>
 <ul>
 <li>Compares PDF, Word (DOCX), text and Markdown files, also across formats; Markdown is compared as plain text</li>
@@ -185,5 +189,35 @@ It is made for drafts of laws, ordinances, reports and other long documents, whe
 
   <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/Synopio" target="_blank" rel="noopener noreferrer">TripleT3005/Synopio</a> · <a href="/imprint/en/">Legal notice</a> · <a href="/privacy/en/">Privacy</a></footer>
 </main>
+<script>
+(function(){
+  var label = document.documentElement.lang === "de" ? "Bild vergrößern" : "Enlarge image";
+  var dialog = document.createElement("dialog"), large = document.createElement("img");
+  dialog.className = "zoom";
+  dialog.appendChild(large);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("click", function(){ dialog.close(); });
+  dialog.addEventListener("close", function(){ large.removeAttribute("src"); });
+  function open(img){
+    large.src = img.currentSrc || img.src;
+    large.alt = img.alt;
+    dialog.setAttribute("aria-label", img.alt || label);
+    (large.decode ? large.decode() : Promise.resolve()).catch(function(){}).then(function(){ if (!dialog.open) dialog.showModal(); });
+  }
+  function prepare(img){
+    if (img.naturalWidth <= img.clientWidth + 1 || img.classList.contains("zoomable")) return;
+    img.classList.add("zoomable");
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.title = label;
+    img.addEventListener("click", function(){ open(img); });
+    img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(img); } });
+  }
+  [].forEach.call(document.querySelectorAll("section img, main > p img"), function(img){
+    if (img.complete) prepare(img); else img.addEventListener("load", function(){ prepare(img); });
+  });
+  addEventListener("resize", function(){ [].forEach.call(document.querySelectorAll("section img, main > p img"), prepare); });
+})();
+</script>
 </body>
 </html>
