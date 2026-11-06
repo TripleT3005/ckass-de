@@ -101,6 +101,10 @@ Gedacht ist sie für Entwürfe von Gesetzen, Verordnungen, Berichten und andere 
 <blockquote>
 <p>Rückmeldungen und Fehlerberichte gern als <a href="https://github.com/TripleT3005/Synopio/issues" target="_blank" rel="noopener noreferrer">Issue</a>. Keine Verbindung zu Microsoft und nicht von Microsoft unterstützt. Windows und Word sind Marken der Microsoft-Unternehmensgruppe.</p>
 </blockquote>
+<p>
+  <img src="../assets/screenshot-light.png" alt="Synopio vergleicht zwei Fassungen einer Büchereisatzung und zeigt nur die Änderungen (heller Modus)" width="49%" loading="lazy" decoding="async">
+  <img src="../assets/screenshot-dark.png" alt="Synopio vergleicht zwei Fassungen einer Büchereisatzung und zeigt nur die Änderungen (dunkler Modus)" width="49%" loading="lazy" decoding="async">
+</p>
 <h3 id="funktionen">Funktionen</h3>
 <ul>
 <li>Vergleicht PDF-, Word- (DOCX), Text- und Markdown-Dateien, auch untereinander; Markdown wird als reiner Text verglichen</li>
@@ -185,5 +189,35 @@ Gedacht ist sie für Entwürfe von Gesetzen, Verordnungen, Berichten und andere 
 
   <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/Synopio" target="_blank" rel="noopener noreferrer">TripleT3005/Synopio</a> · <a href="/imprint/de/">Impressum</a> · <a href="/privacy/de/">Datenschutz</a></footer>
 </main>
+<script>
+(function(){
+  var label = document.documentElement.lang === "de" ? "Bild vergrößern" : "Enlarge image";
+  var dialog = document.createElement("dialog"), large = document.createElement("img");
+  dialog.className = "zoom";
+  dialog.appendChild(large);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("click", function(){ dialog.close(); });
+  dialog.addEventListener("close", function(){ large.removeAttribute("src"); });
+  function open(img){
+    large.src = img.currentSrc || img.src;
+    large.alt = img.alt;
+    dialog.setAttribute("aria-label", img.alt || label);
+    (large.decode ? large.decode() : Promise.resolve()).catch(function(){}).then(function(){ if (!dialog.open) dialog.showModal(); });
+  }
+  function prepare(img){
+    if (img.naturalWidth <= img.clientWidth + 1 || img.classList.contains("zoomable")) return;
+    img.classList.add("zoomable");
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.title = label;
+    img.addEventListener("click", function(){ open(img); });
+    img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(img); } });
+  }
+  [].forEach.call(document.querySelectorAll("section img, main > p img"), function(img){
+    if (img.complete) prepare(img); else img.addEventListener("load", function(){ prepare(img); });
+  });
+  addEventListener("resize", function(){ [].forEach.call(document.querySelectorAll("section img, main > p img"), prepare); });
+})();
+</script>
 </body>
 </html>
