@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/Synopio by scripts/project-pages -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Synopio · A Windows app that compares two versions of a document and shows the differences side by side as a synopsis: deleted text is struck through on the left, inserted text is underlined on the right.">
+<title>Synopio</title>
+<link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ckass.de/synopio/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ckass.de">
+<meta property="og:title" content="Synopio">
+<meta property="og:description" content="Synopio · A Windows app that compares two versions of a document and shows the differences side by side as a synopsis: deleted text is struck through on the left, inserted text is underlined on the right.">
+<meta property="og:url" content="https://ckass.de/synopio/en/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ckass.de/synopio/assets/icons/icon-256.png">
+<meta property="og:image:width" content="256">
+<meta property="og:image:height" content="256">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Synopio","description":"A Windows app that compares two versions of a document and shows the differences side by side as a synopsis: deleted text is struck through on the left, inserted text is underlined on the right.","url":"https://ckass.de/synopio/en/","inLanguage":"en","author":{"@type":"Person","@id":"https://ckass.de/#author","name":"Christoph Kaß","alternateName":["TripleT3005","ckass"],"jobTitle":"IT-Systemadministrator","url":"https://ckass.de/","sameAs":["https://github.com/TripleT3005","https://www.twitch.tv/TripleT3005"]},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/TripleT3005/Synopio/releases/latest","image":"https://ckass.de/synopio/assets/icons/icon-256.png","sameAs":"https://github.com/TripleT3005/Synopio"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ckass","item":"https://ckass.de/en/"},{"@type":"ListItem","position":2,"name":"Synopio","item":"https://ckass.de/synopio/en/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://ckass.de/synopio/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/synopio/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/synopio/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600;min-width:0;overflow-wrap:break-word;hyphens:auto}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+img.zoomable{cursor:zoom-in}
+img.zoomable:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+dialog.zoom{max-width:none;max-height:none;margin:auto;padding:0;border:0;background:none;overflow:visible}
+dialog.zoom::backdrop{background:rgb(0 0 0 / .85)}
+dialog.zoom[open]{animation:zoom-in .15s ease-out}
+dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:auto;border-radius:.5rem;cursor:zoom-out}
+@keyframes zoom-in{from{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}dialog.zoom[open]{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="assets/icons/icon.svg" alt="" width="64" height="64">
+    <h1 id="-synopio">Synopio</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="en/" hreflang="en" lang="en" aria-current="page" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="de/" hreflang="de" lang="de" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="english">
+<p>A Windows app that compares two versions of a document and shows the differences side by side as a synopsis: deleted text is struck through on the left, inserted text is underlined on the right.
+It is made for drafts of laws, ordinances, reports and other long documents, where layout, line breaks and hyphenation differ between the versions while the content barely changes.</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/Synopio/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/Synopio/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/Synopio" target="_blank" rel="noopener noreferrer">Source code</a>
+  <a href="https://github.com/TripleT3005/Synopio/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<blockquote>
+<p><strong>Work in progress:</strong> Synopio is at an early stage of development. Features, file formats and the user interface may still change.</p>
+</blockquote>
+<blockquote>
+<p>Feedback and bug reports are welcome as <a href="https://github.com/TripleT3005/Synopio/issues" target="_blank" rel="noopener noreferrer">issues</a>. Not affiliated with or endorsed by Microsoft. Windows and Word are trademarks of the Microsoft group of companies.</p>
+</blockquote>
+<h3 id="features">Features</h3>
+<ul>
+<li>Compares PDF, Word (DOCX), text and Markdown files, also across formats; Markdown is compared as plain text</li>
+<li>Removes running headers, footers and page numbers and joins hyphenated words, so layout differences are not reported as changes</li>
+<li>Repairs garbled words such as <code>Situa=on</code> that some PDFs contain instead of <code>Situation</code> (see <a href="#repairing-garbled-words">Repairing garbled words</a>)</li>
+<li>Compares only a page range, for example a report that is part of a larger attachment</li>
+<li>Lets you correct the extracted text by hand without changing the original files</li>
+<li>Marks the changes next to the scroll bar and jumps from change to change</li>
+<li>Exports the synopsis as a Word document</li>
+<li>Compares again automatically as soon as a file, a page range, an option or the corrected text changes</li>
+<li>No network access, no telemetry</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<p>Synopio needs Windows 11 and the <a href="https://dotnet.microsoft.com/download/dotnet/10.0" target="_blank" rel="noopener noreferrer">.NET 10 Desktop Runtime</a>. If the runtime is missing, Windows shows a hint with a download link when Synopio starts, and the installer points it out as well.</p>
+<p>Download one of the files from <a href="https://github.com/TripleT3005/Synopio/releases" target="_blank" rel="noopener noreferrer">Releases</a>:</p>
+<ul>
+<li><strong>Installer</strong> <code>Synopio-&lt;version&gt;-windows-x64-setup.exe</code> – installs for the current user (default, no administrator rights) or for all users, adds a Start menu entry and optionally opens <code>.synopio</code> project files with Synopio. It can be removed under Settings → Apps.</li>
+<li><strong>Portable</strong> <code>Synopio-&lt;version&gt;-windows-x64.zip</code> – extract it to any folder and start <code>Synopio.exe</code>. Keep the <code>lang</code> folder next to the program.</li>
+</ul>
+<p>The program is not signed, so SmartScreen may warn on the first start: &quot;More info&quot; → &quot;Run anyway&quot;. Each file has a <code>.sha256</code> file to verify the download, and the release notes link a VirusTotal scan. Changes are listed in the <a href="https://github.com/TripleT3005/Synopio/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">changelog</a>.</p>
+<h4 id="installer-parameters">Installer parameters</h4>
+<p>The installer accepts the usual Inno Setup parameters, e.g. for a silent installation:</p>
+<div class="table"><table>
+<thead><tr><th>Parameter</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><code>/CURRENTUSER</code></td><td>Install for the current user only (default)</td></tr>
+<tr><td><code>/ALLUSERS</code></td><td>Install for all users (asks for administrator rights)</td></tr>
+<tr><td><code>/DIR=&quot;C:\Path&quot;</code></td><td>Installation folder</td></tr>
+<tr><td><code>/SILENT</code>, <code>/VERYSILENT</code></td><td>Without wizard (with or without progress window)</td></tr>
+<tr><td><code>/SUPPRESSMSGBOXES</code></td><td>No message boxes in silent mode</td></tr>
+<tr><td><code>/TASKS=&quot;fileassociation,desktopicon&quot;</code></td><td>Selected options; <code>fileassociation</code> opens <code>.synopio</code> project files with Synopio, <code>desktopicon</code> adds a desktop shortcut. Without the parameter, the file association is on and the desktop shortcut off</td></tr>
+<tr><td><code>/NOICONS</code></td><td>No Start menu entry</td></tr>
+<tr><td><code>/LOG=&quot;C:\Path\setup.log&quot;</code></td><td>Write a log file</td></tr>
+</tbody>
+</table></div>
+<p>Example: <code>Synopio-0.1.0-windows-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /ALLUSERS /TASKS=&quot;fileassociation&quot;</code></p>
+<p>Settings such as the language or the window position are stored per user and are not set by the installer. Uninstalling removes the program and the file association but keeps the settings in <code>%APPDATA%\Synopio</code> and <code>%LOCALAPPDATA%\Synopio</code>.</p>
+<h3 id="usage">Usage</h3>
+<ol>
+<li>Open the old version on the left and the new version on the right, either with <strong>Open…</strong> or by dropping a file onto the panel.</li>
+<li>The comparison starts automatically and runs again after every change. <strong>Show changes only</strong> hides unchanged paragraphs, <strong>Previous change</strong> and <strong>Next change</strong> jump between differences. Red and green marks next to the scroll bar show where text was deleted or inserted.</li>
+<li>To compare only part of a document, enter the page range under <strong>Pages from … to …</strong>.</li>
+<li><strong>Export as Word…</strong> saves the synopsis as a two-column table in landscape format. If <strong>Show changes only</strong> is active, only changed rows are exported.</li>
+<li><strong>Save project…</strong> stores the files, page ranges, options and manual corrections in a <code>.synopio</code> file, so a comparison can be continued later. A project file can also be opened by passing it to <code>Synopio.exe</code>.</li>
+</ol>
+<p>If the text of a PDF was extracted incorrectly, correct it on the tabs <strong>Text of old version</strong> and <strong>Text of new version</strong>. Paragraphs are separated by a blank line, a line such as <code>[[12]]</code> marks the start of page 12. The synopsis uses the corrected text, the original file stays unchanged. <strong>Re-extract text</strong> discards the corrections.</p>
+<div class="table"><table>
+<thead><tr><th>Option</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td>Ignore case</td><td><code>Satzung</code> and <code>SATZUNG</code> count as equal</td></tr>
+<tr><td>Ignore hyphenation</td><td><code>nordrhein-westfälisch</code> and <code>nordrheinwestfälisch</code> count as equal (on by default)</td></tr>
+<tr><td>Ignore punctuation</td><td>Commas, periods and other punctuation marks are not compared</td></tr>
+<tr><td>Remove headers and footers</td><td>Lines that repeat at the top or bottom of many pages, and page numbers, are removed</td></tr>
+<tr><td>Repair garbled words</td><td>See <a href="#repairing-garbled-words">Repairing garbled words</a></td></tr>
+</tbody>
+</table></div>
+<h4 id="repairing-garbled-words">Repairing garbled words</h4>
+<p>Many fonts draw certain letter pairs such as <code>fi</code>, <code>ft</code>, <code>tt</code> or <code>ti</code> as one combined character, a so-called ligature. Some programs store these characters incorrectly when creating a PDF, so the extracted text contains <code>Situa=on</code> instead of <code>Situation</code> or <code>Au&gt;rag</code> instead of <code>Auftrag</code>. Synopio recognizes such words, tries the usual letter pairs and keeps the one that results in a word occurring correctly in one of the two documents. It only changes a word if such a match exists.</p>
+<p>Selected synopsis rows can be copied with <code>Ctrl+C</code>. <strong>About</strong> shows the version and the license and links to the project page. The Word export names Synopio and the version in the footer.</p>
+<p>Synopio follows the light or dark mode of Windows and remembers the window size and position; if the screen it was on is no longer connected, it opens centered.</p>
+<h4 id="languages">Languages</h4>
+<p>Synopio is available in English and German. With <strong>Automatic</strong>, it follows the Windows display language and falls back to English; <a href="https://github.com/TripleT3005/Synopio/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> lists all languages.</p>
+<p>The translations were generated by Claude (AI). If you notice a mistake or know a better wording, please open an <a href="https://github.com/TripleT3005/Synopio/issues" target="_blank" rel="noopener noreferrer">issue</a> or a pull request. The texts are plain text files in the <a href="https://github.com/TripleT3005/Synopio/tree/main/lang" target="_blank" rel="noopener noreferrer"><code>lang</code></a> folder, one <code>key = text</code> per line. Language files are read from the <code>lang</code> folder next to the program and from <code>%APPDATA%\Synopio\lang</code>; texts in the second folder take priority.</p>
+<h3 id="how-it-works">How it works</h3>
+<ol>
+<li><strong>Reading:</strong> PDF text is read with its position on the page using <a href="https://github.com/UglyToad/PdfPig" target="_blank" rel="noopener noreferrer">PdfPig</a>. DOCX files are read directly from the document XML, text and Markdown files line by line.</li>
+<li><strong>Preparing:</strong> Lines that repeat at the same place on many pages are removed as headers and footers. Garbled words are repaired with words that occur correctly in the same or the other document. Lines are joined into paragraphs using their spacing and markers such as <code>§</code>, <code>(1)</code> or <code>a)</code>, and hyphenated words are joined again.</li>
+<li><strong>Comparing:</strong> Both texts are split into words and punctuation marks. A difference algorithm first matches words that occur only once in both texts and then refines the gaps between them. Single matching words inside largely rewritten passages are discarded so that rewritten text appears as one block, and deleted or inserted blocks are aligned to paragraph boundaries. Typographic quotation marks and dashes count as equal to their simple forms.</li>
+<li><strong>Synopsis:</strong> Paragraphs that share matching words are placed in one row, so a paragraph split into two still appears as one unchanged row. Paragraphs without a counterpart become rows that are only deleted or only inserted.</li>
+</ol>
+<h3 id="privacy">Privacy</h3>
+<ul>
+<li>Synopio does not access the network. Nothing is downloaded or sent. The links under <strong>About</strong> open in the browser only when clicked.</li>
+<li>Documents are only read, Synopio never changes them.</li>
+<li>The selected language is stored in <code>%APPDATA%\Synopio\settings.json</code>, the window size and position in <code>%LOCALAPPDATA%\Synopio\window.json</code>.</li>
+<li>Project files (<code>.synopio</code>) contain the paths of the compared files relative to the project file, their SHA-256 checksums, the page ranges, the options and, if present, the corrected text. Keep this in mind before passing on a project file.</li>
+</ul>
+<h3 id="license">License</h3>
+<p><a href="https://github.com/TripleT3005/Synopio/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
+<p>Release packages and the installer include <code>THIRD-PARTY-LICENSES.txt</code> with the licenses of all third-party components built into Synopio.</p>
+</section>
+
+  <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/Synopio" target="_blank" rel="noopener noreferrer">TripleT3005/Synopio</a> · <a href="/imprint/en/">Legal notice</a> · <a href="/privacy/en/">Privacy</a></footer>
+</main>
+</body>
+</html>
