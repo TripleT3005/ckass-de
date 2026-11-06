@@ -10,7 +10,7 @@ Impressum (`/imprint/`) und Datenschutzerklärung (`/privacy/`) entstehen aus [`
 
 ### Projektseiten aus READMEs
 
-Projekte in [`projects.json`](projects.json) bekommen unter `/<slug>/` eine Seite, die aus ihrer `README.md` erzeugt wird. Der Workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) läuft täglich und von Hand. Er holt README und verlinkte Bilder per `gh api` aus den öffentlichen Projekt-Repos, erzeugt die Seiten mit [`scripts/project-pages`](scripts/project-pages) (Node.js ohne Pakete), prüft sie und schlägt Änderungen als Pull Request auf dem Branch `sync/projects` vor. Ohne Änderung entsteht kein Pull Request.
+Projekte in [`projects.json`](projects.json) bekommen unter `/<slug>/` eine Seite, die aus ihrer `README.md` erzeugt wird. Der Workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) läuft täglich, von Hand und sobald sich `projects.json` oder der Generator auf `main` ändert. Er holt README und verlinkte Bilder per `gh api` aus den öffentlichen Projekt-Repos, erzeugt die Seiten mit [`scripts/project-pages`](scripts/project-pages) (Node.js ohne Pakete), prüft sie und schlägt Änderungen als Pull Request auf dem Branch `sync/projects` vor. Ohne Änderung entsteht kein Pull Request.
 
 ```json
 [{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true, "changelog": "flexpad-desktop/CHANGELOG.md" }]
@@ -54,7 +54,7 @@ The legal notice (`/imprint/`) and privacy policy (`/privacy/`) are built from [
 
 ### Project pages from READMEs
 
-Projects listed in [`projects.json`](projects.json) get a page at `/<slug>/` generated from their `README.md`. The workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) runs daily and on demand. It fetches the README and the images it links from the public project repositories via `gh api`, builds the pages with [`scripts/project-pages`](scripts/project-pages) (Node.js without packages), checks them and proposes changes as a pull request from the branch `sync/projects`. Without changes, no pull request is opened.
+Projects listed in [`projects.json`](projects.json) get a page at `/<slug>/` generated from their `README.md`. The workflow [`sync-projects.yml`](.github/workflows/sync-projects.yml) runs daily, on demand and whenever `projects.json` or the generator changes on `main`. It fetches the README and the images it links from the public project repositories via `gh api`, builds the pages with [`scripts/project-pages`](scripts/project-pages) (Node.js without packages), checks them and proposes changes as a pull request from the branch `sync/projects`. Without changes, no pull request is opened.
 
 ```json
 [{ "repo": "TripleT3005/FlexPad", "slug": "flexpad", "branch": "main", "download": true, "changelog": "flexpad-desktop/CHANGELOG.md" }]
