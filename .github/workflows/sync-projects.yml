@@ -5,6 +5,7 @@ on:
     paths:
       - projects.json
       - scripts/project-pages/**
+      - .github/workflows/sync-projects.yml
   schedule:
     - cron: "17 4 * * *"
   workflow_dispatch:
