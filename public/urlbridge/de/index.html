@@ -98,7 +98,7 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 <blockquote>
 <p>Rückmeldungen und Fehlerberichte sind als <a href="https://github.com/TripleT3005/UrlBridge/issues" target="_blank" rel="noopener noreferrer">Issues</a> willkommen; Sicherheitsprobleme bitte wie in <a href="https://github.com/TripleT3005/UrlBridge/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">SECURITY.md</a> beschrieben melden. Keine Verbindung zu Microsoft und nicht von Microsoft unterstützt. Windows ist eine Marke der Microsoft-Unternehmensgruppe.</p>
 </blockquote>
-<p><img src="../assets/screenshot.png" alt="Bestätigungsdialog von UrlBridge mit dem Programm und seinen Argumenten" loading="lazy" decoding="async"></p>
+<p><img src="../assets/screenshot-de.png" alt="Bestätigungsdialog von UrlBridge mit dem Programm und seinen Argumenten" loading="lazy" decoding="async"></p>
 <h3 id="funktionen">Funktionen</h3>
 <ul>
 <li>Beliebig viele eigene URL-Protokolle, jedes mit einem Programm und festen Argumenten</li>
@@ -108,6 +108,7 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 <li>Startet nichts, wenn Standardbenutzer die Konfiguration, UrlBridge selbst oder ein lokales Zielprogramm verändern können</li>
 <li>Jeder Start, jeder Abbruch und jeder abgelehnte Link steht im Windows-Ereignisprotokoll</li>
 <li>Installation per PowerShell-Skript, geeignet für die Softwareverteilung</li>
+<li>Englisch und Deutsch, je nach Anzeigesprache von Windows; weitere Sprachen sind einfache Textdateien</li>
 <li>Kein Netzwerkzugriff, keine Telemetrie (siehe <a href="#datenschutz">Datenschutz</a>)</li>
 </ul>
 <h3 id="installation-1">Installation</h3>
@@ -120,12 +121,13 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 <pre><code>powershell.exe -ExecutionPolicy Bypass -File .\Install.ps1 -ConfigPath .\UrlBridge.json</code></pre>
 <p>Das Skript</p>
 <ul>
-<li>kopiert das Programm nach <code>C:\Program Files\UrlBridge</code> (ohne <code>-ConfigPath</code> bleibt eine vorhandene Konfiguration erhalten),</li>
+<li>kopiert das Programm und den Ordner <code>lang</code> nach <code>C:\Program Files\UrlBridge</code> (ohne <code>-ConfigPath</code> bleibt eine vorhandene Konfiguration erhalten),</li>
 <li>führt <code>UrlBridge.exe --validate</code> aus und bricht bei Fehlern ab; eine vorherige Installation wird dann wiederhergestellt,</li>
 <li>registriert jedes Protokoll der Konfiguration unter <code>HKLM\Software\Classes</code> und entfernt Protokolle, die nicht mehr konfiguriert sind (ein Protokoll, das einem anderen Programm gehört, wird nie überschrieben),</li>
 <li>legt die Ereignisquelle <code>UrlBridge</code> an,</li>
 <li>erstellt einen Eintrag unter <em>Einstellungen → Apps</em> für Inventarisierung und Deinstallation.</li>
 </ul>
+<p>Die Meldungen der Skripte sind englisch.</p>
 <p>Für eine geänderte Konfiguration oder ein Update das Skript erneut ausführen. <code>Uninstall.ps1</code> entfernt das Programm, seine Protokolle, die Ereignisquelle und den Eintrag unter <em>Einstellungen → Apps</em>, der dasselbe Skript aufruft.</p>
 <p>Beide Skripte funktionieren auch aus einem 32-Bit-Host, etwa dem Client einer Softwareverteilung; sie starten sich selbst in der 64-Bit-PowerShell neu.</p>
 <h4 id="exit-codes-der-skripte">Exit-Codes der Skripte</h4>
@@ -140,7 +142,7 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 </tbody>
 </table></div>
 <h3 id="bedienung">Bedienung</h3>
-<p>Ein Klick auf einen Link wie <code>bridge-rdp://pc0042</code> im Browser startet UrlBridge. Es zeigt eine Bestätigung mit Protokoll, Programm und Argumenten; das Programm startet erst, wenn du bestätigst. „Cancel“ ist vorausgewählt. Wird der Link abgelehnt, fehlt das Zielprogramm oder ist die Konfiguration ungültig, erscheint eine kurze Meldung, und nichts startet. Die Oberfläche ist derzeit nur englisch.</p>
+<p>Ein Klick auf einen Link wie <code>bridge-rdp://pc0042</code> im Browser startet UrlBridge. Es zeigt eine Bestätigung mit Protokoll, Programm und Argumenten; das Programm startet erst, wenn du bestätigst. „Abbrechen“ ist vorausgewählt. Wird der Link abgelehnt, fehlt das Zielprogramm oder ist die Konfiguration ungültig, erscheint eine kurze Meldung, und nichts startet.</p>
 <p>In der Konsole:</p>
 <div class="table"><table>
 <thead><tr><th>Befehl</th><th>Wirkung</th></tr></thead>
@@ -168,6 +170,11 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 <p>Edge und Chrome fragen nach, bevor sie ein externes Protokoll öffnen („This site is trying to open UrlBridge“). Für vertrauenswürdige Seiten lässt sich diese Rückfrage mit der Browser-Richtlinie <code>AutoLaunchProtocolsFromOrigins</code> per Gruppenrichtlinie abschalten (ADMX-Vorlagen für Edge und Chrome), zum Beispiel:</p>
 <pre><code>[{ &quot;protocol&quot;: &quot;bridge-rdp&quot;, &quot;allowed_origins&quot;: [&quot;https://intranet.example.com&quot;] }]</code></pre>
 <p>Die Richtlinie gilt je Protokoll und je Herkunft; für nicht aufgeführte Protokolle fragt der Browser weiter nach. Das Installationsskript setzt bewusst keine Browser-Richtlinien. UrlBridge fragt weiterhin vor jedem Start nach.</p>
+<h4 id="sprachen">Sprachen</h4>
+<p>UrlBridge gibt es auf Englisch und Deutsch; <a href="https://github.com/TripleT3005/UrlBridge/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> listet die Codes auf. Es folgt der Anzeigesprache von Windows des jeweiligen Benutzers und fällt auf Englisch zurück. Soll für alle dieselbe Sprache gelten, in der Konfiguration <code>&quot;language&quot;: &quot;de&quot;</code> setzen.</p>
+<p>Übersetzt sind die Dialoge, die Meldungen und die Konsolenausgabe. Die Einzelheiten, die <code>--validate</code> meldet, und die Einträge im Ereignisprotokoll sind immer englisch, damit sie auf jedem Rechner gleich lauten.</p>
+<p>Die Übersetzungen wurden von Claude (KI) erzeugt; <a href="https://github.com/TripleT3005/UrlBridge/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> und der Kopf jeder Datei zeigen, welche eine Person geprüft hat. Wenn dir ein Fehler auffällt oder du eine bessere Formulierung kennst, eröffne gern ein <a href="https://github.com/TripleT3005/UrlBridge/issues" target="_blank" rel="noopener noreferrer">Issue</a> oder einen Pull Request. Prüfende werden mit ihrem Einverständnis mit ihrem GitHub-Namen in der Sprachdatei und in <a href="https://github.com/TripleT3005/UrlBridge/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> genannt.</p>
+<p>Die Texte sind einfache Textdateien im Ordner <code>lang</code> neben dem Programm, benannt nach dem Sprachcode, z. B. <code>de.lang</code>, mit einem <code>Schlüssel = Text</code> pro Zeile. Für eine neue Sprache <a href="https://github.com/TripleT3005/UrlBridge/blob/main/lang/en.lang" target="_blank" rel="noopener noreferrer"><code>lang/en.lang</code></a> kopieren, die Texte hinter dem <code>=</code> übersetzen und die Schlüssel sowie Platzhalter wie <code>{name}</code> unverändert lassen. Fehlende Texte kommen aus der Rückfallsprache (<code>language.fallback</code>), sonst aus dem Englischen, das ins Programm eingebaut ist. Eine Sprachdatei wird nur verwendet, wenn Standardbenutzer sie nicht verändern können; sonst ignoriert UrlBridge sie, und <code>--validate</code> warnt.</p>
 <h3 id="konfiguration">Konfiguration</h3>
 <p>Die Konfiguration ist <code>C:\Program Files\UrlBridge\UrlBridge.json</code>; der Ort lässt sich nicht ändern. UTF-8 ohne BOM, höchstens 64 KiB, höchstens 64 Protokolle mit je 32 Argumenten und 8 Parametern.</p>
 <pre><code>{
@@ -189,6 +196,7 @@ Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt
 <div class="table"><table>
 <thead><tr><th>Feld</th><th>Pflicht</th><th>Regeln</th></tr></thead>
 <tbody>
+<tr><td><code>language</code></td><td>nein</td><td>Sprachcode wie <code>de</code> oder <code>en</code> für alle Benutzer; ohne die Angabe folgt UrlBridge der Anzeigesprache von Windows</td></tr>
 <tr><td><code>protocols[].scheme</code></td><td>ja</td><td>Kleinbuchstaben, Ziffern, <code>-</code>, <code>.</code>, <code>+</code>; beginnt mit einem Buchstaben; 3–64 Zeichen; eindeutig; nie ein bekanntes Schema wie <code>http</code>, <code>https</code>, <code>file</code>, <code>mailto</code> oder <code>ms-*</code>; darf nicht mit <code>url</code> beginnen, weil Windows solche Protokolle nicht öffnet</td></tr>
 <tr><td><code>protocols[].name</code></td><td>ja</td><td>1–64 Zeichen; erscheint im Bestätigungsdialog und in der Registry</td></tr>
 <tr><td><code>protocols[].program</code></td><td>ja</td><td>Absoluter Pfad zu einer <code>.exe</code>, lokal (<code>C:\…</code>) oder UNC (<code>\\server\freigabe\…</code>). Lokale Programme müssen auf einem fest eingebauten Laufwerk liegen. Nicht erlaubt: verbundene Laufwerksbuchstaben, Umgebungsvariablen, <code>..</code>, <code>\\?\</code>, <code>\\.\</code></td></tr>
