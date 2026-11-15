@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/UrlBridge by scripts/project-pages -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="UrlBridge · Mit UrlBridge kann eine Webseite unter Windows ein lokales Programm über ein eigenes URL-Protokoll öffnen, zum Beispiel bridge-rdp://pc0042 → mstsc.exe /v:pc0042.">
+<title>UrlBridge</title>
+<link rel="icon" href="../assets/icons/icon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ckass.de/urlbridge/de/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ckass.de">
+<meta property="og:title" content="UrlBridge">
+<meta property="og:description" content="UrlBridge · Mit UrlBridge kann eine Webseite unter Windows ein lokales Programm über ein eigenes URL-Protokoll öffnen, zum Beispiel bridge-rdp://pc0042 → mstsc.exe /v:pc0042.">
+<meta property="og:url" content="https://ckass.de/urlbridge/de/">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://ckass.de/urlbridge/assets/icons/icon-256.png">
+<meta property="og:image:width" content="256">
+<meta property="og:image:height" content="256">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"UrlBridge","description":"Mit UrlBridge kann eine Webseite unter Windows ein lokales Programm über ein eigenes URL-Protokoll öffnen, zum Beispiel bridge-rdp://pc0042 → mstsc.exe /v:pc0042.","url":"https://ckass.de/urlbridge/de/","inLanguage":"de","author":{"@type":"Person","@id":"https://ckass.de/#author","name":"Christoph Kaß","alternateName":["TripleT3005","ckass"],"jobTitle":"IT-Systemadministrator","url":"https://ckass.de/","sameAs":["https://github.com/TripleT3005","https://www.twitch.tv/TripleT3005"]},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/TripleT3005/UrlBridge/releases/latest","image":"https://ckass.de/urlbridge/assets/icons/icon-256.png","sameAs":"https://github.com/TripleT3005/UrlBridge"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ckass","item":"https://ckass.de/de/"},{"@type":"ListItem","position":2,"name":"UrlBridge","item":"https://ckass.de/urlbridge/de/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://ckass.de/urlbridge/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/urlbridge/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/urlbridge/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600;min-width:0;overflow-wrap:break-word;hyphens:auto}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+img.zoomable{cursor:zoom-in}
+img.zoomable:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+dialog.zoom{max-width:none;max-height:none;margin:auto;padding:0;border:0;background:none;overflow:visible}
+dialog.zoom::backdrop{background:rgb(0 0 0 / .85)}
+dialog.zoom[open]{animation:zoom-in .15s ease-out}
+dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:auto;border-radius:.5rem;cursor:zoom-out}
+@keyframes zoom-in{from{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}dialog.zoom[open]{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="../assets/icons/icon.svg" alt="" width="64" height="64">
+    <h1 id="-urlbridge">UrlBridge</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="../en/" hreflang="en" lang="en" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="../de/" hreflang="de" lang="de" aria-current="page" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="deutsch">
+<p>Mit UrlBridge kann eine Webseite unter Windows ein lokales Programm über ein eigenes URL-Protokoll öffnen, zum Beispiel <code>bridge-rdp://pc0042</code> → <code>mstsc.exe /v:pc0042</code>.
+Welche Protokolle es gibt, welches Programm sie starten und welche Werte erlaubt sind, legt ein Administrator in einer einzigen Konfigurationsdatei fest. Alles, was in einem Link ankommt, gilt als feindliche Eingabe: Es wird streng geprüft, kann nur Platzhalter in festen Argumenten füllen, und ohne deine Bestätigung startet nichts.</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/UrlBridge/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/UrlBridge/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/UrlBridge" target="_blank" rel="noopener noreferrer">Quellcode</a>
+  <a href="https://github.com/TripleT3005/UrlBridge/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<blockquote>
+<p>Rückmeldungen und Fehlerberichte sind als <a href="https://github.com/TripleT3005/UrlBridge/issues" target="_blank" rel="noopener noreferrer">Issues</a> willkommen; Sicherheitsprobleme bitte wie in <a href="https://github.com/TripleT3005/UrlBridge/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">SECURITY.md</a> beschrieben melden. Keine Verbindung zu Microsoft und nicht von Microsoft unterstützt. Windows ist eine Marke der Microsoft-Unternehmensgruppe.</p>
+</blockquote>
+<p><img src="../assets/screenshot.png" alt="Bestätigungsdialog von UrlBridge mit dem Programm und seinen Argumenten" loading="lazy" decoding="async"></p>
+<h3 id="funktionen">Funktionen</h3>
+<ul>
+<li>Beliebig viele eigene URL-Protokolle, jedes mit einem Programm und festen Argumenten</li>
+<li>Strenge eingebaute Wertetypen statt freiem Text (<code>host</code>, <code>hostname</code>, <code>ipv4</code>, <code>integer</code>, <code>token</code>, <code>choice</code>)</li>
+<li>Bestätigungsdialog vor jedem Start, der das Programm und alle Argumente zeigt</li>
+<li>Keine Shell, kein <code>ShellExecute</code>, keine Suche im <code>PATH</code></li>
+<li>Startet nichts, wenn Standardbenutzer die Konfiguration, UrlBridge selbst oder ein lokales Zielprogramm verändern können</li>
+<li>Jeder Start, jeder Abbruch und jeder abgelehnte Link steht im Windows-Ereignisprotokoll</li>
+<li>Installation per PowerShell-Skript, geeignet für die Softwareverteilung</li>
+<li>Kein Netzwerkzugriff, keine Telemetrie (siehe <a href="#datenschutz">Datenschutz</a>)</li>
+</ul>
+<h3 id="installation-1">Installation</h3>
+<p><code>UrlBridge-&lt;Version&gt;-windows-x64.zip</code> von <a href="https://github.com/TripleT3005/UrlBridge/releases" target="_blank" rel="noopener noreferrer">Releases</a> herunterladen und entpacken. Die Installation braucht Administratorrechte; UrlBridge wird immer für alle Benutzer installiert.</p>
+<p>Das Programm ist nicht signiert, daher können SmartScreen oder der Virenscanner warnen. Zur ZIP gibt es eine <code>.sha256</code>-Datei zum Prüfen des Downloads, und die Release-Notizen verlinken einen VirusTotal-Scan. Änderungen stehen im <a href="https://github.com/TripleT3005/UrlBridge/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>.</p>
+<ol>
+<li>Die eigene Konfiguration nach dem Muster von <code>UrlBridge.example.json</code> schreiben (siehe <a href="#konfiguration">Konfiguration</a>).</li>
+<li>Das Installationsskript in einer Windows PowerShell mit Administratorrechten ausführen:</li>
+</ol>
+<pre><code>powershell.exe -ExecutionPolicy Bypass -File .\Install.ps1 -ConfigPath .\UrlBridge.json</code></pre>
+<p>Das Skript</p>
+<ul>
+<li>kopiert das Programm nach <code>C:\Program Files\UrlBridge</code> (ohne <code>-ConfigPath</code> bleibt eine vorhandene Konfiguration erhalten),</li>
+<li>führt <code>UrlBridge.exe --validate</code> aus und bricht bei Fehlern ab; eine vorherige Installation wird dann wiederhergestellt,</li>
+<li>registriert jedes Protokoll der Konfiguration unter <code>HKLM\Software\Classes</code> und entfernt Protokolle, die nicht mehr konfiguriert sind (ein Protokoll, das einem anderen Programm gehört, wird nie überschrieben),</li>
+<li>legt die Ereignisquelle <code>UrlBridge</code> an,</li>
+<li>erstellt einen Eintrag unter <em>Einstellungen → Apps</em> für Inventarisierung und Deinstallation.</li>
+</ul>
+<p>Für eine geänderte Konfiguration oder ein Update das Skript erneut ausführen. <code>Uninstall.ps1</code> entfernt das Programm, seine Protokolle, die Ereignisquelle und den Eintrag unter <em>Einstellungen → Apps</em>, der dasselbe Skript aufruft.</p>
+<p>Beide Skripte funktionieren auch aus einem 32-Bit-Host, etwa dem Client einer Softwareverteilung; sie starten sich selbst in der 64-Bit-PowerShell neu.</p>
+<h4 id="exit-codes-der-skripte">Exit-Codes der Skripte</h4>
+<div class="table"><table>
+<thead><tr><th>Code</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Erfolgreich</td></tr>
+<tr><td>1</td><td>Keine Administratorrechte oder ungültige Parameter</td></tr>
+<tr><td>2</td><td>Konfiguration ungültig (<code>--validate</code> fehlgeschlagen)</td></tr>
+<tr><td>3</td><td>Kopieren fehlgeschlagen</td></tr>
+<tr><td>4</td><td>Registrierung fehlgeschlagen, z. B. weil das Protokoll einem anderen Programm gehört</td></tr>
+</tbody>
+</table></div>
+<h3 id="bedienung">Bedienung</h3>
+<p>Ein Klick auf einen Link wie <code>bridge-rdp://pc0042</code> im Browser startet UrlBridge. Es zeigt eine Bestätigung mit Protokoll, Programm und Argumenten; das Programm startet erst, wenn du bestätigst. „Cancel“ ist vorausgewählt. Wird der Link abgelehnt, fehlt das Zielprogramm oder ist die Konfiguration ungültig, erscheint eine kurze Meldung, und nichts startet. Die Oberfläche ist derzeit nur englisch.</p>
+<p>In der Konsole:</p>
+<div class="table"><table>
+<thead><tr><th>Befehl</th><th>Wirkung</th></tr></thead>
+<tbody>
+<tr><td><code>UrlBridge.exe &lt;url&gt;</code></td><td>Prüfen, Bestätigung anzeigen, starten</td></tr>
+<tr><td><code>UrlBridge.exe --test &lt;url&gt;</code></td><td>Zeigt Programm und Argumente, die gestartet würden, startet aber nichts</td></tr>
+<tr><td><code>UrlBridge.exe --validate</code></td><td>Prüft die ganze Konfiguration und listet alle Probleme auf</td></tr>
+<tr><td><code>UrlBridge.exe --version</code></td><td>Zeigt die Version</td></tr>
+<tr><td><code>UrlBridge.exe --help</code></td><td>Zeigt die Hilfe; ohne Parameter tut UrlBridge sonst nichts</td></tr>
+</tbody>
+</table></div>
+<p>UrlBridge ist eine Fensteranwendung, eine Konsole wartet deshalb nicht auf sie. In Skripten <code>Start-Process -Wait -PassThru</code> verwenden und <code>ExitCode</code> auslesen:</p>
+<div class="table"><table>
+<thead><tr><th>Code</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Gestartet bzw. Prüfung ohne Fehler</td></tr>
+<tr><td>1</td><td>Ungültiger Aufruf</td></tr>
+<tr><td>2</td><td>Konfiguration ungültig oder unsicher (Rechte)</td></tr>
+<tr><td>3</td><td>Link abgelehnt</td></tr>
+<tr><td>4</td><td>Vom Benutzer abgebrochen</td></tr>
+<tr><td>5</td><td>Programm nicht gefunden oder Start fehlgeschlagen</td></tr>
+</tbody>
+</table></div>
+<h4 id="rückfragen-des-browsers">Rückfragen des Browsers</h4>
+<p>Edge und Chrome fragen nach, bevor sie ein externes Protokoll öffnen („This site is trying to open UrlBridge“). Für vertrauenswürdige Seiten lässt sich diese Rückfrage mit der Browser-Richtlinie <code>AutoLaunchProtocolsFromOrigins</code> per Gruppenrichtlinie abschalten (ADMX-Vorlagen für Edge und Chrome), zum Beispiel:</p>
+<pre><code>[{ &quot;protocol&quot;: &quot;bridge-rdp&quot;, &quot;allowed_origins&quot;: [&quot;https://intranet.example.com&quot;] }]</code></pre>
+<p>Die Richtlinie gilt je Protokoll und je Herkunft; für nicht aufgeführte Protokolle fragt der Browser weiter nach. Das Installationsskript setzt bewusst keine Browser-Richtlinien. UrlBridge fragt weiterhin vor jedem Start nach.</p>
+<h3 id="konfiguration">Konfiguration</h3>
+<p>Die Konfiguration ist <code>C:\Program Files\UrlBridge\UrlBridge.json</code>; der Ort lässt sich nicht ändern. UTF-8 ohne BOM, höchstens 64 KiB, höchstens 64 Protokolle mit je 32 Argumenten und 8 Parametern.</p>
+<pre><code>{
+  &quot;protocols&quot;: [
+    {
+      &quot;scheme&quot;: &quot;bridge-rdp&quot;,
+      &quot;name&quot;: &quot;Remote Desktop&quot;,
+      &quot;program&quot;: &quot;C:\\Windows\\System32\\mstsc.exe&quot;,
+      &quot;arguments&quot;: [&quot;/v:{host}&quot;],
+      &quot;parameters&quot;: [
+        { &quot;name&quot;: &quot;host&quot;, &quot;type&quot;: &quot;host&quot; }
+      ]
+    }
+  ]
+}</code></pre>
+<p><strong>Ist die Konfiguration ungültig oder unsicher, startet nichts</strong>, auch nicht die Protokolle, die in Ordnung sind. Jeder Aufruf führt dieselbe Prüfung aus wie <code>--validate</code>.</p>
+<p>Ein Zielprogramm, das es auf einem Rechner nicht gibt, ist kein Fehler der Konfiguration: <code>--validate</code> warnt nur, die anderen Protokolle funktionieren weiter, und ein Link auf das fehlende Programm zeigt eine Meldung, dass es nicht gefunden wurde.</p>
+<p>Der Parser ist streng: doppelte Schlüssel, unbekannte Felder, Kommentare, abschließende Kommas und fehlende Pflichtfelder sind Fehler.</p>
+<div class="table"><table>
+<thead><tr><th>Feld</th><th>Pflicht</th><th>Regeln</th></tr></thead>
+<tbody>
+<tr><td><code>protocols[].scheme</code></td><td>ja</td><td>Kleinbuchstaben, Ziffern, <code>-</code>, <code>.</code>, <code>+</code>; beginnt mit einem Buchstaben; 3–64 Zeichen; eindeutig; nie ein bekanntes Schema wie <code>http</code>, <code>https</code>, <code>file</code>, <code>mailto</code> oder <code>ms-*</code>; darf nicht mit <code>url</code> beginnen, weil Windows solche Protokolle nicht öffnet</td></tr>
+<tr><td><code>protocols[].name</code></td><td>ja</td><td>1–64 Zeichen; erscheint im Bestätigungsdialog und in der Registry</td></tr>
+<tr><td><code>protocols[].program</code></td><td>ja</td><td>Absoluter Pfad zu einer <code>.exe</code>, lokal (<code>C:\…</code>) oder UNC (<code>\\server\freigabe\…</code>). Lokale Programme müssen auf einem fest eingebauten Laufwerk liegen. Nicht erlaubt: verbundene Laufwerksbuchstaben, Umgebungsvariablen, <code>..</code>, <code>\\?\</code>, <code>\\.\</code></td></tr>
+<tr><td><code>protocols[].arguments</code></td><td>ja</td><td>Feste Argumente; Platzhalter <code>{name}</code> nur für deklarierte Parameter, jeder Parameter mindestens einmal verwendet</td></tr>
+<tr><td><code>protocols[].parameters</code></td><td>ja</td><td>Geordnete Liste; bestimmt Anzahl und Reihenfolge der Werte im Link</td></tr>
+<tr><td><code>parameters[].name</code></td><td>ja</td><td>Buchstaben und Ziffern, beginnt mit einem Buchstaben, 1–32 Zeichen</td></tr>
+<tr><td><code>parameters[].type</code></td><td>ja</td><td>Siehe Wertetypen</td></tr>
+<tr><td><code>parameters[].min</code>, <code>max</code></td><td>bei <code>integer</code></td><td>Erlaubter Bereich, 0–4294967295</td></tr>
+<tr><td><code>parameters[].maxLength</code></td><td>bei <code>token</code></td><td>1–256</td></tr>
+<tr><td><code>parameters[].values</code></td><td>bei <code>choice</code></td><td>Feste Liste mit 1–64 erlaubten Werten</td></tr>
+</tbody>
+</table></div>
+<h4 id="aufbau-der-links">Aufbau der Links</h4>
+<p><code>schema://wert1/wert2/…</code></p>
+<ul>
+<li>Die Anzahl der Werte muss genau der Anzahl der Parameter entsprechen. Ein einzelner abschließender <code>/</code> wird ignoriert.</li>
+<li>Abgelehnt werden: Query (<code>?</code>), Fragment (<code>#</code>), Benutzerangaben (<code>@</code>), leere Werte und Links mit mehr als 2048 Zeichen.</li>
+<li>Prozent-Kodierung wird vor der Prüfung genau einmal dekodiert; ungültige Kodierung oder ungültiges UTF-8 wird abgelehnt.</li>
+<li>Die Kommandozeile muss nach dem Programm genau ein Argument enthalten; alles andere wird abgelehnt.</li>
+</ul>
+<h4 id="wertetypen">Wertetypen</h4>
+<div class="table"><table>
+<thead><tr><th>Typ</th><th>Erlaubt</th></tr></thead>
+<tbody>
+<tr><td><code>hostname</code></td><td>DNS-Name: <code>A–Z a–z 0–9 - .</code>; Label 1–63, insgesamt 1–253 Zeichen; kein <code>-</code> am Anfang oder Ende eines Labels; keine leeren Label</td></tr>
+<tr><td><code>ipv4</code></td><td>Vier Dezimalzahlen 0–255 ohne führende Nullen</td></tr>
+<tr><td><code>host</code></td><td><code>hostname</code> oder <code>ipv4</code></td></tr>
+<tr><td><code>integer</code></td><td>Dezimalzahl ohne Vorzeichen und führende Nullen, innerhalb <code>min</code>–<code>max</code></td></tr>
+<tr><td><code>token</code></td><td><code>A–Z a–z 0–9 - _</code>, Länge 1–<code>maxLength</code></td></tr>
+<tr><td><code>choice</code></td><td>Genau einer der Werte aus <code>values</code> (Groß- und Kleinschreibung zählt)</td></tr>
+</tbody>
+</table></div>
+<p>Unabhängig vom Typ besteht ein Wert nur aus <code>A–Z a–z 0–9 - _ .</code>, hat 1–256 Zeichen und beginnt nie mit <code>-</code>. Leerzeichen, Anführungszeichen, Schrägstriche, Backslashes, <code>%</code>, Steuerzeichen und alles außerhalb von ASCII werden immer abgelehnt. Werte können deshalb weder aus einem Argument ausbrechen noch eigene Optionen hinzufügen.</p>
+<h3 id="funktionsweise">Funktionsweise</h3>
+<p>Windows startet für jeden Link auf ein registriertes Protokoll <code>UrlBridge.exe &quot;&lt;Link&gt;&quot;</code>. Jeder Aufruf ist ein eigener, kurzer Prozess: Konfiguration und Rechte laden und prüfen, Link zerlegen und prüfen, Argumentliste bauen, Zielprogramm prüfen, Bestätigung einholen, Programm starten, Eintrag ins Ereignisprotokoll schreiben, beenden. Es gibt keinen Hintergrundprozess und keine Kommunikation zwischen Prozessen.</p>
+<h4 id="bedrohungsmodell">Bedrohungsmodell</h4>
+<ul>
+<li><em>Eine Webseite.</em> Jede Seite kann einen Link auf ein registriertes Protokoll auslösen. Alles im Link ist feindliche Eingabe; dagegen schützen die Prüfung und der Bestätigungsdialog. Browser übergeben Sonderzeichen prozent-kodiert, und Edge öffnet Links mit rohen Anführungszeichen oder Leerzeichen gar nicht; UrlBridge verlässt sich auf beides nicht.</li>
+<li><em>Ein Benutzer oder Prozess ohne Administratorrechte</em>, der die Konfiguration, UrlBridge, ein Zielprogramm oder deren Ordner verändern oder über Laufwerksbuchstaben, Umgebungsvariablen, <code>PATH</code> oder DLLs neben dem Programm umleiten will.</li>
+<li><em>Nicht abgedeckt:</em> Administratoren. Wer nach <code>C:\Program Files</code> schreiben kann, braucht UrlBridge nicht, um Programme auszuführen. Ein Benutzer kann außerdem ein gleichnamiges Protokoll nur für sein eigenes Konto registrieren; das betrifft niemand anderen.</li>
+</ul>
+<h4 id="programmstart">Programmstart</h4>
+<ul>
+<li><code>CreateProcessW</code> mit ausdrücklichem Programmpfad; keine Shell, kein <code>ShellExecute</code>, keine Suche im <code>PATH</code>. Arbeitsverzeichnis ist der Ordner des Programms.</li>
+<li>Nur <code>.exe</code>-Dateien. <code>CreateProcessW</code> führt <code>.bat</code> und <code>.cmd</code> stillschweigend über <code>cmd.exe</code> aus, dessen eigene Zerlegung der Kommandozeile die Prüfung aushebeln könnte, und Batch-Dateien lassen sich nicht signieren.</li>
+<li>Interpreter wie <code>cmd.exe</code>, <code>powershell.exe</code> oder <code>wscript.exe</code> sind erlaubt, weil sich eine Sperrliste durch Kopieren oder Umbenennen leicht umgehen lässt und nur Administratoren die Konfiguration ändern können. <code>--validate</code> warnt davor: Bei einem Interpreter kann aus Werten Code werden.</li>
+<li>UrlBridge lädt seine eigenen Bibliotheken nur aus dem Windows-Systemordner.</li>
+</ul>
+<h4 id="rechteprüfung">Rechteprüfung</h4>
+<p>Bei jedem Aufruf und bei <code>--validate</code>, für die Konfiguration, UrlBridge selbst und lokale Zielprogramme; das Programm des aufgerufenen Protokolls wird direkt vor der Bestätigung noch einmal geprüft.</p>
+<ul>
+<li>Nur SYSTEM, Administratoren und TrustedInstaller dürfen die Datei verändern können (schreiben, anhängen, löschen, Rechte oder Besitzer ändern), ebenso den Ordner, in dem sie liegt (dort zusätzlich: Dateien oder Unterordner anlegen, gegen untergeschobene DLLs).</li>
+<li>In allen Ordnern darüber bis zur Laufwerkswurzel darf niemand sonst Einträge löschen oder umbenennen oder Rechte oder Besitzer ändern, damit kein Ordner auf dem Pfad ausgetauscht werden kann. Das Anlegen neuer Ordner wird dort hingenommen, weil Windows es auf <code>C:\</code> standardmäßig erlaubt.</li>
+<li>Auch der Besitzer muss einer von diesen sein. Nur vererbende Einträge wie <code>CREATOR OWNER</code> werden ignoriert.</li>
+<li>Lassen sich die Rechte nicht lesen, gilt das als Fehler.</li>
+<li>Programme auf Netzwerkfreigaben (UNC-Pfade) werden nicht geprüft. Schreibrechte werden dort auf dem Dateiserver verwaltet, oft zeitlich begrenzt oder erst bei Bedarf vergeben, was UrlBridge nicht bewerten kann; für den Schutz der Freigabe ist der Administrator des Dateiservers verantwortlich.</li>
+</ul>
+<h4 id="ereignisprotokoll">Ereignisprotokoll</h4>
+<p>Quelle <code>UrlBridge</code> im Protokoll <em>Anwendung</em>, mit dem Windows-Benutzer des Aufrufs. Eine Logdatei gibt es nicht.</p>
+<div class="table"><table>
+<thead><tr><th>Ereignis-ID</th><th>Stufe</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Information</td><td>Programm gestartet (Protokoll, Programm, Argumente, Link)</td></tr>
+<tr><td>2</td><td>Information</td><td>Vom Benutzer abgebrochen</td></tr>
+<tr><td>3</td><td>Warnung</td><td>Link abgelehnt, mit Grund</td></tr>
+<tr><td>4</td><td>Fehler</td><td>Konfiguration ungültig, nichts gestartet</td></tr>
+<tr><td>5</td><td>Fehler</td><td>Programm nicht gefunden oder Start fehlgeschlagen</td></tr>
+</tbody>
+</table></div>
+<h3 id="datenschutz">Datenschutz</h3>
+<p>UrlBridge greift selbst nicht auf das Netzwerk zu. Es sendet nichts, ruft nichts ab und prüft nicht auf Updates. Programme auf Netzwerkfreigaben liest Windows wie jede andere Datei. Das Ereignisprotokoll hält zu jedem Aufruf den Windows-Benutzer, das Protokoll, die Werte und das Programm fest.</p>
+<h3 id="lizenz">Lizenz</h3>
+<p><a href="https://github.com/TripleT3005/UrlBridge/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a></p>
+<p>Release-Pakete enthalten <code>THIRD-PARTY-LICENSES.txt</code> mit den Lizenzen aller Fremdkomponenten, die in UrlBridge eingebaut sind. Die CI schlägt fehl, wenn eine Abhängigkeit eine Lizenz verwendet, die nicht auf der Erlaubnisliste in <a href="https://github.com/TripleT3005/UrlBridge/blob/main/scripts/third_party_licenses.py" target="_blank" rel="noopener noreferrer"><code>scripts/third_party_licenses.py</code></a> steht.</p>
+</section>
+
+  <footer><a href="/de/">ckass.de</a> · <a href="https://github.com/TripleT3005/UrlBridge" target="_blank" rel="noopener noreferrer">TripleT3005/UrlBridge</a> · <a href="/imprint/de/">Impressum</a> · <a href="/privacy/de/">Datenschutz</a></footer>
+</main>
+<script>
+(function(){
+  var label = document.documentElement.lang === "de" ? "Bild vergrößern" : "Enlarge image";
+  var dialog = document.createElement("dialog"), large = document.createElement("img");
+  dialog.className = "zoom";
+  dialog.appendChild(large);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("click", function(){ dialog.close(); });
+  dialog.addEventListener("close", function(){ large.removeAttribute("src"); });
+  function open(img){
+    large.src = img.currentSrc || img.src;
+    large.alt = img.alt;
+    dialog.setAttribute("aria-label", img.alt || label);
+    (large.decode ? large.decode() : Promise.resolve()).catch(function(){}).then(function(){ if (!dialog.open) dialog.showModal(); });
+  }
+  function prepare(img){
+    if (img.naturalWidth <= img.clientWidth + 1 || img.classList.contains("zoomable")) return;
+    img.classList.add("zoomable");
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.title = label;
+    img.addEventListener("click", function(){ open(img); });
+    img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(img); } });
+  }
+  [].forEach.call(document.querySelectorAll("section img, main > p img"), function(img){
+    if (img.complete) prepare(img); else img.addEventListener("load", function(){ prepare(img); });
+  });
+  addEventListener("resize", function(){ [].forEach.call(document.querySelectorAll("section img, main > p img"), prepare); });
+})();
+</script>
+</body>
+</html>
