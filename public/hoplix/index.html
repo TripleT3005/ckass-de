@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!-- Generated from README.md of TripleT3005/Hoplix by scripts/project-pages -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Hoplix · Hoplix is a file transfer client for Windows and Linux, written in Rust with iced.">
+<title>Hoplix</title>
+<link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://ckass.de/hoplix/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ckass.de">
+<meta property="og:title" content="Hoplix">
+<meta property="og:description" content="Hoplix · Hoplix is a file transfer client for Windows and Linux, written in Rust with iced.">
+<meta property="og:url" content="https://ckass.de/hoplix/en/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ckass.de/hoplix/assets/icons/icon-256.png">
+<meta property="og:image:width" content="256">
+<meta property="og:image:height" content="256">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"Hoplix","description":"Hoplix is a file transfer client for Windows and Linux, written in Rust with iced.","url":"https://ckass.de/hoplix/en/","inLanguage":"en","author":{"@type":"Person","@id":"https://ckass.de/#author","name":"Christoph Kaß","alternateName":["TripleT3005","ckass"],"jobTitle":"IT-Systemadministrator","url":"https://ckass.de/","sameAs":["https://github.com/TripleT3005","https://www.twitch.tv/TripleT3005"]},"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/TripleT3005/Hoplix/releases/latest","image":"https://ckass.de/hoplix/assets/icons/icon-256.png","sameAs":"https://github.com/TripleT3005/Hoplix"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ckass","item":"https://ckass.de/en/"},{"@type":"ListItem","position":2,"name":"Hoplix","item":"https://ckass.de/hoplix/en/"}]}]}</script>
+<link rel="alternate" hreflang="en" href="https://ckass.de/hoplix/en/">
+<link rel="alternate" hreflang="de" href="https://ckass.de/hoplix/de/">
+<link rel="alternate" hreflang="x-default" href="https://ckass.de/hoplix/">
+<style>
+:root{--bg:#F3F4F1;--ink:#1B2B23;--muted:#6B7A72;--accent:#2F6B4E;--line:#D9DDD8;--code:#E6E9E4;color-scheme:light;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root{--bg:#111614;--ink:#E5EAE6;--muted:#8A9A91;--accent:#86BC9C;--line:#26302B;--code:#1B2320;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI Variable","Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.5rem calc(3rem + env(safe-area-inset-bottom,0px))}
+header{display:flex;align-items:center;gap:1rem}
+header img{width:4rem;height:4rem}
+h1{margin:0;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;letter-spacing:-.02em;font-weight:600;min-width:0;overflow-wrap:break-word;hyphens:auto}
+h2{margin:3rem 0 .5rem;font-size:1.5rem;letter-spacing:-.01em}
+h3{margin:1.75rem 0 .25rem;font-size:1.1rem}
+h4,h5,h6{margin:1.25rem 0 .25rem;font-size:1rem}
+p,ul,ol{margin:.5rem 0}
+ul,ol{padding-left:1.25rem}
+li{margin:.25rem 0}
+li>ul,li>ol{margin:.25rem 0}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;font-size:.875em;background:var(--code);padding:.1em .35em;border-radius:.3rem;overflow-wrap:anywhere}
+pre{margin:.75rem 0;padding:.75rem 1rem;background:var(--code);border-radius:.5rem;overflow-x:auto;line-height:1.45}
+pre code{padding:0;background:none;overflow-wrap:normal}
+blockquote{margin:1rem 0;padding:0 0 0 1rem;border-left:3px solid var(--line);color:var(--muted)}
+.table{margin:.75rem 0;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:.4rem .75rem .4rem 0;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600}
+img{max-width:100%;height:auto}
+p>img{border-radius:.5rem;vertical-align:top}
+@media (max-width:40rem){p>img[width$="%"]{display:block;width:100%;margin:.75rem 0}}
+.lang{margin-top:1rem;color:var(--muted)}
+.switch{margin-left:auto;align-self:flex-start}
+.switch{display:flex;gap:.25rem}
+.switch a{display:flex;padding:.35rem;border:1px solid transparent;border-radius:.4rem;opacity:.45;transition:opacity .2s,border-color .2s}
+.switch a:hover{opacity:.8}
+.switch a[aria-current="page"]{opacity:1;border-color:var(--line)}
+.switch a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.switch svg{display:block;width:1.75rem;height:1.15rem;border-radius:.15rem}
+@media (prefers-reduced-motion:reduce){.switch a{transition:none}}
+section+section{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.links a{padding:.6rem 1.4rem;border:1px solid var(--muted);border-radius:999px;color:var(--ink);text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.links a:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+img.zoomable{cursor:zoom-in}
+img.zoomable:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+dialog.zoom{max-width:none;max-height:none;margin:auto;padding:0;border:0;background:none;overflow:visible}
+dialog.zoom::backdrop{background:rgb(0 0 0 / .85)}
+dialog.zoom[open]{animation:zoom-in .15s ease-out}
+dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:auto;border-radius:.5rem;cursor:zoom-out}
+@keyframes zoom-in{from{opacity:0;transform:scale(.96)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.links a,.switch a{transition:none}dialog.zoom[open]{animation:none}}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="assets/icons/icon.svg" alt="" width="64" height="64">
+    <h1 id="-hoplix">Hoplix</h1>
+    <nav class="switch" aria-label="Language / Sprache">
+      <a href="en/" hreflang="en" lang="en" aria-current="page" aria-label="English" title="English"><svg viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><clipPath id="flag-en-gb"><path d="M0 0L60 40H0z"/></clipPath><clipPath id="flag-en-us"><path d="M0 0H60V40z"/></clipPath><clipPath id="flag-gb-t"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#flag-en-gb)"><svg width="60" height="40" viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" clip-path="url(#flag-gb-t)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg></g><g clip-path="url(#flag-en-us)"><path fill="#fff" d="M0 0h60v40H0z"/><path stroke="#B22234" stroke-width="3.08" d="M0 1.54h60M0 7.69h60M0 13.85h60M0 20h60M0 26.15h60M0 32.31h60M0 38.46h60"/><path fill="#3C3B6E" d="M0 0h24v21.5H0z"/><path fill="#fff" d="M3.00 0.80L3.38 1.97L4.62 1.97L3.62 2.70L4.00 3.88L3.00 3.15L2.00 3.88L2.38 2.70L1.38 1.97L2.62 1.97zM8.00 0.80L8.38 1.97L9.62 1.97L8.62 2.70L9.00 3.88L8.00 3.15L7.00 3.88L7.38 2.70L6.38 1.97L7.62 1.97zM13.00 0.80L13.38 1.97L14.62 1.97L13.62 2.70L14.00 3.88L13.00 3.15L12.00 3.88L12.38 2.70L11.38 1.97L12.62 1.97zM18.00 0.80L18.38 1.97L19.62 1.97L18.62 2.70L19.00 3.88L18.00 3.15L17.00 3.88L17.38 2.70L16.38 1.97L17.62 1.97zM5.50 4.80L5.88 5.97L7.12 5.97L6.12 6.70L6.50 7.88L5.50 7.15L4.50 7.88L4.88 6.70L3.88 5.97L5.12 5.97zM10.50 4.80L10.88 5.97L12.12 5.97L11.12 6.70L11.50 7.88L10.50 7.15L9.50 7.88L9.88 6.70L8.88 5.97L10.12 5.97zM15.50 4.80L15.88 5.97L17.12 5.97L16.12 6.70L16.50 7.88L15.50 7.15L14.50 7.88L14.88 6.70L13.88 5.97L15.12 5.97zM20.50 4.80L20.88 5.97L22.12 5.97L21.12 6.70L21.50 7.88L20.50 7.15L19.50 7.88L19.88 6.70L18.88 5.97L20.12 5.97zM13.00 8.80L13.38 9.97L14.62 9.97L13.62 10.70L14.00 11.88L13.00 11.15L12.00 11.88L12.38 10.70L11.38 9.97L12.62 9.97zM18.00 8.80L18.38 9.97L19.62 9.97L18.62 10.70L19.00 11.88L18.00 11.15L17.00 11.88L17.38 10.70L16.38 9.97L17.62 9.97zM20.50 12.80L20.88 13.97L22.12 13.97L21.12 14.70L21.50 15.88L20.50 15.15L19.50 15.88L19.88 14.70L18.88 13.97L20.12 13.97zM18.00 16.80L18.38 17.97L19.62 17.97L18.62 18.70L19.00 19.88L18.00 19.15L17.00 19.88L17.38 18.70L16.38 17.97L17.62 17.97z"/></g><path stroke="#fff" stroke-width="1.2" d="M0 0L60 40"/></svg></a>
+      <a href="de/" hreflang="de" lang="de" aria-label="Deutsch" title="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="none" aria-hidden="true"><path fill="#000" d="M0 0h5v1H0z"/><path fill="#D00" d="M0 1h5v1H0z"/><path fill="#FFCE00" d="M0 2h5v1H0z"/></svg></a>
+    </nav>
+  </header>
+
+<section id="english">
+<p>Hoplix is a file transfer client for Windows and Linux, written in Rust with <a href="https://iced.rs" target="_blank" rel="noopener noreferrer">iced</a>. It connects to SFTP, FTP and FTPS servers, transfers files and whole folders, compares and synchronises folders and opens files in external programs. A command-line tool, <code>hoplix-cli</code>, uses the same core.</p>
+<div class="links">
+  <a href="https://github.com/TripleT3005/Hoplix/releases/latest" target="_blank" rel="noopener noreferrer">Download</a>
+  <a href="https://github.com/TripleT3005/Hoplix/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a>
+  <a href="https://github.com/TripleT3005/Hoplix" target="_blank" rel="noopener noreferrer">Source code</a>
+  <a href="https://github.com/TripleT3005/Hoplix/issues" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+<blockquote>
+<p><strong>Work in progress:</strong> Hoplix is at an early stage of development. Features, settings files and the user interface may still change.</p>
+</blockquote>
+<blockquote>
+<p>Feedback and bug reports are welcome as <a href="https://github.com/TripleT3005/Hoplix/issues" target="_blank" rel="noopener noreferrer">issues</a>. Not affiliated with or endorsed by Microsoft, the GNOME project or KDE. Windows is a trademark of the Microsoft group of companies.</p>
+</blockquote>
+<p>
+  <img src="assets/screenshot-light.png" alt="Hoplix in light mode with two panes showing demo folders" width="49%" loading="lazy" decoding="async">
+  <img src="assets/screenshot-dark.png" alt="Hoplix in dark mode with two panes showing demo folders" width="49%" loading="lazy" decoding="async">
+</p>
+<h3 id="installation">Installation</h3>
+<p>Download one of the files from <a href="https://github.com/TripleT3005/Hoplix/releases" target="_blank" rel="noopener noreferrer">Releases</a>:</p>
+<ul>
+<li><strong>Installer</strong> <code>Hoplix-&lt;version&gt;-windows-x64-setup.exe</code> – installs Hoplix and <code>hoplix-cli</code> for the current user (default, no administrator rights, to <code>%LOCALAPPDATA%\Programs\Hoplix</code>) or for all users (to <code>C:\Program Files\Hoplix</code>, asks for administrator rights) and adds a Start menu entry and optionally a desktop shortcut. It can be removed under Settings → Apps.</li>
+<li><strong>Portable for Windows</strong> <code>Hoplix-&lt;version&gt;-windows-x64-portable.zip</code> – extract it to any folder and start <code>hoplix.exe</code>. Keep the <code>lang</code> folder next to the program.</li>
+<li><strong>Portable for Linux</strong> <code>Hoplix-&lt;version&gt;-linux-x64.tar.gz</code> – extract it and start <code>hoplix</code>. Keep the <code>lang</code> folder next to the program.</li>
+</ul>
+<p>Versions 0.x are published as pre-releases. The programs are not signed, so SmartScreen may warn on the first start: &quot;More info&quot; → &quot;Run anyway&quot;. Each file has a <code>.sha256</code> file to verify the download, and the release notes link a VirusTotal scan. Changes are listed in the <a href="https://github.com/TripleT3005/Hoplix/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">changelog</a>.</p>
+<h4 id="installer-parameters">Installer parameters</h4>
+<p>The installer accepts the usual Inno Setup parameters, e.g. for a silent installation:</p>
+<div class="table"><table>
+<thead><tr><th>Parameter</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><code>/CURRENTUSER</code></td><td>Install for the current user only (default)</td></tr>
+<tr><td><code>/ALLUSERS</code></td><td>Install for all users (asks for administrator rights)</td></tr>
+<tr><td><code>/DIR=&quot;C:\Path&quot;</code></td><td>Installation folder</td></tr>
+<tr><td><code>/SILENT</code>, <code>/VERYSILENT</code></td><td>Without wizard (with or without progress window)</td></tr>
+<tr><td><code>/SUPPRESSMSGBOXES</code></td><td>No message boxes in silent mode</td></tr>
+<tr><td><code>/TASKS=&quot;desktopicon&quot;</code></td><td>Add a desktop shortcut; without the parameter there is none</td></tr>
+<tr><td><code>/NOICONS</code></td><td>No Start menu entry</td></tr>
+<tr><td><code>/LOG=&quot;C:\Path\setup.log&quot;</code></td><td>Write a log file</td></tr>
+</tbody>
+</table></div>
+<p>Example: <code>Hoplix-0.2.0-windows-x64-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /ALLUSERS /TASKS=&quot;desktopicon&quot;</code></p>
+<p>Settings such as the language, the layout or the editor are stored per user and are not set by the installer. Uninstalling removes the program and its shortcuts but keeps your settings, sites and trusted server keys in <code>%APPDATA%\Hoplix</code> and the passwords saved in the Windows Credential Manager.</p>
+<h3 id="usage">Usage</h3>
+<ul>
+<li>Every location opens in its own tab. Use <strong>+</strong> for a new tab and <strong>×</strong> to close one.</li>
+<li>Double-click a folder to open it, use <strong>Up</strong> to go to the parent folder, or type a path and press Enter.</li>
+<li>Click a column header to sort by it; click it again to reverse the order. The columns are name, type, size and the date of the last change in your local time.</li>
+<li><strong>Connect</strong> opens a connection in a new tab. Protocols: SFTP (port 22), FTP (21, unencrypted), FTPS with explicit TLS (21) and FTPS with implicit TLS (990). SFTP signs in with a password or a private key file (OpenSSH format, optionally with a passphrase), FTP and FTPS with a password. <strong>Save as site</strong> turns the entered connection into a saved site.</li>
+<li>The first time you connect to an SFTP server, Hoplix shows its key fingerprint. Choose <em>Trust once</em> or <em>Always trust</em>; a changed key is refused with a warning.</li>
+<li>FTPS certificates are checked against the certificate authorities trusted by your system. If a certificate is not trusted (for example self-signed), Hoplix shows its SHA-256 fingerprint and asks the same way; a changed, untrusted certificate is refused.</li>
+<li>For plain FTP, the connect page warns that passwords and files are sent unencrypted.</li>
+<li><strong>New folder</strong>, <strong>Rename</strong> and <strong>Delete</strong> work in local and remote tabs. Deleting asks first and removes folders with everything in them.</li>
+<li>Select several entries with Ctrl+click (toggle) and Shift+click (range).</li>
+<li><strong>Open and edit files:</strong> a double-click or Enter opens a file with the default program of the system, <strong>Edit</strong> (F4) with the editor set in <em>Settings → Editor</em> (empty: the default program). Files from a server are first downloaded to a private temporary folder. Hoplix checks the copy every second; when it was saved, the <strong>Edited files</strong> list at the bottom offers <em>Upload</em> (replaces the file on the server through the transfer queue) or <em>Ignore</em>, or uploads it right away with <em>Settings → Upload changes automatically</em>. Watching ends with <em>Stop watching</em> or when the tab is closed; the copies are deleted when Hoplix closes.</li>
+<li><strong>Transfers:</strong> drag the selection onto another tab or the other pane and release it there, use <strong>Copy to…</strong> to pick a target tab, or, in the classic layout, <strong>Copy to other side</strong>. Files and whole folders go to the folder currently open in the target, between any two places: local to server (upload), server to local (download) or server to server. Several transfers run at the same time (<em>Settings → Parallel transfers</em>, default 2).</li>
+<li>The <strong>Transfers</strong> panel at the bottom shows each transfer with progress, speed and remaining time; it can be collapsed to a one-line summary. Pause, resume, cancel, retry and remove single transfers or all at once. Paused, cancelled and failed transfers continue where they stopped. When the connection drops, Hoplix retries three times and resumes the file.</li>
+<li>When a file already exists, Hoplix asks: overwrite, resume (if the existing file is smaller), keep both (<code>name (1).ext</code>) or skip, optionally for all further conflicts. The panel sets a fixed answer instead of asking. The target folder refreshes when a transfer is done.</li>
+<li><strong>Compare</strong> (Ctrl+D) marks the differences between the two panes, or in the modern layout between the current tab and the one chosen under <strong>Compare with…</strong>: <code>+</code> only here, <code>»</code> newer here, <code>«</code> older here, <code>≠</code> same time but different size, <code>!</code> a file on one side and a folder on the other, <code>•</code> a folder whose contents differ (with <em>Include subfolders</em>). Times within 2 seconds count as equal; times from FTP listings that only show minutes or days are compared at that precision. <em>Only differences</em> hides equal entries; Ctrl+A and the arrow keys then only reach the visible ones.</li>
+<li><strong>Synchronise…</strong> (Ctrl+Shift+D) copies between the two compared folders: left to right, right to left, or both ways (the newer file wins; files that differ only in size are skipped). <em>Update</em> copies new and newer files, <em>Mirror</em> also replaces newer files in the target and can delete files that are missing on the source. Options: include subfolders, compare the size only, skip hidden files (names starting with a dot), exclude patterns with <code>*</code> and <code>?</code> (ignoring case, separated by <code>;</code> or <code>,</code>; a pattern with <code>/</code> matches the path inside the folder). Before starting, the dialog shows how many files are uploaded, downloaded or copied, folders created and files deleted, the total size and a preview list. Deletions need the extra confirmation <em>Yes, delete them</em>. The files go through the transfer queue and keep their modification time where the server allows it.</li>
+<li><strong>Sites</strong> keeps your servers, sorted into folders that can be nested. Create, edit, duplicate and delete sites and folders; the <em>Folder</em> field moves a site. Each site stores protocol, server, port, user name, sign-in method, key file, the remote and local folder to open, and notes. <em>Connect</em> or a double-click opens the site in a new tab named after it; a local folder opens next to it (in the other pane in the classic layout).</li>
+<li><strong>Save password</strong> (or <em>Save passphrase</em> for key files) keeps the secret of a site. Where it is kept is chosen in <strong>Settings → Saved passwords</strong>: in the Windows Credential Manager or the system keyring on Linux (default), or in a file encrypted with a master password that you enter once per session. Switching moves all saved passwords; <em>Change master password</em> re-encrypts them.</li>
+<li><strong>Settings</strong> switches between light, dark and the system appearance, the language, and the layout: <em>Modern</em> (one browser with tabs) or <em>Classic</em> (two panes side by side).</li>
+<li><strong>Commands</strong> (Ctrl+K) opens the command palette: type a few letters of an action or of a saved site, choose with the arrow keys and press Enter; Esc closes it.</li>
+<li>Hoplix remembers the open tabs and the window size and position. After a restart, local tabs open again at their folder; tabs of saved sites come back <em>not connected</em> and connect with one click, so Hoplix never connects to a server on its own. Connections without a saved site are not restored.</li>
+<li>If the connection to a server drops, Hoplix reconnects with the same sign-in on the next action; the server key must still match.</li>
+</ul>
+<h4 id="keyboard-shortcuts">Keyboard shortcuts</h4>
+<p>Shortcuts work in the file list, not while you type in a text field.</p>
+<div class="table"><table>
+<thead><tr><th>Keys</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Ctrl+K</td><td>Command palette</td></tr>
+<tr><td>Enter</td><td>Open the selected folder or file</td></tr>
+<tr><td>F4</td><td>Edit the selected file in the external editor</td></tr>
+<tr><td>Backspace, Alt+↑</td><td>Parent folder</td></tr>
+<tr><td>F5</td><td>Refresh</td></tr>
+<tr><td>F2</td><td>Rename</td></tr>
+<tr><td>Del</td><td>Delete (asks first)</td></tr>
+<tr><td>↑, ↓, Page ↑, Page ↓, Home, End</td><td>Move the selection; with Shift, extend it</td></tr>
+<tr><td>Ctrl+A</td><td>Select all</td></tr>
+<tr><td>Ctrl+D</td><td>Compare the folders, or stop comparing</td></tr>
+<tr><td>Ctrl+Shift+D</td><td>Synchronise the folders</td></tr>
+<tr><td>Ctrl+T, Ctrl+W</td><td>New tab, close tab</td></tr>
+<tr><td>Ctrl+Tab, Ctrl+Shift+Tab</td><td>Next, previous tab</td></tr>
+<tr><td>Esc</td><td>Close a dialog, the palette or a page</td></tr>
+</tbody>
+</table></div>
+<h4 id="command-line">Command line</h4>
+<p><code>hoplix-cli</code> offers the same operations without a window:</p>
+<pre><code>hoplix-cli ls sftp://user@example.com/var/www --key ~/.ssh/id_ed25519
+hoplix-cli get sftp://user@example.com/~/backup.tar.gz . --password-env HOPLIX_PASSWORD --resume
+hoplix-cli put report.pdf sftp://user@example.com:2222/srv/files/ --key id_ed25519 --passphrase-env KEY_PASS
+hoplix-cli ls ftpes://user@example.com/www --password-env HOPLIX_PASSWORD
+hoplix-cli get ftp://ftp.example.com/pub/readme.txt .
+hoplix-cli put -r website sftp://user@example.com/var/www --key id_ed25519 --skip-existing
+hoplix-cli cp -r sftp://user@old.example.com/srv/data sftp://user@new.example.com/srv/ --key id_ed25519
+hoplix-cli compare -r website sftp://user@example.com/var/www --key id_ed25519
+hoplix-cli sync -r website sftp://user@example.com/var/www --key id_ed25519 --delete --exclude &quot;*.tmp&quot; --dry-run</code></pre>
+<p>Saved sites work as targets too, with their saved password or passphrase:</p>
+<pre><code>hoplix-cli sites
+hoplix-cli ls &quot;site://Web server/var/www&quot;
+hoplix-cli get site://Work%2FBackup/~/backup.tar.gz . --master-password-env HOPLIX_MASTER</code></pre>
+<p>Commands: <code>ls</code>, <code>stat</code>, <code>get [-r]</code>, <code>put [-r]</code>, <code>cp [-r]</code>, <code>mkdir</code>, <code>rm [-r]</code>, <code>mv</code>, <code>sites</code>. <code>-r</code> copies folders with everything in them; <code>cp</code> copies between any two targets, also from one server to another. If the destination is an existing folder, the source is copied into it, otherwise it gets the destination's name. Existing files are overwritten unless you pass <code>--resume</code> (complete smaller files, skip equal ones), <code>--skip-existing</code> or <code>--keep-both</code>. Progress is shown on stderr when it is a terminal. Sites are named by name or by <code>folder/name</code> (write <code>/</code> as <code>%2F</code>); <code>--password-env</code> or <code>--key</code> override the saved secret. With a master password, pass its environment variable with <code>--master-password-env</code>. URLs start with <code>sftp://</code>, <code>ftp://</code>, <code>ftpes://</code> (FTPS, explicit TLS) or <code>ftps://</code> (FTPS, implicit TLS); FTP URLs without a user sign in anonymously. Passwords and passphrases are only read from environment variables whose name you pass, never from the command line. Unknown server keys and untrusted certificates are refused unless you add <code>--accept-host-key</code> (this run) or <code>--remember-host-key</code>. <code>hoplix-cli help</code> lists all options.</p>
+<p><code>compare &lt;a&gt; &lt;b&gt; [-r]</code> prints one line per difference (<code>only-first</code>, <code>only-second</code>, <code>newer-first</code>, <code>newer-second</code>, <code>size</code>, <code>type</code>) and a summary. <code>sync &lt;from&gt; &lt;to&gt; [-r]</code> copies new and newer files from <code>&lt;from&gt;</code> so that <code>&lt;to&gt;</code> matches it and creates <code>&lt;to&gt;</code> if it does not exist; <code>--mirror</code> also replaces files that are newer in <code>&lt;to&gt;</code>, <code>--delete</code> additionally deletes what is missing in <code>&lt;from&gt;</code>, <code>--dry-run</code> only lists the plan. Both take <code>--size-only</code>, <code>--skip-hidden</code> and <code>--exclude &lt;pattern&gt;</code> (several times).</p>
+<h3 id="how-it-works">How it works</h3>
+<ul>
+<li><code>crates/hoplix-core</code> defines a common file system interface with a local, an SFTP and an FTP/FTPS backend, all in pure Rust: SFTP with <code>russh</code> and <code>russh-sftp</code>, FTP with <code>suppaftp</code>, TLS with <code>rustls</code> and <code>rustls-platform-verifier</code> (system certificate store), cryptography from <code>ring</code>.</li>
+<li>FTP uses passive mode (EPSV, or PASV when the server lacks it), MLSD/MLST listings when available and LIST otherwise, UTF-8 file names and REST/APPE to resume transfers. Transfers run on their own connections, so browsing stays possible meanwhile.</li>
+<li>The transfer queue in <code>hoplix-core</code> streams every file from the source to the target in 128 KiB blocks, so copies between two servers never touch the local disk. Folders are read first to know the total size, then copied file by file; parallel transfers run as separate jobs. SFTP runs parallel transfers as separate requests on the one SSH session, FTP opens extra connections for them. Retries wait 1, 2 and 4 seconds and continue at the size the target file already has.</li>
+<li><code>crates/hoplix-app</code> contains the iced user interface, <code>crates/hoplix-cli</code> the command-line tool.</li>
+<li>Comparing and synchronising (<code>sync.rs</code> in <code>hoplix-core</code>) lists both folders, matches entries by name and compares size and modification time. A sync builds a plan first (deletions, new folders, copies), so the app and <code>--dry-run</code> can show it; copies then run through the transfer queue with <em>overwrite</em>, and the modification time is set afterwards (SFTP <code>SETSTAT</code>, FTP <code>MFMT</code> or <code>MDTM</code>, locally directly). Sync uses only the connections that are already open.</li>
+<li>On Windows, <code>build/resources.rs</code> embeds the icon, the version information and a manifest (per-monitor DPI awareness, UTF-8) into both programs without extra tools; the version comes only from the workspace <code>Cargo.toml</code>, and a test checks that <code>Cargo.lock</code>, <code>CHANGELOG.md</code>, the installer script and the release workflow agree with it. The title bar takes the colours of the current theme.</li>
+<li>Texts come from <code>lang/&lt;code&gt;.lang</code> files (<code>key = text</code>, UTF-8) with a comment header naming the language, its category and its reviewers; <a href="https://github.com/TripleT3005/Hoplix/blob/main/LANGUAGES.md" target="_blank" rel="noopener noreferrer">LANGUAGES.md</a> lists them. English is built in; missing texts fall back one by one to the language named with <code>language.fallback</code>, otherwise to English. <code>language.direction = rtl</code> marks a right-to-left language; it is read, but the layout is not mirrored yet.</li>
+<li>Sites are stored in <code>sites.conf</code> without any password. Saved passwords go to the Windows Credential Manager (entries <code>Hoplix:site/&lt;id&gt;</code>) or the Secret Service on Linux (GNOME Keyring, KWallet; attributes <code>application=Hoplix</code>, <code>name=site/&lt;id&gt;</code>). With a master password they are kept in <code>secrets.vault</code> instead: the key is derived with PBKDF2-HMAC-SHA256 (600,000 iterations, random 32-byte salt) and every entry is encrypted with AES-256-GCM (random nonce, bound to its name), all with <code>ring</code>. A forgotten master password cannot be recovered.</li>
+<li>Settings are stored in <code>%APPDATA%\Hoplix\settings.conf</code> on Windows and in <code>$XDG_CONFIG_HOME/hoplix/settings.conf</code> (default <code>~/.config/hoplix/</code>) on Linux. Open tabs (folder paths and site ids) and the window size and position are kept in <code>session.conf</code> next to it. Trusted server keys are kept in <code>known_hosts</code> in the same folder, in OpenSSH format, trusted FTPS certificates in <code>trusted_certificates</code> (one line per server: <code>host:port SHA256:…</code>).</li>
+</ul>
+<h3 id="privacy">Privacy</h3>
+<p>Hoplix only connects to servers you enter yourself; there is no telemetry and no update check.</p>
+<ul>
+<li><strong>SFTP:</strong> Hoplix opens an SSH connection to the server and port you entered. It sends your user name and either your password or a signature made with your private key; the key itself never leaves your computer. Everything else (folder listings, files you download or upload, renames, deletions) goes through this encrypted connection only.</li>
+<li><strong>FTPS:</strong> like FTP below, but the control connection and all data connections are encrypted with TLS. To check the certificate, the system may look up revocation information as it does for other programs.</li>
+<li><strong>FTP:</strong> the user name, the password, folder listings and file contents are sent <strong>unencrypted</strong> and can be read by anyone on the way. Anonymous sign-in (<code>ftp://</code> without a user in <code>hoplix-cli</code>) sends <code>anonymous@</code> as password.</li>
+<li><strong>Saved data:</strong> the settings file, <code>session.conf</code> with the folders of your open tabs and the window position, the <code>known_hosts</code> file with the keys of servers you chose to always trust, the <code>trusted_certificates</code> file with certificate fingerprints you chose to always trust, and <code>sites.conf</code> with your sites (no passwords). Passwords and passphrases are stored only when you tick <em>Save password</em>, and only in the Windows Credential Manager, the Linux system keyring or the encrypted <code>secrets.vault</code>, never as plain text. Nothing of this is sent anywhere.</li>
+<li>Locally, Hoplix reads only the folders you open. Files you open or edit from a server are copied to a folder <code>hoplix-edit-…</code> in the temporary folder of your user account and deleted when Hoplix closes; opening a file starts the default program or the editor you set, nothing else.</li>
+</ul>
+<h3 id="license">License</h3>
+<p><a href="https://github.com/TripleT3005/Hoplix/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT</a> © TripleT3005</p>
+<p>The licenses of the libraries used are in <a href="https://github.com/TripleT3005/Hoplix/blob/main/THIRD-PARTY-LICENSES.txt" target="_blank" rel="noopener noreferrer">THIRD-PARTY-LICENSES.txt</a>, which is included with the program.</p>
+</section>
+
+  <footer><a href="/en/">ckass.de</a> · <a href="https://github.com/TripleT3005/Hoplix" target="_blank" rel="noopener noreferrer">TripleT3005/Hoplix</a> · <a href="/imprint/en/">Legal notice</a> · <a href="/privacy/en/">Privacy</a></footer>
+</main>
+<script>
+(function(){
+  var label = document.documentElement.lang === "de" ? "Bild vergrößern" : "Enlarge image";
+  var dialog = document.createElement("dialog"), large = document.createElement("img");
+  dialog.className = "zoom";
+  dialog.appendChild(large);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("click", function(){ dialog.close(); });
+  dialog.addEventListener("close", function(){ large.removeAttribute("src"); });
+  function open(img){
+    large.src = img.currentSrc || img.src;
+    large.alt = img.alt;
+    dialog.setAttribute("aria-label", img.alt || label);
+    (large.decode ? large.decode() : Promise.resolve()).catch(function(){}).then(function(){ if (!dialog.open) dialog.showModal(); });
+  }
+  function prepare(img){
+    if (img.naturalWidth <= img.clientWidth + 1 || img.classList.contains("zoomable")) return;
+    img.classList.add("zoomable");
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.title = label;
+    img.addEventListener("click", function(){ open(img); });
+    img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(img); } });
+  }
+  [].forEach.call(document.querySelectorAll("section img, main > p img"), function(img){
+    if (img.complete) prepare(img); else img.addEventListener("load", function(){ prepare(img); });
+  });
+  addEventListener("resize", function(){ [].forEach.call(document.querySelectorAll("section img, main > p img"), prepare); });
+})();
+</script>
+</body>
+</html>
