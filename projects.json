@@ -4,5 +4,6 @@
   { "repo": "TripleT3005/TrayReveal", "slug": "trayreveal", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
   { "repo": "TripleT3005/chat-below-for-twitch", "slug": "chat-below-for-twitch", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
   { "repo": "TripleT3005/Synopio", "slug": "synopio", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
-  { "repo": "TripleT3005/UrlBridge", "slug": "urlbridge", "branch": "main", "download": true, "changelog": "CHANGELOG.md" }
+  { "repo": "TripleT3005/UrlBridge", "slug": "urlbridge", "branch": "main", "download": true, "changelog": "CHANGELOG.md" },
+  { "repo": "TripleT3005/Hoplix", "slug": "hoplix", "branch": "main", "download": true, "changelog": "CHANGELOG.md" }
 ]
