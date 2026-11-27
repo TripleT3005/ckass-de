@@ -107,6 +107,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li>Makros aus Drücken und Loslassen von Tasten, Pausen, Medientasten und Text</li>
 <li>Grafischer Editor: Kacheln auf einer Arbeitsfläche platzieren, Pins zuordnen und Makros aus Vorlagen oder Schritt für Schritt erstellen</li>
 <li>Entprellzeit, Encoder-Auflösung und Drehrichtung pro Kachel einstellbar</li>
+<li>Taster mit einem zweiten Makro für langes Drücken oder mit Wiederholen, solange sie gedrückt sind (z. B. für Lautstärke oder Pfeiltasten)</li>
 <li>Profile lokal und auf dem Gerät gespeichert; einmal eingerichtet, arbeitet das Gerät ohne die App</li>
 <li>Text für fünf Tastaturlayouts: Englisch (US und UK), Deutsch, Deutsch (Schweiz) und Französisch</li>
 <li>App in 51 Sprachen, darunter deutsche Dialekte und einige Spaßsprachen</li>
@@ -174,8 +175,8 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li>Mit <strong>Add Tile</strong> Kacheln hinzufügen (Taster, EC11-Encoder, Kippschalter oder <a href="#bauteile">eigene Bauteile</a>), an die gewünschte Stelle ziehen und zum Bearbeiten im <strong>Tile Inspector</strong> auswählen:
 <ul>
 <li><strong>Pins</strong>: für jeden Anschluss des Bauteils den GPIO-Pin wählen (angeboten werden nur freie, nutzbare Pins),</li>
-<li><strong>Parameter</strong>: Entprellzeit, bei Encodern zusätzlich Schritte pro Raste und Drehrichtung,</li>
-<li><strong>Funktionen</strong> (z. B. Drücken, Rechts drehen, Links drehen; beim Kippschalter Einschalten und Ausschalten): aufklappen, um das Makro zu bearbeiten,</li>
+<li><strong>Parameter</strong>: Entprellzeit, bei Encodern zusätzlich Schritte pro Raste und Drehrichtung. Bei Tastern und dem Drucktaster eines Encoders: <strong>Repeat while held</strong> mit der Zeit bis zur ersten Wiederholung und der Zeit zwischen den Wiederholungen oder, sobald langes Drücken ein Makro hat, die Zeit, ab der ein Druck als lang gilt (Standard 500 ms),</li>
+<li><strong>Funktionen</strong> (z. B. Drücken, Lang drücken, Rechts drehen, Links drehen; beim Kippschalter Einschalten und Ausschalten): aufklappen, um das Makro zu bearbeiten. Ohne Makro für langes Drücken löst ein Taster sofort beim Drücken aus; mit einem läuft das kurze Drücken beim Loslassen und das lange, sobald die Zeit erreicht ist. Langes Drücken und Wiederholen schließen sich aus,</li>
 <li>in einer Funktion das Makro aus <strong>Presets</strong> übernehmen oder Aktionen (Press, Release, Delay, Media, Text) einzeln hinzufügen. <strong>Advanced View</strong> zeigt das Makro als rohes JSON zum Bearbeiten.</li>
 <li><strong>Test</strong> neben einer Funktion führt ihr Makro einmal auf dem verbundenen Gerät aus, ohne etwas zu speichern; die Antwort (in der Warteschlange, ausgelastet oder der Grund eines Fehlers) erscheint an der Funktion. Das Makro tippt in das Fenster, das den Fokus hat; Text verwendet das Tastaturlayout des auf dem Gerät gespeicherten Profils.</li>
 </ul></li>
