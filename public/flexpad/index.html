@@ -107,6 +107,7 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li>Macros made of key presses and releases, delays, media keys and text</li>
 <li>Visual editor: place tiles on a canvas, assign pins and build macros from presets or step by step</li>
 <li>Debounce time, encoder resolution and direction adjustable per tile</li>
+<li>Buttons with a second macro on a long press, or repeating their macro while held (e.g. for volume or arrow keys)</li>
 <li>Profiles stored locally and on the device; the device works without the app once configured</li>
 <li>Text typed for five keyboard layouts: English (US and UK), German, German (Switzerland) and French</li>
 <li>App in 51 languages, including German dialects and a few fun languages</li>
@@ -174,8 +175,8 @@ dialog.zoom img{display:block;max-width:96vw;max-height:96vh;width:auto;height:a
 <li>Add tiles with <strong>Add Tile</strong> (button, EC11 encoder, toggle switch or <a href="#components">your own components</a>), drag them into place and select one to edit it in the <strong>Tile Inspector</strong>:
 <ul>
 <li><strong>Pins</strong>: choose the GPIO pin for each connection of the component (only free, usable pins are offered),</li>
-<li><strong>Parameters</strong>: debounce time, and for encoders the steps per detent and the direction,</li>
-<li><strong>Functions</strong> (e.g. press, turn right, turn left; for a toggle switch turn on and turn off): open one to edit its macro,</li>
+<li><strong>Parameters</strong>: debounce time, and for encoders the steps per detent and the direction. For buttons and the push button of an encoder: <strong>Repeat while held</strong> with the time until the first repeat and the time between repeats, or, once the long press has a macro, the time after which a press counts as long (default 500 ms),</li>
+<li><strong>Functions</strong> (e.g. press, long press, turn right, turn left; for a toggle switch turn on and turn off): open one to edit its macro. Without a long-press macro, a button runs its macro right when it is pressed; with one, a short press runs on release and a long press as soon as the time is reached. Long press and repeat exclude each other,</li>
 <li>in a function, build the macro from <strong>Presets</strong> or add actions (Press, Release, Delay, Media, Text) one by one. <strong>Advanced View</strong> shows the macro as raw JSON for editing.</li>
 <li><strong>Test</strong> next to a function runs its macro once on the connected device without saving anything; the answer (queued, busy or the reason for an error) is shown at the function. The macro types into the window that has the focus; text uses the keyboard layout of the profile stored on the device.</li>
 </ul></li>
